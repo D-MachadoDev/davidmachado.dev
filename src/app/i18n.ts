@@ -28,10 +28,13 @@ const translations = {
     "nav.contact": "Contact",
     "nav.cta": "Get in touch",
     "nav.openMenu": "Open menu",
+    "nav.closeMenu": "Close menu",
+    "nav.language": "Language",
     "nav.translateSite": "Translate site",
 
     "mobile.location": "Location",
     "mobile.email": "Email",
+    "mobile.language": "Language",
 
     "hero.available": "Available for opportunities",
     "hero.availableShort": "Available",
@@ -150,10 +153,13 @@ const translations = {
     "nav.contact": "Contacto",
     "nav.cta": "Contactar",
     "nav.openMenu": "Abrir menú",
+    "nav.closeMenu": "Cerrar menú",
+    "nav.language": "Idioma",
     "nav.translateSite": "Traducir sitio",
 
     "mobile.location": "Ubicación",
     "mobile.email": "Correo",
+    "mobile.language": "Idioma",
 
     "hero.available": "Abierto a nuevos proyectos",
     "hero.availableShort": "Abierto",
@@ -274,10 +280,13 @@ const translations = {
     "nav.contact": "Contato",
     "nav.cta": "Entre em contato",
     "nav.openMenu": "Abrir menu",
+    "nav.closeMenu": "Fechar menu",
+    "nav.language": "Idioma",
     "nav.translateSite": "Traduzir site",
 
     "mobile.location": "Localização",
     "mobile.email": "Email",
+    "mobile.language": "Idioma",
 
     "hero.available": "Disponível para oportunidades",
     "hero.availableShort": "Disponível",

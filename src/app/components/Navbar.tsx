@@ -22,6 +22,8 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const [isInHero, setIsInHero] = useState(true);
+
   const { scrollY } = useScroll();
 
   const backgroundColor = useTransform(
@@ -34,7 +36,15 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const y = window.scrollY;
+
+      setScrolled(y > 50);
+
+      const hero = document.getElementById("hero");
+      if (hero) {
+        const heroBottom = hero.offsetTop + hero.offsetHeight;
+        setIsInHero(y < heroBottom - 100);
+      }
 
       const sections = navSections.map((item) => ({
         id: item.id,
@@ -45,20 +55,50 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
       for (const section of sections) {
         if (section.el) {
           const rect = section.el.getBoundingClientRect();
-          if (rect.top <= 200 && rect.bottom >= 200) {
+          if (rect.top <= 160 && rect.bottom >= 160) {
             current = section.id;
           }
         }
       }
+
       setActiveSection(current);
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      setLangMenuOpen(false);
+    }
+  }, [mobileMenuOpen]);
+
   const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const element = document.getElementById(id);
+    if (!element) return;
+
+    const navbarOffset = 96;
+    const elementTop =
+      element.getBoundingClientRect().top + window.pageYOffset - navbarOffset;
+
+    window.scrollTo({
+      top: Math.max(elementTop, 0),
+      behavior: "smooth",
+    });
+
+    setMobileMenuOpen(false);
+    setLangMenuOpen(false);
   };
 
   return (
@@ -77,7 +117,10 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex items-center justify-between">
-        <MagneticButton onClick={() => scrollToSection("hero")} className="relative group">
+        <MagneticButton
+          onClick={() => scrollToSection("hero")}
+          className="relative group"
+        >
           <motion.div
             className="relative"
             whileHover={{ scale: 1.05 }}
@@ -86,6 +129,7 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
             <span className="text-[#EDEDED] font-mono font-bold text-xl tracking-tighter">
               DM
             </span>
+
             <motion.div
               className="absolute -bottom-1 left-0 h-[2px] bg-[#3B82F6]"
               initial={{ width: 0 }}
@@ -98,6 +142,7 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
         <div className="hidden md:flex items-center gap-1 relative">
           {navSections.map((item, index) => {
             const isActive = activeSection === item.id;
+
             return (
               <motion.button
                 key={item.id}
@@ -106,7 +151,9 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.08 + 0.2, duration: 0.4 }}
                 className={`relative px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${
-                  isActive ? "text-[#EDEDED]" : "text-[#71717A] hover:text-[#EDEDED]"
+                  isActive
+                    ? "text-[#EDEDED]"
+                    : "text-[#71717A] hover:text-[#EDEDED]"
                 }`}
               >
                 {isActive && (
@@ -128,7 +175,10 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
                       initial={{ opacity: 0, y: 8, filter: "blur(4px)" }}
                       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                       exit={{ opacity: 0, y: -8, filter: "blur(4px)" }}
-                      transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{
+                        duration: 0.22,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
                       className="block"
                     >
                       {t(language, item.key)}
@@ -143,14 +193,16 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
         <div className="hidden md:flex items-center gap-3">
           <div className="relative">
             <motion.button
+              type="button"
               whileTap={{ scale: 0.96 }}
-              onClick={() => setLangMenuOpen(!langMenuOpen)}
+              onClick={() => setLangMenuOpen((prev) => !prev)}
               className="group px-3 py-2 text-sm font-medium text-[#EDEDED] border border-[#27272A] hover:border-[#3B82F6]/50 transition-all duration-300 flex items-center gap-2"
               style={{
                 borderRadius: "6px",
                 backgroundColor: "rgba(10, 10, 10, 0.6)",
                 backdropFilter: "blur(8px)",
               }}
+              aria-label={t(language, "nav.language")}
             >
               <Globe className="w-3.5 h-3.5 text-[#71717A] group-hover:text-[#3B82F6] transition-colors" />
 
@@ -177,31 +229,45 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
               </motion.div>
             </motion.button>
 
-            {langMenuOpen && (
-              <>
-                <div className="fixed inset-0 z-[-1]" onClick={() => setLangMenuOpen(false)} />
-                <motion.div
-                  initial={{ opacity: 0, y: 8, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                  transition={{ duration: 0.15, ease: [0.33, 1, 0.68, 1] }}
-                  className="absolute right-0 mt-2 w-40 border border-[#27272A] shadow-2xl overflow-hidden"
-                  style={{
-                    borderRadius: "8px",
-                    backgroundColor: "rgba(8, 8, 8, 0.95)",
-                    backdropFilter: "blur(16px)",
-                  }}
-                >
-                  <div className="py-1">
-                    {(Object.entries(languageMeta) as [Language, typeof languageMeta[Language]][]).map(
-                      ([key, meta]) => (
+            <AnimatePresence>
+              {langMenuOpen && (
+                <>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-[-1]"
+                    onClick={() => setLangMenuOpen(false)}
+                  />
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                    transition={{
+                      duration: 0.15,
+                      ease: [0.33, 1, 0.68, 1],
+                    }}
+                    className="absolute right-0 mt-2 w-40 border border-[#27272A] shadow-2xl overflow-hidden"
+                    style={{
+                      borderRadius: "8px",
+                      backgroundColor: "rgba(8, 8, 8, 0.95)",
+                      backdropFilter: "blur(16px)",
+                    }}
+                  >
+                    <div className="py-1">
+                      {(Object.entries(languageMeta) as [
+                        Language,
+                        (typeof languageMeta)[Language]
+                      ][]).map(([key, meta]) => (
                         <button
                           key={key}
+                          type="button"
                           onClick={() => {
                             onLanguageChange(key);
                             setLangMenuOpen(false);
                           }}
-                          className={`w-full px-4 py-2.5 text-left text-sm transition-colors flex items-center gap-3 ${
+                          className={`relative w-full px-4 py-2.5 text-left text-sm transition-colors flex items-center gap-3 ${
                             language === key
                               ? "text-[#3B82F6]"
                               : "text-[#EDEDED] hover:bg-[#27272A]/60"
@@ -213,18 +279,22 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
                               className="absolute left-0 w-[2px] h-5 bg-[#3B82F6] rounded-r"
                             />
                           )}
+
                           <span>{meta.flag}</span>
                           <span className="font-medium">{meta.native}</span>
+
                           {language === key && (
-                            <span className="ml-auto text-xs text-[#3B82F6]/60">✓</span>
+                            <span className="ml-auto text-xs text-[#3B82F6]/60">
+                              ✓
+                            </span>
                           )}
                         </button>
-                      )
-                    )}
-                  </div>
-                </motion.div>
-              </>
-            )}
+                      ))}
+                    </div>
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
           </div>
 
           <MagneticButton
@@ -241,12 +311,14 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
               whileHover={{ x: 0 }}
               transition={{ duration: 0.3 }}
             />
+
             <span className="relative z-10 flex items-center gap-2">
               <motion.span
                 className="inline-block w-1.5 h-1.5 rounded-full bg-[#10B981]"
                 animate={{ opacity: [1, 0.4, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
+
               <AnimatePresence mode="wait">
                 <motion.span
                   key={language}
@@ -263,39 +335,56 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
           </MagneticButton>
         </div>
 
-        <motion.button
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden text-[#EDEDED] p-2 w-10 h-10 flex items-center justify-center"
-          aria-label={t(language, "nav.openMenu")}
-        >
-          <div className="w-6 flex flex-col items-end gap-1.5">
-            <motion.span
-              animate={{ rotate: mobileMenuOpen ? 45 : 0, y: mobileMenuOpen ? 8 : 0 }}
-              transition={{ duration: 0.3 }}
-              className="block h-[2px] bg-current origin-center"
-              style={{ width: "100%" }}
-            />
-            <motion.span
-              animate={{ opacity: mobileMenuOpen ? 0 : 1, x: mobileMenuOpen ? 10 : 0 }}
-              transition={{ duration: 0.2 }}
-              className="block h-[2px] bg-current"
-              style={{ width: "75%" }}
-            />
-            <motion.span
-              animate={{ rotate: mobileMenuOpen ? -45 : 0, y: mobileMenuOpen ? -8 : 0 }}
-              transition={{ duration: 0.3 }}
-              className="block h-[2px] bg-current origin-center"
-              style={{ width: "66%" }}
-            />
-          </div>
-        </motion.button>
+        {isInHero && (
+          <motion.button
+            type="button"
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            className="md:hidden text-[#EDEDED] p-2 w-10 h-10 flex items-center justify-center"
+            aria-label={
+              mobileMenuOpen
+                ? t(language, "nav.closeMenu")
+                : t(language, "nav.openMenu")
+            }
+          >
+            <div className="w-6 flex flex-col items-end gap-1.5">
+              <motion.span
+                animate={{
+                  rotate: mobileMenuOpen ? 45 : 0,
+                  y: mobileMenuOpen ? 8 : 0,
+                }}
+                transition={{ duration: 0.25 }}
+                className="block h-[2px] bg-current origin-center"
+                style={{ width: "100%" }}
+              />
+              <motion.span
+                animate={{
+                  opacity: mobileMenuOpen ? 0 : 1,
+                  x: mobileMenuOpen ? 10 : 0,
+                }}
+                transition={{ duration: 0.18 }}
+                className="block h-[2px] bg-current"
+                style={{ width: "75%" }}
+              />
+              <motion.span
+                animate={{
+                  rotate: mobileMenuOpen ? -45 : 0,
+                  y: mobileMenuOpen ? -8 : 0,
+                }}
+                transition={{ duration: 0.25 }}
+                className="block h-[2px] bg-current origin-center"
+                style={{ width: "66%" }}
+              />
+            </div>
+          </motion.button>
+        )}
       </div>
 
       <MobileMenu
         isOpen={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
         language={language}
+        onLanguageChange={onLanguageChange}
       />
     </motion.nav>
   );
