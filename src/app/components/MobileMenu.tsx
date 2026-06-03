@@ -24,34 +24,51 @@ export function MobileMenu({
 }: MobileMenuProps) {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
+    if (!element) return;
 
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-      onClose();
-    }
+    onClose();
+
+    window.setTimeout(() => {
+      const navbarOffset = 96;
+      const elementTop =
+        element.getBoundingClientRect().top + window.pageYOffset - navbarOffset;
+
+      window.scrollTo({
+        top: Math.max(elementTop, 0),
+        behavior: "smooth",
+      });
+    }, 40);
+  };
+
+  const handleLanguageChange = (nextLanguage: Language) => {
+    onLanguageChange(nextLanguage);
   };
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       {isOpen && (
-        <>
+        <motion.div
+          key="mobile-menu-root"
+          className="fixed inset-0 z-[60] md:hidden"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 1 }}
+        >
           <motion.div
-            key="mobile-menu-backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.18 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] md:hidden"
+            className="absolute inset-0 bg-black/80 z-0"
           />
 
           <motion.aside
-            key="mobile-menu-panel"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-y-0 right-0 w-full max-w-sm h-dvh bg-[#0A0A0A] border-l border-[#27272A] z-[70] overflow-y-auto overscroll-contain will-change-transform md:hidden flex flex-col"
+            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute inset-y-0 right-0 w-full max-w-sm h-dvh bg-[#0A0A0A] border-l border-[#27272A] z-10 overflow-y-auto overscroll-contain will-change-transform flex flex-col"
             aria-label="Mobile navigation menu"
           >
             <div className="flex items-center justify-between p-6 border-b border-[#27272A]">
@@ -75,8 +92,7 @@ export function MobileMenu({
                     key={item.id}
                     initial={{ opacity: 0, x: 18 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 12 }}
-                    transition={{ delay: index * 0.05, duration: 0.22 }}
+                    transition={{ delay: index * 0.04, duration: 0.2 }}
                   >
                     <motion.button
                       type="button"
@@ -102,7 +118,7 @@ export function MobileMenu({
             >
               <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-[#71717A]">
                 <Globe className="w-3.5 h-3.5" />
-                <span>Language</span>
+                <span>{t(language, "nav.language")}</span>
               </div>
 
               <div className="grid grid-cols-2 gap-2">
@@ -116,7 +132,7 @@ export function MobileMenu({
                     <button
                       key={key}
                       type="button"
-                      onClick={() => onLanguageChange(key)}
+                      onClick={() => handleLanguageChange(key)}
                       className={`px-4 py-3 rounded-lg border text-sm flex items-center justify-center gap-2 transition-colors ${
                         isActive
                           ? "border-[#3B82F6] text-[#EDEDED] bg-[#3B82F6]/10"
@@ -178,7 +194,7 @@ export function MobileMenu({
               </div>
             </motion.div>
           </motion.aside>
-        </>
+        </motion.div>
       )}
     </AnimatePresence>
   );
