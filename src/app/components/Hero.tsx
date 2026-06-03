@@ -59,7 +59,7 @@ export function Hero({ language }: { language: Language }) {
     <section
       id="hero"
       ref={ref}
-      className="min-h-screen relative flex items-start sm:items-center justify-center px-6 sm:px-8 lg:px-12 pt-32 sm:pt-28 overflow-hidden"
+      className="min-h-screen relative flex items-start md:items-center justify-center px-6 sm:px-8 lg:px-12 pt-20 sm:pt-24 md:pt-0 overflow-hiddenn"
     >
       {/* Animated Gradient Background */}
       <div className="absolute inset-0 overflow-hidden">
@@ -144,7 +144,7 @@ export function Hero({ language }: { language: Language }) {
         />
       </div>
 
-        <motion.div className="max-w-6xl mx-auto relative z-10 w-full pt-4 sm:pt-0" style={{ opacity }}>
+        <motion.div className="max-w-6xl mx-auto relative z-10 w-full" style={{ opacity }}>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
