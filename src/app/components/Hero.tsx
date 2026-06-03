@@ -59,7 +59,7 @@ export function Hero({ language }: { language: Language }) {
     <section
       id="hero"
       ref={ref}
-      className="min-h-screen relative flex items-center justify-center px-6 sm:px-8 lg:px-12 overflow-hidden"
+      className="min-h-screen relative flex items-start sm:items-center justify-center px-6 sm:px-8 lg:px-12 pt-32 sm:pt-28 overflow-hidden"
     >
       {/* Animated Gradient Background */}
       <div className="absolute inset-0 overflow-hidden">
@@ -144,7 +144,7 @@ export function Hero({ language }: { language: Language }) {
         />
       </div>
 
-        <motion.div className="max-w-6xl mx-auto relative z-10 w-full" style={{ opacity }}>
+        <motion.div className="max-w-6xl mx-auto relative z-10 w-full pt-4 sm:pt-0" style={{ opacity }}>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -156,7 +156,7 @@ export function Hero({ language }: { language: Language }) {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 border border-[#27272A] mb-8 sm:mb-10 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 border border-[#27272A] mb-8 sm:mb-10 backdrop-blur-sm max-w-full"
             style={{ 
               borderRadius: "8px",
               backgroundColor: "rgba(10, 10, 10, 0.5)"
@@ -167,7 +167,7 @@ export function Hero({ language }: { language: Language }) {
               animate={{ opacity: [1, 0.3, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
-            <span className="text-xs sm:text-sm text-[#71717A] font-mono">
+            <span className="text-xs sm:text-sm text-[#71717A] font-mono truncate">
               <span className="hidden sm:inline">{t(language, "hero.available")} • </span>
               <span className="sm:hidden">{t(language, "hero.availableShort")} • </span>
               {t(language, "contact.location")}
@@ -245,7 +245,7 @@ export function Hero({ language }: { language: Language }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-sm sm:text-base md:text-[1.05rem] text-[#71717A] mb-10 sm:mb-12 max-w-[36rem] leading-[1.8]"
+            className="text-sm sm:text-base md:text-[1.05rem] text-[#71717A] mb-12 sm:mb-12 max-w-[36rem] leading-[1.8]"
             >
             {t(language, "hero.descPre")}
             <span className="text-[#3B82F6]">{t(language, "hero.descCloud")}</span>
@@ -260,7 +260,7 @@ export function Hero({ language }: { language: Language }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
-            className="flex flex-col sm:flex-row flex-wrap items-center gap-3 sm:gap-4 mb-12 sm:mb-16"
+            className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 mb-14 sm:mb-16"
           >
             <MagneticButton
               onClick={() => scrollToSection("work")}
@@ -289,7 +289,7 @@ export function Hero({ language }: { language: Language }) {
             </MagneticButton>
             <button
               onClick={handleDownloadCV}
-              className="group flex items-center justify-center gap-2 px-4 py-2 text-sm text-[#71717A] hover:text-[#EDEDED] transition-colors"
+              className="group flex items-center justify-center gap-2 px-4 py-2 text-sm text-[#A1A1AA] hover:text-[#EDEDED] transition-colors"
             >
               <Download className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
               Descargar CV
@@ -301,7 +301,7 @@ export function Hero({ language }: { language: Language }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
-            className="flex flex-wrap gap-2 sm:gap-3"
+            className="flex flex-wrap gap-2 sm:gap-3 pt-2"
           >
             {[
               "Cloud Architecture",
