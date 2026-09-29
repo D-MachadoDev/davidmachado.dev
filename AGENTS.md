@@ -25,7 +25,7 @@ Las reglas globales (idioma, flujo, git) están en `~/.claude/CLAUDE.md` y `~/.c
 3. Demostrar cada afirmación con su comando y su salida.
 4. **Cero alucinaciones.** Lo que no se verificó no se afirma. Si un archivo, carpeta o skill no existe, decirlo en lugar de describirlo como si existiera.
 5. Nada de secrets: `.env` está ignorado por git. Los secretos van en variables de entorno o secret manager.
-6. **Sin tracking de tareas.** No hay boards, tickets, ni SDD. Solo el código de la aplicación y los `.md` que la acompañan.
+6. **Sin tracking de tareas en el repo.** No hay boards, tickets ni SDD dentro del código. El tracking que haga falta (pendientes, estado, planes de sesión) se lleva **en Obsidian**, nunca en el repositorio.
 7. Cada paso deja rastro verificable: comando, salida y commit. Nada queda "dicho" sin probarse.
 
 ## 3. Flujo completo
@@ -106,6 +106,7 @@ Cada fase declara las skills que la componen. Ninguna fase se salta salvo que se
 - Formato y lint antes de commitear: `biome check --write .`
 - Código limpio al repo como en un proyecto serio: rama → PR → review → merge. Nada de empujar directo a `master`.
 - `git-guardrails-claude-code` bloquea comandos destructivos (`push`, `reset --hard`, `clean`, `branch -D`).
+- **Commits coherentes y justificados**: además de convencionales, el mensaje explica el porqué en una frase (qué problema resuelve o por qué importa), no solo el qué. Un commit, una idea.
 
 ## 8. Skills instaladas
 
@@ -198,7 +199,7 @@ Las fases 0-8 de la sección 3 se activan solas. Para forzar una se usa `/` en e
    - OpenCode: además una frase explícita, porque no importa `@` solo. Ejemplo: `Lee y aplica el archivo C:\Users\da-V7\.agents\AGENTS.md`. Fuente: *"You can teach opencode to read external files by providing explicit instructions in your AGENTS.md"*.
    - **Suposición marcada**: la ruta absoluta `@C:\...` en Windows no está comprobada en los cuatro agentes. Si alguno no la importa, se copia el archivo en vez de importarlo.
 4. **Cambios de reglas**: se editan en `C:\Users\da-V7\.agents\AGENTS.md` y se vuelven a copiar a los proyectos existentes. No hay sincronización automática.
-5. **Vault de Obsidian vacío o sin notas del proyecto**: el agente **no** crea nada por su cuenta al arrancar. Primero pasa por `grill-me` (Fases 0-1) con el humano: allí se define qué notas hacen falta y con qué contenido. Solo después de esa validación se crea la estructura estándar en el vault (`Projects/<Proyecto>/00-Brief.md`, `01-Stack.md`, `02-Plan.md`, `03-Estado.md`, `MAP.md`, `Decisiones.md`). La memoria vive en Obsidian: el repo **nunca** recibe `.md` sueltos (solo `README.md`, `docs/decisions.md` y `docs/STATUS.md` — este último es el snapshot de sesión: se lee al abrir cualquier sesión y se actualiza al cerrar).
+5. **Vault de Obsidian vacío o sin notas del proyecto**: el agente **no** crea nada por su cuenta al arrancar. Primero pasa por `grill-me` (Fases 0-1) con el humano: allí se define qué notas hacen falta y con qué contenido. Solo después de esa validación se crea la estructura estándar en el vault (`Projects/<Proyecto>/00-Brief.md`, `01-Stack.md`, `02-Plan.md`, `03-Estado.md`, `MAP.md`, `Decisiones.md`). La memoria vive en Obsidian: el repo **nunca** recibe `.md` sueltos (solo `README.md`, `docs/decisions.md` y `docs/STATUS.md` — este último es el snapshot de sesión: se lee al abrir cualquier sesión y se actualiza al cerrar). Specs, planes, notas de aprendizaje y todo documento que genere una skill (p. ej. `docs/superpowers/specs/`) van a la nota del proyecto en Obsidian: si una skill los escribe dentro del repo, se mueven al vault.
 
 - **Sincronizacion verificada:** al comparar plantilla y copia hay que **normalizar los
   finales de linea** (CRLF -> LF). Verificado hoy: `core.autocrlf = true` en este repo,
@@ -257,3 +258,9 @@ este archivo. Regla de uso:
 - **NO adoptado:** su plantilla de `AGENTS.md` (su seccion 22) ni `SDD/SDD.md` como
   memoria principal - la memoria vive en Obsidian (ver `WORKFLOW-EXAMPLES.md`, Caso F).
 - **Analisis completo y 9 simulacros de uso:** `WORKFLOW-EXAMPLES.md` en la raiz del repo.
+
+## 12. Imagen primero, aprendizaje continuo y cero vibecoding
+
+1. **Imagen antes que código (UI)**: toda interfaz parte de una referencia visual. Si el humano manda una imagen, se usa como base; si no, se genera con `imagegen-frontend-web` o `image-to-code` y se valida con el humano **antes** de escribir la UI. Sin referencia aprobada, no se maqueta.
+2. **Aprendizaje continuo (de simple a avanzado)**: adaptarse al nivel real del humano, pero **no estancarse con él**: llevarlo hacia adelante en cada sesión. Explicar cada concepto en dos niveles — lenguaje simple primero, técnico después — con gráficos o diagramas cuando ayuden (`archify`). Una pregunta en medio del proceso («¿qué es Redis?») se responde a fondo: objetivo de **cero deuda de conocimiento**. Cada proyecto, texto, idea y sesión es ocasión de mejorar: consejos de fondo técnico y humano (habilidades blandas, inteligencia emocional, perfil profesional senior).
+3. **Cero vibecoding**: prohibido escribir código que el humano no pueda explicar después. Cada decisión viene con su porqué en su nivel; si algo no queda claro, se para y se enseña antes de continuar.
