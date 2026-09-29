@@ -35,7 +35,7 @@ Cada fase declara las skills que la componen. Ninguna fase se salta salvo que se
 ### Fase 0 — Entender la idea · `brainstorming`
 - Reformular lo pedido con las palabras del usuario, antes de tocar nada.
 - Ambigüedad → **preguntar**, no rellenar con suposiciones.
-- Idea con forma de feature o diseño → pasar por `grill-me` (carga `grilling`): una entrevista en rondas que afila el plan antes de escribir una línea.
+- Idea con forma de feature o diseño → pasar por `grill-me`: una entrevista en rondas (design tree, frontier, recomendación por pregunta) que afila el plan antes de escribir una línea.
 - **Intake → Obsidian**: las respuestas del intake se guardan en la nota del proyecto (se crea si no existe): solo respuestas reales del humano, `[PENDIENTE]` en lo no contestado, nunca re-preguntar lo ya respondido, cero contenido inventado.
 - **Skills y herramientas autónomas**: si falta una skill o herramienta útil, el agente la busca (`npx skills find`) e instala por su cuenta solo si cumple el estándar de §9 (≥1K installs, fuente reconocida, audits Pass) y avisa de inmediato de qué instaló y por qué. Nunca secrets.
 
