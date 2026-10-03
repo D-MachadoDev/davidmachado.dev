@@ -1,0 +1,12 @@
+# David Machado — Portfolio & Engineering Systems
+> Software Engineer & Systems Architect building scalable web applications and distributed architectures.
+
+## Flagship Systems
+- Faro: Property Management Platform (ASP.NET Core, React 18, PostgreSQL)
+- Zentric Marketplace: Transactional API with DDD and Hexagonal Architecture
+- Concurrent Booking Engine: In-memory atomic locking via Redis and optimistic concurrency
+- Virtualized Data Explorer: Dynamic DOM windowing and Web Worker multithreading at 60fps
+
+## Contact & Code
+- GitHub: https://github.com/D-MachadoDev
+- LinkedIn: https://www.linkedin.com/in/david-machado-94b3921a2/

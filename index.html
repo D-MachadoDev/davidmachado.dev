@@ -1,35 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>David Machado — Systems Engineer & Cloud Architect</title>
-    <meta name="author" content="David Machado"/>
-    <meta name="robots" content="index,follow"/>
-    <meta name="description" content="Portfolio of David Machado: Systems thinker, cloud architect, and full-stack engineer building scalable infrastructure and developer tools. Based in Medellín, Colombia." />
-    <meta name="theme-color" content="#050505" />
-    <!-- <link rel="cannonical" href="hosting personal"> -->
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="David Machado — Systems Engineer & Cloud Architect" />
-    <meta property="og:description" content="Building scalable solutions at the intersection of cloud architecture, distributed systems, and developer experience." />
-    <meta property="og:url" content="https://davidmachado.dev" />
-    <!-- <meta property="og:image" content="https://davidmachado.dev/image.png" / > AGREGAR IMAGEN PARA LA CARD-->
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="David Machado — Systems Engineer & Cloud Architect" />
-    <meta name="twitter:description" content="Building scalable solutions at the intersection of cloud architecture, distributed systems, and developer experience." />
-    <!-- <meta name="twitter:image" content="https://davidmachado.dev/preview.png" /> AGREGAR IMAGEN PARA LA CARD -->
+    <title>David Machado — Software Engineer | Backend, Distributed Systems & Full-Stack</title>
     
-    <!-- Preconnect fonts -->
+    <!-- Canonical & Indexing -->
+    <link rel="canonical" href="https://davidmachado.dev/" />
+    <meta name="author" content="David Machado" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="description" content="Software Engineer especializado en arquitecturas de backend (.NET / C#), concurrencia distribuida con Redis, bases de datos relacionales (PostgreSQL) y aplicaciones web reactivas a 60fps (React & TypeScript). Ubicado en Medellín, Colombia · Disponible para roles globales." />
+    <meta name="theme-color" content="#050505" />
+
+    <!-- Open Graph / LinkedIn / Facebook / WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="David Machado — Portfolio" />
+    <meta property="og:title" content="David Machado — Software Engineer | Backend, Distributed Systems & Full-Stack" />
+    <meta property="og:description" content="Diseño de APIs transaccionales bajo Arquitectura Hexagonal y DDD, bloqueos atómicos en Redis para cero sobreventas y aplicaciones web fluidas a 60fps." />
+    <meta property="og:url" content="https://davidmachado.dev/" />
+    <meta property="og:image" content="https://davidmachado.dev/og-image.png" />
+    <meta property="og:image:secure_url" content="https://davidmachado.dev/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="David Machado — Software Engineer Portfolio Social Preview" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="pt_BR" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Davidma13020061" />
+    <meta name="twitter:creator" content="@Davidma13020061" />
+    <meta name="twitter:title" content="David Machado — Software Engineer | Backend, Distributed Systems & Full-Stack" />
+    <meta name="twitter:description" content="Diseño de APIs transaccionales bajo Arquitectura Hexagonal y DDD, bloqueos atómicos en Redis para cero sobreventas y aplicaciones web fluidas a 60fps." />
+    <meta name="twitter:image" content="https://davidmachado.dev/og-image.png" />
+    <meta name="twitter:image:alt" content="David Machado — Software Engineer Portfolio Social Preview" />
+
+    <!-- Structured Data (Schema.org JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://davidmachado.dev/#person",
+          "name": "David Machado",
+          "alternateName": "D-MachadoDev",
+          "jobTitle": "Software Engineer",
+          "description": "Software Engineer especializado en arquitectura de backend, sistemas distribuidos y desarrollo web full-stack.",
+          "url": "https://davidmachado.dev/",
+          "image": "https://davidmachado.dev/og-image.png",
+          "sameAs": [
+            "https://github.com/D-MachadoDev",
+            "https://www.linkedin.com/in/david-machado-94b3921a2/",
+            "https://x.com/Davidma13020061"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Medellín",
+            "addressCountry": "CO"
+          },
+          "knowsAbout": [
+            "Software Architecture",
+            "Backend Development",
+            "Distributed Systems",
+            ".NET",
+            "C#",
+            "PostgreSQL",
+            "Redis",
+            "Docker",
+            "React",
+            "TypeScript",
+            "Tailwind CSS",
+            "Domain-Driven Design",
+            "Hexagonal Architecture"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://davidmachado.dev/#website",
+          "url": "https://davidmachado.dev/",
+          "name": "David Machado — Software Engineer Portfolio",
+          "description": "Portafolio oficial de ingeniería de software de David Machado.",
+          "author": {
+            "@id": "https://davidmachado.dev/#person"
+          },
+          "inLanguage": ["es", "en", "pt"]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Preconnect fonts for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://api.fontshare.com" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23050508'/><rect x='10' y='10' width='80' height='80' rx='12' fill='none' stroke='%233B82F6' stroke-width='6'/><text x='50%' y='55%' text-anchor='middle' dominant-baseline='central' font-family='monospace' font-weight='bold' font-size='42' fill='%23FFFFFF'>DM</text></svg>" />
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23050508'/><rect x='10' y='10' width='80' height='80' rx='12' fill='none' stroke='%233B82F6' stroke-width='6'/><text x='50%' y='55%' text-anchor='middle' dominant-baseline='central' font-family='monospace' font-weight='bold' font-size='42' fill='%23FFFFFF'>DM</text></svg>" />
   </head>
 
   <body>
