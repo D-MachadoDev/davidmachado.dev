@@ -306,12 +306,13 @@ export function Hero({ language }: { language: Language }) {
 						className="flex flex-wrap gap-2 sm:gap-3"
 					>
 						{[
-							"Cloud Architecture",
-							"Distributed Systems",
-							"React",
-							"Node.js",
-							"Kubernetes",
+							".NET / C#",
+							"ASP.NET Core",
+							"PostgreSQL",
+							"Clean Architecture",
+							"React 18",
 							"TypeScript",
+							"Docker",
 						].map((tech, index) => (
 							<motion.span
 								key={tech}

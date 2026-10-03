@@ -179,24 +179,39 @@ export function Experience({ language }: { language: Language }) {
 
   const lineScaleY = useTransform(scrollYProgress, [0, 0.8], [0, 1]);
 
+  /**
+   * ============================================================================
+   * GUÍA DE ESCALABILIDAD — CÓMO AÑADIR EXPERIENCIA LABORAL FUTURA
+   * ============================================================================
+   * Para añadir un nuevo empleo o pasantía en el futuro, agrega un nuevo objeto
+   * al inicio del array `timeline`:
+   *
+   * {
+   *   type: "work",                                 // "work" | "education" | "achievement"
+   *   title: "Backend Engineer / Full-Stack Dev",   // Tu cargo
+   *   organization: "Nombre de la Empresa",         // Empresa / Organización
+   *   period: "2026 - Presente",                    // Rango de fechas
+   *   description: "Descripción en formato STAR: situación, reto resuelto y resultados técnicos.",
+   *   tags: [".NET 9", "PostgreSQL", "Docker", "CI/CD"], // Tecnologías clave
+   * },
+   * ============================================================================
+   */
   const timeline: TimelineItem[] = [
-    /* TODO: Add work experience / achievements here using this format
     {
       type: "work",
-      title: "Solutions Architect Intern",
-      organization: "Tech Innovations Lab",
-      period: "2025 - Present",
-      description: "Designing scalable cloud architectures for enterprise clients.",
-      tags: ["AWS", "Kubernetes", "Microservices"],
+      title: t(language, "exp.workTitle"),
+      organization: t(language, "exp.workOrg"),
+      period: t(language, "exp.workPeriod"),
+      description: t(language, "exp.workDesc"),
+      tags: ["ASP.NET Core", "React 18", "PostgreSQL", "Clean Architecture"],
     },
-    */
     {
       type: "education",
       title: t(language, "exp.eduTitle"),
       organization: t(language, "exp.eduOrg"),
       period: t(language, "exp.eduPeriod"),
       description: t(language, "exp.eduDesc"),
-      tags: ["GPA: 4.2/5.0"],
+      tags: ["5to Semestre", "POO & Algoritmia", "Bases de Datos"],
     },
   ];
 

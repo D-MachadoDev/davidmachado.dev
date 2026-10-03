@@ -15,39 +15,39 @@ import { type Language, t, type TranslationKey } from "../i18n";
 
 const skills = [
   {
-    icon: Cloud,
-    categoryKey: "about.skillCloud" as TranslationKey,
-    items: ["AWS", "Docker", "CI/CD", "Azure"],
-    color: "#60A5FA",
-  },
-  {
     icon: Code2,
     categoryKey: "about.skillLang" as TranslationKey,
-    items: ["C#", ".NET", "Python", "JavaScript"],
+    items: ["C#", ".NET 8/9", "TypeScript", "JavaScript", "SQL"],
     color: "#34D399",
   },
   {
     icon: Database,
     categoryKey: "about.skillData" as TranslationKey,
-    items: ["SQL Server", "MySQL", "Oracle", "MongoDB"],
+    items: ["PostgreSQL", "SQL Server", "EF Core", "LINQ", "Migrations"],
     color: "#FBBF24",
   },
   {
     icon: Boxes,
     categoryKey: "about.skillArch" as TranslationKey,
-    items: ["APIs", "Microservices", "SaaS", "Integrations"],
+    items: ["Clean Architecture", "RESTful APIs", "SOLID", "Domain Modeling"],
     color: "#A78BFA",
+  },
+  {
+    icon: Cloud,
+    categoryKey: "about.skillCloud" as TranslationKey,
+    items: ["Docker", "Docker Compose", "Linux", "Environment Config"],
+    color: "#60A5FA",
   },
   {
     icon: Terminal,
     categoryKey: "about.skillDevops" as TranslationKey,
-    items: ["Git", "Linux", "Docker", "Azure Portal"],
+    items: ["Git", "GitHub", "Postman", "Swagger / OpenAPI"],
     color: "#F472B6",
   },
   {
     icon: GitBranch,
     categoryKey: "about.skillMethods" as TranslationKey,
-    items: ["Scrum", "Kanban", "Code Review", "Documentation"],
+    items: ["Unit Testing", "Code Review", "Agile / Scrum", "Technical Docs"],
     color: "#22D3EE",
   },
 ];
@@ -231,12 +231,12 @@ export function About({ language }: { language: Language }) {
     }
   };
 
-  // Cambia estos números cuando quieras actualizar tus métricas.
+  // Métricas verificadas de ingeniería
   const stats = [
-    { label: t(language, "about.statYears"), value: 2, suffix: "+" },   // años de experiencia
-    { label: t(language, "about.statProjects"), value: 12, suffix: "+" }, // proyectos importantes
-    { label: t(language, "about.statRepos"), value: 25, suffix: "+" },   // repos relevantes
-    { label: t(language, "about.statLines"), value: 20, suffix: "k+" },  // líneas aproximadas
+    { label: t(language, "about.statProjects"), value: 4, suffix: "" },     // 4 sistemas de ingeniería activos
+    { label: t(language, "about.statArch"), value: 100, suffix: "%" },      // 100% Clean Architecture & SOLID
+    { label: t(language, "about.statRepos"), value: 6, suffix: "+" },       // 6+ repositorios en GitHub
+    { label: t(language, "about.statStack"), value: 1, suffix: "st" },      // Core: C# / .NET / TypeScript
   ];
 
   const philosophy = [
