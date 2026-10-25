@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Toaster } from "sonner";
 import { About } from "./components/About";
 import { BackToTop } from "./components/BackToTop";
+import { Certifications } from "./components/Certifications";
 import { Contact } from "./components/Contact";
 import { CustomCursor } from "./components/CustomCursor";
 import { Experience } from "./components/Experience";
@@ -131,7 +132,9 @@ export default function App() {
 				<SectionDivider />
 				<Experience language={language} />
 				<SectionDivider />
-				<Contact language={language} />
+				<Certifications language={language} />
+			<SectionDivider />
+			<Contact language={language} />
 			</main>
 
 			{/* Back to Top Button */}
