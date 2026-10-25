@@ -1,7 +1,6 @@
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { toast } from "sonner";
 import { type Language, t } from "../i18n";
 import { MagneticButton } from "./MagneticButton";
 import { TextReveal } from "./TextReveal";
@@ -36,24 +35,6 @@ export function Hero({ language }: { language: Language }) {
 		const element = document.getElementById(id);
 		if (element) {
 			element.scrollIntoView({ behavior: "smooth" });
-		}
-	};
-
-	const handleDownloadCV = async () => {
-		try {
-			const res = await fetch("/assets/cv/david-machado-cv.pdf", {
-				method: "HEAD",
-			});
-			if (res.ok) {
-				const link = document.createElement("a");
-				link.href = "/assets/cv/david-machado-cv.pdf";
-				link.download = "david-machado-cv.pdf";
-				link.click();
-			} else {
-				toast("CV próximamente disponible", { duration: 2000 });
-			}
-		} catch {
-			toast("CV próximamente disponible", { duration: 2000 });
 		}
 	};
 
@@ -178,23 +159,8 @@ export function Hero({ language }: { language: Language }) {
 									animation: "shimmer 6s ease-in-out infinite",
 								}}
 							>
-								David
-							</h1>
-						</TextReveal>
-						<TextReveal delay={0.2}>
-							<h1
-								className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl leading-[0.88] tracking-tight"
-								style={{
-									background:
-										"linear-gradient(90deg, #EDEDED 0%, #EDEDED 44%, #93C5FD 50%, #EDEDED 56%, #EDEDED 100%)",
-									backgroundSize: "200% 100%",
-									WebkitBackgroundClip: "text",
-									WebkitTextFillColor: "transparent",
-									backgroundClip: "text",
-									animation: "shimmer 6s ease-in-out infinite 0.5s",
-								}}
-							>
-								Machado
+							David
+							<span className="block">Machado</span>
 							</h1>
 						</TextReveal>
 					</div>
