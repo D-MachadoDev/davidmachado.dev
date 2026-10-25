@@ -148,16 +148,7 @@ export function Hero({ language }: { language: Language }) {
 					<div className="mb-3 sm:mb-4">
 						<TextReveal delay={0.1}>
 							<h1
-								className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl leading-[0.88] tracking-tight"
-								style={{
-									background:
-										"linear-gradient(90deg, #EDEDED 0%, #EDEDED 44%, #93C5FD 50%, #EDEDED 56%, #EDEDED 100%)",
-									backgroundSize: "200% 100%",
-									WebkitBackgroundClip: "text",
-									WebkitTextFillColor: "transparent",
-									backgroundClip: "text",
-									animation: "shimmer 6s ease-in-out infinite",
-								}}
+							className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl leading-[0.88] tracking-tight text-balance text-white"
 							>
 							David
 							<span className="block">Machado</span>
