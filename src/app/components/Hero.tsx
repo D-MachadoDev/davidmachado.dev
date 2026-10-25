@@ -225,7 +225,7 @@ export function Hero({ language }: { language: Language }) {
 							<ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform relative z-10" />
 						</MagneticButton>
 						<MagneticButton
-							href="https://mail.google.com/mail/?view=cm&to=davidmachado.dev07@gmail.com&su=Hola%20David"
+							href="mailto:davidmachado.dev07@gmail.com?subject=Hola%20David"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 border border-white/20 text-white font-medium hover:border-white/40 hover:bg-white/5 transition-all backdrop-blur-sm text-sm sm:text-base flex items-center justify-center"
@@ -239,21 +239,6 @@ export function Hero({ language }: { language: Language }) {
 						</MagneticButton>
 					</motion.div>
 
-					<motion.div
-						initial={{ opacity: 0, y: 16 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ delay: 0.78, duration: 0.6 }}
-						className="mb-6 sm:mb-8"
-					>
-						<button
-							type="button"
-							onClick={handleDownloadCV}
-							className="group inline-flex items-center gap-2 text-sm text-zinc-300 hover:text-white transition-colors"
-						>
-							<Download className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
-							<span>Descargar CV</span>
-						</button>
-					</motion.div>
 
 					{/* Tech Stack Pills */}
 					<motion.div
