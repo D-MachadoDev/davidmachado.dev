@@ -54,7 +54,7 @@ const skills = [
   {
     icon: Bot,
     categoryKey: "about.skillAI" as TranslationKey,
-    items: ["LLM APIs", "RAG & Context", "Prompt Engineering", "MCP Tools", "Automation"],
+    items: ["LLM APIs", "Agent Orchestration", "RAG & Context", "Prompt Engineering", "MCP Tools", "Automation"],
     color: "#818CF8",
   },
 ];
