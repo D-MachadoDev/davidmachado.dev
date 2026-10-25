@@ -5,6 +5,7 @@ import {
   Cloud,
   Database,
   Terminal,
+  Bot,
   GitBranch,
   Download,
 } from "lucide-react";
@@ -49,6 +50,12 @@ const skills = [
     categoryKey: "about.skillMethods" as TranslationKey,
     items: ["Unit Testing", "Code Review", "Agile / Scrum", "Technical Docs"],
     color: "#22D3EE",
+  },
+  {
+    icon: Bot,
+    categoryKey: "about.skillAI" as TranslationKey,
+    items: ["LLM APIs", "RAG & Context", "Prompt Engineering", "MCP Tools", "Automation"],
+    color: "#818CF8",
   },
 ];
 

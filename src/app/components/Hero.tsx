@@ -255,6 +255,7 @@ export function Hero({ language }: { language: Language }) {
 							"React 18",
 							"TypeScript",
 							"Docker",
+							"AI Integration",
 						].map((tech, index) => (
 							<motion.span
 								key={tech}
