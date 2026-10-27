@@ -32,8 +32,11 @@ Branch: `fix/credibility-and-deploy` (from `main`).
 - `D-MachadoDev/Zentric`: .NET 10, Hexagonal + DDD + CQRS, PostgreSQL, Docker, README
   badge `Tests-592 Passing (100%)`. Returns HTTP 200.
 - `D-MachadoDev/leaseflow`: TypeScript + Express + SQLite, Vitest. Returns HTTP 200.
-- Vercel project `davidmachado-dev` exists and serves the site.
+- Production deployment is live at `https://davidmachado-dev.vercel.app/` (deployment
+  `davidmachado-n4pb2hczk`, Vercel project `davidmachado-dev`).
 - `davidmachado.dev` has no DNS record. Do not restore it as canonical until it resolves.
+- The former `https://x.com/Davidma13020061` profile returns 404; it was removed from the
+  contact section, footer, Twitter metadata, and JSON-LD.
 - `npm audit --omit=dev` reports 0 production vulnerabilities. Dev-only advisories remain
   in Vitest/Tinypool; the available fix requires Vitest 5, a breaking upgrade.
 
@@ -46,17 +49,19 @@ Branch: `fix/credibility-and-deploy` (from `main`).
 - Headless Edge smoke test on 1440x900 and 390x844: no console errors; About, Experience,
   and Contact visible after scroll; mobile menu opens, switches to Spanish, closes on
   Escape, and restores body scroll. Contact email renders without breaking the domain.
-- Local preview: `/`, CV PDF, OG image, sitemap, robots, and llms.txt return 200.
+- Live site: `/`, CV PDF, OG image, sitemap, robots, and llms.txt return 200. HTML has the
+  Vercel canonical and OG URL, loads `index-Bhab5Ojs.js`, and contains no X/Twitter handle.
+- Live headless Edge smoke test on 1440x900 and 390x844: no console errors, no horizontal
+  overflow, contact email intact, CV link present, mobile menu reachable after scrolling
+  and closes on Escape.
 
 ## Known issues / blockers
 
-1. `gh` CLI returns 401 Bad credentials. PR creation needs `gh auth login` or an
-   equivalent authenticated path.
-2. `.vercel/project.json` is absent. Run `npx vercel link --project davidmachado-dev`
-   before `npx vercel --prod`.
-3. `og-image.png` and the CV PDF are generated assets; regenerate when copy changes.
+1. `gh` CLI returns 401 Bad credentials. Pushing and PR creation need `gh auth login` or
+   an equivalent authenticated path.
+2. `og-image.png` and the CV PDF are generated assets; regenerate when copy changes.
 
 ## Next steps
 
-1. Deploy with `npx vercel --prod --yes` and verify the live URL.
-2. Open the PR once `gh` is authenticated; merge after review.
+1. Push `fix/credibility-and-deploy` and open the PR once `gh` is authenticated.
+2. Merge after review; the production alias already serves this branch's build.
