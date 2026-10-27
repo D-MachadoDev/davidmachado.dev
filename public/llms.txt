@@ -1,0 +1,26 @@
+# David Machado — Backend Software Engineer
+
+> Software engineering student in Medellín, Colombia. Focused on backend systems:
+> transactional APIs, relational schemas, and domain logic covered by automated tests.
+> Stack: .NET 10 / C#, TypeScript, PostgreSQL, SQLite, Docker.
+
+## Public systems
+
+- Zentric — Marketplace Core API: .NET 10, Hexagonal Architecture, DDD, CQRS,
+  PostgreSQL, Docker, 592 xUnit tests.
+  https://github.com/D-MachadoDev/Zentric
+- LeaseFlow — Lease Billing Engine: TypeScript, Express, SQLite, Vitest; models leases,
+  partial payments, and receipt reconciliation.
+  https://github.com/D-MachadoDev/leaseflow
+
+## Private case study
+
+- Retail Analytics — Data Pipeline & BI: incremental ETL, star schema, Power BI
+  dashboards. Walkthrough available on request.
+
+## Contact
+
+- Email: davidmachado.dev07@gmail.com
+- GitHub: https://github.com/D-MachadoDev
+- LinkedIn: https://www.linkedin.com/in/david-machado-94b3921a2/
+- Portfolio: https://davidmachado-dev.vercel.app/

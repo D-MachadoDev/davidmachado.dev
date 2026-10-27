@@ -3,37 +3,106 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>David Machado — Systems Engineer & Cloud Architect</title>
-    <meta name="author" content="David Machado"/>
-    <meta name="robots" content="index,follow"/>
-    <meta name="description" content="Portfolio of David Machado: Systems thinker, cloud architect, and full-stack engineer building scalable infrastructure and developer tools. Based in Medellín, Colombia." />
+    <title>David Machado — Backend Software Engineer (.NET & TypeScript)</title>
+
+    <!-- Canonical & Indexing -->
+    <link rel="canonical" href="https://davidmachado-dev.vercel.app/" />
+    <meta name="author" content="David Machado" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="description" content="Backend software engineer in Medellín, Colombia. .NET/C# and TypeScript, hexagonal architecture, PostgreSQL, Docker, and automated tests. Open-source work with public repositories." />
     <meta name="theme-color" content="#050505" />
-    <!-- <link rel="cannonical" href="hosting personal"> -->
+    <meta name="color-scheme" content="dark" />
 
-    <!-- Open Graph -->
+    <!-- Open Graph / LinkedIn / Facebook / WhatsApp -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="David Machado — Systems Engineer & Cloud Architect" />
-    <meta property="og:description" content="Building scalable solutions at the intersection of cloud architecture, distributed systems, and developer experience." />
-    <meta property="og:url" content="https://davidmachado.dev" />
-    <!-- <meta property="og:image" content="https://davidmachado.dev/image.png" / > AGREGAR IMAGEN PARA LA CARD-->
+    <meta property="og:site_name" content="David Machado — Portfolio" />
+    <meta property="og:title" content="David Machado — Backend Software Engineer (.NET & TypeScript)" />
+    <meta property="og:description" content="Transactional systems with hexagonal architecture, relational data, and automated tests. Zentric (.NET 10, 592 tests) and LeaseFlow (TypeScript, SQLite) are open source." />
+    <meta property="og:url" content="https://davidmachado-dev.vercel.app/" />
+    <meta property="og:image" content="https://davidmachado-dev.vercel.app/og-image.png" />
+    <meta property="og:image:secure_url" content="https://davidmachado-dev.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="David Machado — Backend Software Engineer portfolio preview" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="es_CO" />
+    <meta property="og:locale:alternate" content="pt_BR" />
 
-    <!-- Twitter -->
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="David Machado — Systems Engineer & Cloud Architect" />
-    <meta name="twitter:description" content="Building scalable solutions at the intersection of cloud architecture, distributed systems, and developer experience." />
-    <!-- <meta name="twitter:image" content="https://davidmachado.dev/preview.png" /> AGREGAR IMAGEN PARA LA CARD -->
-    
-    <!-- Preconnect fonts -->
+    <meta name="twitter:title" content="David Machado — Backend Software Engineer (.NET & TypeScript)" />
+    <meta name="twitter:description" content="Transactional systems with hexagonal architecture, relational data, and automated tests. Zentric (.NET 10, 592 tests) and LeaseFlow (TypeScript, SQLite) are open source." />
+    <meta name="twitter:image" content="https://davidmachado-dev.vercel.app/og-image.png" />
+    <meta name="twitter:image:alt" content="David Machado — Backend Software Engineer portfolio preview" />
+
+    <!-- Structured Data (Schema.org JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://davidmachado-dev.vercel.app/#person",
+          "name": "David Alexander Machado Alzate",
+          "alternateName": "D-MachadoDev",
+          "jobTitle": "Backend Software Engineer",
+          "description": "Software engineering student focused on backend systems: transactional APIs, relational schemas, and tested domain logic with .NET and TypeScript.",
+          "url": "https://davidmachado-dev.vercel.app/",
+          "image": "https://davidmachado-dev.vercel.app/assets/david-machado.jpg",
+          "sameAs": [
+            "https://github.com/D-MachadoDev",
+            "https://www.linkedin.com/in/david-machado-94b3921a2/"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Medellín",
+            "addressCountry": "CO"
+          },
+          "knowsAbout": [
+            ".NET",
+            "C#",
+            "TypeScript",
+            "PostgreSQL",
+            "SQLite",
+            "Docker",
+            "Hexagonal Architecture",
+            "Domain-Driven Design",
+            "CQRS",
+            "REST APIs",
+            "Automated Testing",
+            "GitHub Actions",
+            "React",
+            "Tailwind CSS"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://davidmachado-dev.vercel.app/#website",
+          "url": "https://davidmachado-dev.vercel.app/",
+          "name": "David Machado — Backend Software Engineer Portfolio",
+          "description": "Portfolio of David Machado: backend systems, repositories, and documented engineering evidence.",
+          "author": {
+            "@id": "https://davidmachado-dev.vercel.app/#person"
+          },
+          "inLanguage": ["en", "es", "pt"]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Preconnect fonts for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://api.fontshare.com" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23050508'/><rect x='10' y='10' width='80' height='80' rx='12' fill='none' stroke='%233B82F6' stroke-width='6'/><text x='50%' y='55%' text-anchor='middle' dominant-baseline='central' font-family='monospace' font-weight='bold' font-size='42' fill='%23FFFFFF'>DM</text></svg>" />
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23050508'/><rect x='10' y='10' width='80' height='80' rx='12' fill='none' stroke='%233B82F6' stroke-width='6'/><text x='50%' y='55%' text-anchor='middle' dominant-baseline='central' font-family='monospace' font-weight='bold' font-size='42' fill='%23FFFFFF'>DM</text></svg>" />
   </head>
 
   <body>
-    <div id="root"></div> 
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

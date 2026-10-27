@@ -44,4 +44,13 @@ Thumbs.db
 # Cache
 .cache/
 .eslintcache
-EOF
+
+# Local tooling
+.codegraph/
+.impeccable/
+.playwright-cli/
+
+.vercel
+.env
+.env.local
+.env.*.local
