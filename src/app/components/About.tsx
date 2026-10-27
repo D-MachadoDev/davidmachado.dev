@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import {
   Code2,
   Boxes,
@@ -9,7 +9,6 @@ import {
   GitBranch,
   Download,
 } from "lucide-react";
-import { toast } from "sonner";
 import { FadeIn } from "./TextReveal";
 import { useRef, useState, useEffect } from "react";
 import { type Language, t, type TranslationKey } from "../i18n";
@@ -18,25 +17,25 @@ const skills = [
   {
     icon: Code2,
     categoryKey: "about.skillLang" as TranslationKey,
-    items: ["C#", ".NET 8/9", "TypeScript", "JavaScript", "SQL"],
+    items: ["C#", ".NET 10", "TypeScript", "JavaScript", "SQL"],
     color: "#34D399",
   },
   {
     icon: Database,
     categoryKey: "about.skillData" as TranslationKey,
-    items: ["PostgreSQL", "SQL Server", "EF Core", "LINQ", "Migrations"],
+    items: ["PostgreSQL", "SQL Server", "SQLite", "EF Core", "Migrations"],
     color: "#FBBF24",
   },
   {
     icon: Boxes,
     categoryKey: "about.skillArch" as TranslationKey,
-    items: ["Clean Architecture", "RESTful APIs", "SOLID", "Domain Modeling"],
+    items: ["Hexagonal Architecture", "DDD", "CQRS", "REST APIs", "SOLID"],
     color: "#A78BFA",
   },
   {
     icon: Cloud,
     categoryKey: "about.skillCloud" as TranslationKey,
-    items: ["Docker", "Docker Compose", "Linux", "Environment Config"],
+    items: ["Docker", "Docker Compose", "Linux", "GitHub Actions"],
     color: "#60A5FA",
   },
   {
@@ -48,13 +47,13 @@ const skills = [
   {
     icon: GitBranch,
     categoryKey: "about.skillMethods" as TranslationKey,
-    items: ["Unit Testing", "Code Review", "Agile / Scrum", "Technical Docs"],
+    items: ["xUnit", "Vitest", "Code Review", "Technical Docs"],
     color: "#22D3EE",
   },
   {
     icon: Bot,
     categoryKey: "about.skillAI" as TranslationKey,
-    items: ["LLM APIs", "Agent Orchestration", "RAG & Context", "Prompt Engineering", "MCP Tools", "Automation"],
+    items: ["LLM APIs", "Prompt Engineering", "Workflow Automation"],
     color: "#818CF8",
   },
 ];
@@ -63,9 +62,16 @@ function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
   const [displayed, setDisplayed] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     if (hasAnimated || !ref.current) return;
+
+    if (prefersReducedMotion) {
+      setDisplayed(value);
+      setHasAnimated(true);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -95,7 +101,7 @@ function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
 
     observer.observe(ref.current);
     return () => observer.disconnect();
-  }, [value, hasAnimated]);
+  }, [value, hasAnimated, prefersReducedMotion]);
 
   return (
     <div
@@ -112,10 +118,12 @@ function SkillCard({
   skill,
   index,
   language,
+  featured = false,
 }: {
   skill: (typeof skills)[number];
   index: number;
   language: Language;
+  featured?: boolean;
 }) {
   const Icon = skill.icon;
 
@@ -129,7 +137,9 @@ function SkillCard({
         y: -4,
         scale: 1.01,
       }}
-      className="group border border-[#27272A] p-6 transition-all duration-300 relative overflow-hidden h-full"
+      className={`group border border-[#27272A] p-6 transition-all duration-300 relative overflow-hidden h-full ${
+        featured ? "md:col-span-2 xl:col-span-3" : ""
+      }`}
       style={{
         borderRadius: "8px",
         backgroundColor: "#0B0B0C",
@@ -150,8 +160,14 @@ function SkillCard({
         }}
       />
 
-      <div className="relative z-10">
-        <div className="flex items-start gap-4 mb-5">
+      <div
+        className={
+          featured
+            ? "relative z-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between"
+            : "relative z-10"
+        }
+      >
+        <div className={featured ? "flex items-center gap-4" : "flex items-start gap-4 mb-5"}>
           <motion.div
             whileHover={{ scale: 1.05, y: -1 }}
             className="relative p-3 border border-[#27272A] transition-all"
@@ -191,7 +207,9 @@ function SkillCard({
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-2">
+        <div
+          className={`flex flex-wrap gap-2 ${featured ? "sm:justify-end" : ""}`}
+        >
           {skill.items.map((item, i) => (
             <motion.span
               key={item}
@@ -220,30 +238,11 @@ function SkillCard({
 export function About({ language }: { language: Language }) {
   const sectionRef = useRef<HTMLElement | null>(null);
 
-  const handleDownloadCV = async () => {
-    try {
-      const res = await fetch("/assets/cv/david-machado-cv.pdf", { method: "HEAD" });
-
-      if (res.ok) {
-        const link = document.createElement("a");
-        link.href = "/assets/cv/david-machado-cv.pdf";
-        link.download = "david-machado-cv.pdf";
-        link.click();
-        return;
-      }
-
-      toast("CV próximamente disponible", { duration: 2000 });
-    } catch {
-      toast("CV próximamente disponible", { duration: 2000 });
-    }
-  };
-
-  // Métricas verificadas de ingeniería
   const stats = [
-    { label: t(language, "about.statProjects"), value: 4, suffix: "" },     // 4 sistemas de ingeniería activos
-    { label: t(language, "about.statArch"), value: 100, suffix: "%" },      // 100% Clean Architecture & SOLID
-    { label: t(language, "about.statRepos"), value: 6, suffix: "+" },       // 6+ repositorios en GitHub
-    { label: t(language, "about.statStack"), value: 1, suffix: "st" },      // Core: C# / .NET / TypeScript
+    { label: t(language, "about.statProjects"), value: 3, suffix: "" },
+    { label: t(language, "about.statTests"), value: 592, suffix: "" },
+    { label: t(language, "about.statRepos"), value: 9, suffix: "" },
+    { label: t(language, "about.statOpenSource"), value: 2, suffix: "" },
   ];
 
   const philosophy = [
@@ -285,7 +284,7 @@ export function About({ language }: { language: Language }) {
               </span>
             </motion.div>
 
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#EDEDED] mb-6 sm:mb-8 tracking-tight max-w-4xl leading-tight">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#EDEDED] mb-6 sm:mb-8 tracking-tight max-w-4xl leading-tight text-balance">
               {t(language, "about.heading")}{" "}
               <span className="text-[#3B82F6]">{t(language, "about.headingAccent")}</span>
             </h2>
@@ -311,14 +310,15 @@ export function About({ language }: { language: Language }) {
               transition={{ delay: 0.3, duration: 0.8 }}
               className="mt-8 sm:mt-10"
             >
-              <button
-                onClick={handleDownloadCV}
+              <a
+                href="/assets/cv/david-machado-cv.pdf"
+                download="david-machado-cv.pdf"
                 className="group inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium text-[#71717A] hover:text-[#EDEDED] border border-[#27272A] hover:border-[#3B82F6] transition-all"
                 style={{ borderRadius: "8px" }}
               >
                 <Download className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
-                Descargar CV
-              </button>
+                {t(language, "about.downloadCv")}
+              </a>
             </motion.div>
           </div>
         </FadeIn>
@@ -336,6 +336,7 @@ export function About({ language }: { language: Language }) {
                   skill={skill}
                   index={index}
                   language={language}
+                  featured={index === skills.length - 1}
                 />
               ))}
             </div>

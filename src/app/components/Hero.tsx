@@ -1,7 +1,14 @@
 import { ArrowRight } from "lucide-react";
-import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
+import {
+	AnimatePresence,
+	motion,
+	useReducedMotion,
+	useScroll,
+	useTransform,
+} from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { type Language, t } from "../i18n";
+import { CONTACT_EMAIL } from "../lib/mailto";
 import { MagneticButton } from "./MagneticButton";
 import { TextReveal } from "./TextReveal";
 
@@ -14,22 +21,30 @@ export function Hero({ language }: { language: Language }) {
 	];
 
 	const ref = useRef(null);
+	const prefersReducedMotion = useReducedMotion();
 	const [subtitleIndex, setSubtitleIndex] = useState(0);
 	const { scrollYProgress } = useScroll({
 		target: ref,
 		offset: ["start start", "end start"],
 	});
 
-	const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+	const y = useTransform(
+		scrollYProgress,
+		[0, 1],
+		prefersReducedMotion ? ["0%", "0%"] : ["0%", "50%"],
+	);
 	const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.5, 0]);
 
-	// Rotate subtitle every 4.5s
+	// Rotate subtitle every 4.5s, unless the visitor asked for reduced motion
 	useEffect(() => {
+		if (prefersReducedMotion) return;
+
 		const interval = setInterval(() => {
+			if (document.hidden) return;
 			setSubtitleIndex((prev) => (prev + 1) % subtitles.length);
 		}, 4500);
 		return () => clearInterval(interval);
-	}, [subtitles.length]);
+	}, [subtitles.length, prefersReducedMotion]);
 
 	const scrollToSection = (id: string) => {
 		const element = document.getElementById(id);
@@ -52,10 +67,14 @@ export function Hero({ language }: { language: Language }) {
 						background:
 							"radial-gradient(circle at 50% 40%, rgba(59, 130, 246, 0.06) 0%, transparent 52%)",
 					}}
-					animate={{
-						scale: [1, 1.08, 1],
-						opacity: [0.24, 0.38, 0.24],
-					}}
+					animate={
+						prefersReducedMotion
+							? undefined
+							: {
+									scale: [1, 1.08, 1],
+									opacity: [0.24, 0.38, 0.24],
+								}
+					}
 					transition={{
 						duration: 10,
 						repeat: Infinity,
@@ -79,7 +98,8 @@ export function Hero({ language }: { language: Language }) {
 			/>
 
 			{/* Floating geometric shapes */}
-			<div className="absolute inset-0 overflow-hidden pointer-events-none">
+			{!prefersReducedMotion && (
+				<div className="absolute inset-0 overflow-hidden pointer-events-none">
 				<motion.div
 					className="absolute top-[20%] right-[15%] w-20 h-20 border border-[#3B82F6]/10 rounded-full"
 					animate={{ y: [-20, 20, -20], rotate: [0, 180, 360] }}
@@ -101,7 +121,8 @@ export function Hero({ language }: { language: Language }) {
 					animate={{ rotate: [0, 90, 180, 270, 360], scale: [1, 1.2, 1] }}
 					transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
 				/>
-			</div>
+				</div>
+			)}
 
 			<motion.div
 				className="max-w-6xl mx-auto relative z-10 w-full"
@@ -125,7 +146,9 @@ export function Hero({ language }: { language: Language }) {
 					>
 						<motion.div
 							className="w-2 h-2 rounded-full bg-emerald-500"
-							animate={{ opacity: [1, 0.3, 1] }}
+							animate={
+								prefersReducedMotion ? undefined : { opacity: [1, 0.3, 1] }
+							}
 							transition={{ duration: 2, repeat: Infinity }}
 						/>
 						<span className="text-xs sm:text-sm text-zinc-300 font-mono truncate">
@@ -138,7 +161,9 @@ export function Hero({ language }: { language: Language }) {
 							{t(language, "contact.location")}
 							<motion.span
 								className="inline-block w-[2px] h-3 bg-[#3B82F6] ml-1 align-middle"
-								animate={{ opacity: [1, 0, 1] }}
+								animate={
+									prefersReducedMotion ? undefined : { opacity: [1, 0, 1] }
+								}
 								transition={{ duration: 1, repeat: Infinity }}
 							/>
 						</span>
@@ -166,10 +191,21 @@ export function Hero({ language }: { language: Language }) {
 						<AnimatePresence mode="wait">
 							<motion.h2
 								key={subtitleIndex}
-								initial={{ y: 60, opacity: 0, filter: "blur(4px)" }}
+								initial={
+									prefersReducedMotion
+										? false
+										: { y: 60, opacity: 0, filter: "blur(4px)" }
+								}
 								animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-								exit={{ y: -60, opacity: 0, filter: "blur(4px)" }}
-								transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1] }}
+								exit={
+									prefersReducedMotion
+										? undefined
+										: { y: -60, opacity: 0, filter: "blur(4px)" }
+								}
+								transition={{
+									duration: prefersReducedMotion ? 0 : 0.5,
+									ease: [0.33, 1, 0.68, 1],
+								}}
 								className="text-xl sm:text-2xl md:text-2xl lg:text-[2rem] font-light tracking-tight leading-none absolute inset-0 flex items-center"
 								style={{
 									background:
@@ -225,9 +261,7 @@ export function Hero({ language }: { language: Language }) {
 							<ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform relative z-10" />
 						</MagneticButton>
 						<MagneticButton
-							href="mailto:davidmachado.dev07@gmail.com?subject=Hola%20David"
-							target="_blank"
-							rel="noopener noreferrer"
+							href={`mailto:${CONTACT_EMAIL}`}
 							className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 border border-white/20 text-white font-medium hover:border-white/40 hover:bg-white/5 transition-all backdrop-blur-sm text-sm sm:text-base flex items-center justify-center"
 							style={{
 								borderRadius: "8px",
@@ -248,14 +282,14 @@ export function Hero({ language }: { language: Language }) {
 						className="flex flex-wrap gap-2 sm:gap-3"
 					>
 						{[
-							".NET / C#",
-							"ASP.NET Core",
-							"PostgreSQL",
-							"Clean Architecture",
-							"React 18",
+							".NET 10",
+							"C#",
 							"TypeScript",
+							"PostgreSQL",
+							"SQLite",
 							"Docker",
-							"AI Integration",
+							"Hexagonal Architecture",
+							"xUnit / Vitest",
 						].map((tech, index) => (
 							<motion.span
 								key={tech}
@@ -281,11 +315,12 @@ export function Hero({ language }: { language: Language }) {
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				transition={{ delay: 1.5, duration: 1 }}
-				className="absolute bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2 cursor-pointer hidden sm:block"
-				onClick={() => scrollToSection("work")}
+				className="absolute bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2 hidden sm:block"
 			>
-				<motion.div
-					animate={{ y: [0, 10, 0] }}
+				<motion.button
+					type="button"
+					onClick={() => scrollToSection("work")}
+					animate={prefersReducedMotion ? undefined : { y: [0, 10, 0] }}
 					transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
 					className="flex flex-col items-center gap-3 text-[#71717A] hover:text-[#3B82F6] transition-colors group"
 				>
@@ -297,12 +332,16 @@ export function Hero({ language }: { language: Language }) {
 						style={{ borderRadius: "20px" }}
 					>
 						<motion.div
-							animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
+							animate={
+								prefersReducedMotion
+									? undefined
+									: { y: [0, 12, 0], opacity: [1, 0, 1] }
+							}
 							transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
 							className="w-1.5 h-1.5 bg-current rounded-full"
 						/>
 					</div>
-				</motion.div>
+				</motion.button>
 			</motion.div>
 		</section>
 	);

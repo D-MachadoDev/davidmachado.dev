@@ -180,21 +180,9 @@ export function Experience({ language }: { language: Language }) {
   const lineScaleY = useTransform(scrollYProgress, [0, 0.8], [0, 1]);
 
   /**
-   * ============================================================================
-   * GUÍA DE ESCALABILIDAD — CÓMO AÑADIR EXPERIENCIA LABORAL FUTURA
-   * ============================================================================
-   * Para añadir un nuevo empleo o pasantía en el futuro, agrega un nuevo objeto
-   * al inicio del array `timeline`:
-   *
-   * {
-   *   type: "work",                                 // "work" | "education" | "achievement"
-   *   title: "Backend Engineer / Full-Stack Dev",   // Tu cargo
-   *   organization: "Nombre de la Empresa",         // Empresa / Organización
-   *   period: "2026 - Presente",                    // Rango de fechas
-   *   description: "Descripción en formato STAR: situación, reto resuelto y resultados técnicos.",
-   *   tags: [".NET 9", "PostgreSQL", "Docker", "CI/CD"], // Tecnologías clave
-   * },
-   * ============================================================================
+   * Add new roles at the top of this array. Keep the description in a
+   * situation -> action -> result shape and name only technologies that
+   * the linked repository or the client can back up.
    */
   const timeline: TimelineItem[] = [
     {
@@ -203,7 +191,7 @@ export function Experience({ language }: { language: Language }) {
       organization: t(language, "exp.workOrg"),
       period: t(language, "exp.workPeriod"),
       description: t(language, "exp.workDesc"),
-      tags: ["ASP.NET Core", "React 18", "PostgreSQL", "Clean Architecture"],
+      tags: ["C#", ".NET 10", "TypeScript", "PostgreSQL", "Docker", "Vitest"],
     },
     {
       type: "education",
@@ -211,7 +199,11 @@ export function Experience({ language }: { language: Language }) {
       organization: t(language, "exp.eduOrg"),
       period: t(language, "exp.eduPeriod"),
       description: t(language, "exp.eduDesc"),
-      tags: ["5to Semestre", "POO & Algoritmia", "Bases de Datos"],
+      tags: [
+        t(language, "exp.eduTag1"),
+        t(language, "exp.eduTag2"),
+        t(language, "exp.eduTag3"),
+      ],
     },
   ];
 
@@ -226,7 +218,7 @@ export function Experience({ language }: { language: Language }) {
             >
               <span className="text-xs sm:text-sm font-mono text-[#71717A] uppercase tracking-wider">{t(language, "exp.badge")}</span>
             </motion.div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#EDEDED] mb-4 sm:mb-6 tracking-tight leading-tight">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#EDEDED] mb-4 sm:mb-6 tracking-tight leading-tight text-balance">
               {t(language, "exp.heading")} <span className="text-[#3B82F6]">{t(language, "exp.headingAccent")}</span>
             </h2>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#71717A] max-w-3xl leading-relaxed">

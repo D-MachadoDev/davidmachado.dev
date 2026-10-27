@@ -1,6 +1,11 @@
-import { createRoot } from "react-dom/client"; // EntryPoint React 18+, expone createRoot, "client" indica APIs para el cliente(navegador)
-import App from "./app/App"; // export dafault sin {}
-import "./styles/index.css"; // css Global en el bundle(dist)
+import { createRoot } from "react-dom/client"; // React 18+ entry point ("client" = browser APIs)
+import App from "./app/App";
+import "./styles/index.css"; // Global styles for the bundle
 
-createRoot(document.getElementById("root")!).render(<App />);
-  
+const rootElement = document.getElementById("root");
+
+if (!rootElement) {
+	throw new Error("Root element #root was not found in index.html");
+}
+
+createRoot(rootElement).render(<App />);

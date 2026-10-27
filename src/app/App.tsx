@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-import { Toaster } from "sonner";
 import { About } from "./components/About";
 import { BackToTop } from "./components/BackToTop";
-import { Certifications } from "./components/Certifications";
 import { Contact } from "./components/Contact";
 import { CustomCursor } from "./components/CustomCursor";
 import { Experience } from "./components/Experience";
 import { Hero } from "./components/Hero";
-import { LoadingScreen } from "./components/LoadingScreen";
 import { Navbar } from "./components/Navbar";
 import { Projects } from "./components/Projects";
 import { ScrollProgress } from "./components/ScrollProgress";
@@ -30,7 +27,6 @@ function SectionDivider() {
 }
 
 export default function App() {
-	const [loading, setLoading] = useState(true);
 	const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 	const [language, setLanguage] = useState<Language>(detectLanguage());
 
@@ -56,13 +52,20 @@ export default function App() {
 		return () => mq.removeEventListener("change", handler);
 	}, []);
 
-	if (loading) {
-		return <LoadingScreen onComplete={() => setLoading(false)} />;
-	}
+	useEffect(() => {
+		document.documentElement.lang = language;
+		document.title = t(language, "meta.title");
+
+		const description = document.querySelector<HTMLMetaElement>(
+			'meta[name="description"]',
+		);
+		if (description) {
+			description.content = t(language, "meta.description");
+		}
+	}, [language]);
 
 	return (
 		<div className="relative bg-[#050505] min-h-screen overflow-x-hidden">
-			<Toaster theme="dark" position="bottom-right" />
 			{/*  Skip to content for a11y */}
 			<a
 				href="#main-content"
@@ -132,13 +135,11 @@ export default function App() {
 				<SectionDivider />
 				<Experience language={language} />
 				<SectionDivider />
-				<Certifications language={language} />
-			<SectionDivider />
-			<Contact language={language} />
+				<Contact language={language} />
 			</main>
 
 			{/* Back to Top Button */}
-			<BackToTop />
+			<BackToTop language={language} />
 		</div>
 	);
 }

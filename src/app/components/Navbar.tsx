@@ -8,6 +8,7 @@ import {
 } from "motion/react";
 import { useEffect, useState } from "react";
 import { type Language, languageMeta, t } from "../i18n";
+import { CONTACT_MAILTO } from "../lib/mailto";
 import { MagneticButton } from "./MagneticButton";
 import { MobileMenu } from "./MobileMenu";
 
@@ -28,7 +29,6 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [activeSection, setActiveSection] = useState("");
 	const [langMenuOpen, setLangMenuOpen] = useState(false);
-	const [isInHero, setIsInHero] = useState(true);
 
 	const { scrollY } = useScroll();
 
@@ -40,16 +40,13 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
 
 	const borderOpacity = useTransform(scrollY, [0, 80], [0, 1]);
 
-	// Synchronize 'scrolled' and 'isInHero' booleans without synchronous DOM layout reads
+	// Synchronize 'scrolled' without synchronous DOM layout reads
 	useMotionValueEvent(scrollY, "change", (latest) => {
 		const isScrolled = latest > 50;
 		setScrolled((prev) => (prev !== isScrolled ? isScrolled : prev));
-		if (latest <= 50) {
-			setIsInHero(true);
-		}
 	});
 
-	// Asynchronous IntersectionObserver for active section highlighting & hero tracking
+	// Asynchronous IntersectionObserver for active section highlighting
 	useEffect(() => {
 		const sectionIds = ["hero", "work", "about", "experience", "contact"];
 		const entryMap = new Map<string, IntersectionObserverEntry>();
@@ -74,10 +71,8 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
 				}
 
 				if (bestId === "hero") {
-					setIsInHero(true);
 					setActiveSection("");
 				} else if (bestId) {
-					setIsInHero(false);
 					setActiveSection(bestId);
 				}
 			},
@@ -331,9 +326,7 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
 					</div>
 
 					<MagneticButton
-						href="https://mail.google.com/mail/?view=cm&to=davidmachado.dev07@gmail.com&su=Hola%20David"
-						target="_blank"
-						rel="noopener noreferrer"
+						href={CONTACT_MAILTO}
 						className="group px-5 py-2.5 text-sm font-medium text-[#EDEDED] border border-[#27272A] hover:border-[#3B82F6]/60 transition-all duration-300 relative overflow-hidden"
 						style={{ borderRadius: "6px" }}
 					>
@@ -368,49 +361,47 @@ export function Navbar({ language, onLanguageChange }: NavbarProps) {
 					</MagneticButton>
 				</div>
 
-				{isInHero && (
-					<motion.button
-						type="button"
-						whileTap={{ scale: 0.9 }}
-						onClick={() => setMobileMenuOpen((prev) => !prev)}
-						className="md:hidden text-[#EDEDED] p-2 w-10 h-10 flex items-center justify-center"
-						aria-label={
-							mobileMenuOpen
-								? t(language, "nav.closeMenu")
-								: t(language, "nav.openMenu")
-						}
-					>
-						<div className="w-6 flex flex-col items-end gap-1.5">
-							<motion.span
-								animate={{
-									rotate: mobileMenuOpen ? 45 : 0,
-									y: mobileMenuOpen ? 8 : 0,
-								}}
-								transition={{ duration: 0.25 }}
-								className="block h-[2px] bg-current origin-center"
-								style={{ width: "100%" }}
-							/>
-							<motion.span
-								animate={{
-									opacity: mobileMenuOpen ? 0 : 1,
-									x: mobileMenuOpen ? 10 : 0,
-								}}
-								transition={{ duration: 0.18 }}
-								className="block h-[2px] bg-current"
-								style={{ width: "75%" }}
-							/>
-							<motion.span
-								animate={{
-									rotate: mobileMenuOpen ? -45 : 0,
-									y: mobileMenuOpen ? -8 : 0,
-								}}
-								transition={{ duration: 0.25 }}
-								className="block h-[2px] bg-current origin-center"
-								style={{ width: "66%" }}
-							/>
-						</div>
-					</motion.button>
-				)}
+				<motion.button
+					type="button"
+					whileTap={{ scale: 0.9 }}
+					onClick={() => setMobileMenuOpen((prev) => !prev)}
+					className="md:hidden text-[#EDEDED] p-2 w-10 h-10 flex items-center justify-center"
+					aria-label={
+						mobileMenuOpen
+							? t(language, "nav.closeMenu")
+							: t(language, "nav.openMenu")
+					}
+				>
+					<div className="w-6 flex flex-col items-end gap-1.5">
+						<motion.span
+							animate={{
+								rotate: mobileMenuOpen ? 45 : 0,
+								y: mobileMenuOpen ? 8 : 0,
+							}}
+							transition={{ duration: 0.25 }}
+							className="block h-[2px] bg-current origin-center"
+							style={{ width: "100%" }}
+						/>
+						<motion.span
+							animate={{
+								opacity: mobileMenuOpen ? 0 : 1,
+								x: mobileMenuOpen ? 10 : 0,
+							}}
+							transition={{ duration: 0.18 }}
+							className="block h-[2px] bg-current"
+							style={{ width: "75%" }}
+						/>
+						<motion.span
+							animate={{
+								rotate: mobileMenuOpen ? -45 : 0,
+								y: mobileMenuOpen ? -8 : 0,
+							}}
+							transition={{ duration: 0.25 }}
+							className="block h-[2px] bg-current origin-center"
+							style={{ width: "66%" }}
+						/>
+					</div>
+				</motion.button>
 			</div>
 
 			<MobileMenu

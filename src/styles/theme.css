@@ -151,15 +151,6 @@
   }
 }
 
-/* Hide cursor on touch devices */
-@media (hover: none) {
-  .fixed.w-1\.5,
-  .fixed.w-10,
-  .fixed.w-32 {
-    display: none !important;
-  }
-}
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

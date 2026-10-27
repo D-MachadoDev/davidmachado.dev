@@ -1,6 +1,8 @@
 import { Globe, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import { useEffect } from "react";
 import { type Language, languageMeta, t } from "../i18n";
+import { CONTACT_EMAIL, CONTACT_MAILTO } from "../lib/mailto";
 
 interface MobileMenuProps {
 	isOpen: boolean;
@@ -44,6 +46,17 @@ export function MobileMenu({
 		onLanguageChange(nextLanguage);
 	};
 
+	useEffect(() => {
+		if (!isOpen) return;
+
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === "Escape") onClose();
+		};
+
+		document.addEventListener("keydown", handleKeyDown);
+		return () => document.removeEventListener("keydown", handleKeyDown);
+	}, [isOpen, onClose]);
+
 	return (
 		<AnimatePresence>
 			{isOpen && (
@@ -69,7 +82,9 @@ export function MobileMenu({
 						exit={{ x: "100%" }}
 						transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
 						className="absolute inset-y-0 right-0 w-full max-w-sm h-dvh bg-[#0A0A0A] border-l border-[#27272A] z-10 overflow-y-auto overscroll-contain will-change-transform flex flex-col"
-						aria-label="Mobile navigation menu"
+						role="dialog"
+						aria-modal="true"
+						aria-label={t(language, "a11y.mobileMenu")}
 					>
 						<div className="flex items-center justify-between p-6 border-b border-[#27272A]">
 							<h2 className="text-xl text-[#EDEDED] font-mono font-bold">DM</h2>
@@ -156,9 +171,7 @@ export function MobileMenu({
 							className="p-6"
 						>
 							<a
-								href="https://mail.google.com/mail/?view=cm&to=davidmachado.dev07@gmail.com&su=Hola%20David"
-								target="_blank"
-								rel="noopener noreferrer"
+								href={CONTACT_MAILTO}
 								className="block w-full py-4 px-6 bg-white text-black text-center font-semibold hover:bg-zinc-200 transition-all shadow-sm"
 								style={{ borderRadius: "8px" }}
 							>
@@ -187,10 +200,10 @@ export function MobileMenu({
 										{t(language, "mobile.email")}
 									</div>
 									<a
-										href="mailto:davidmachado.dev07@gmail.com"
+										href={`mailto:${CONTACT_EMAIL}`}
 										className="text-[#EDEDED] font-mono text-xs break-all hover:text-[#3B82F6] transition-colors"
 									>
-										davidmachado.dev07@gmail.com
+										{CONTACT_EMAIL}
 									</a>
 								</div>
 							</div>

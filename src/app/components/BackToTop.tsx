@@ -5,10 +5,12 @@ import {
 	useMotionValueEvent,
 	useScroll,
 } from "motion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { type Language, t } from "../i18n";
 
-export function BackToTop() {
+export function BackToTop({ language }: { language: Language }) {
 	const [isVisible, setIsVisible] = useState(false);
+	const [isAtContact, setIsAtContact] = useState(false);
 	const { scrollY } = useScroll();
 
 	useMotionValueEvent(scrollY, "change", (latest) => {
@@ -16,13 +18,26 @@ export function BackToTop() {
 		setIsVisible((prev) => (prev !== shouldShow ? shouldShow : prev));
 	});
 
+	useEffect(() => {
+		const contact = document.getElementById("contact");
+		if (!contact) return;
+
+		const observer = new IntersectionObserver(
+			([entry]) => setIsAtContact(entry.isIntersecting),
+			{ threshold: 0.01 },
+		);
+
+		observer.observe(contact);
+		return () => observer.disconnect();
+	}, []);
+
 	const scrollToTop = () => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
 
 	return (
 		<AnimatePresence>
-			{isVisible && (
+			{isVisible && !isAtContact && (
 				<motion.button
 					type="button"
 					onClick={scrollToTop}
@@ -33,7 +48,7 @@ export function BackToTop() {
 					whileHover={{ scale: 1.08 }}
 					whileTap={{ scale: 0.92 }}
 					className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 p-3 sm:p-4 bg-[#3B82F6] text-[#EDEDED] hover:bg-[#2563EB] transition-colors duration-200 group rounded-xl shadow-lg shadow-blue-500/20"
-					aria-label="Back to top"
+					aria-label={t(language, "a11y.backToTop")}
 				>
 					{/* Subtle glow that only renders when mounted, static blur <= 8px */}
 					<span className="absolute inset-0 bg-[#3B82F6] opacity-30 group-hover:opacity-60 blur-md rounded-xl pointer-events-none transition-opacity duration-300" />
