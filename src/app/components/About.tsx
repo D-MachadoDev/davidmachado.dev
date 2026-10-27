@@ -275,14 +275,40 @@ export function About({ language }: { language: Language }) {
       <div className="max-w-7xl mx-auto">
         <FadeIn>
           <div className="mb-12 sm:mb-16 lg:mb-20">
-            <motion.div
-              className="inline-block px-4 py-2 border border-[#27272A] mb-6 backdrop-blur-sm"
-              style={{ borderRadius: "8px" }}
-            >
-              <span className="text-xs sm:text-sm font-mono text-[#71717A] uppercase tracking-wider">
-                {t(language, "about.badge")}
-              </span>
-            </motion.div>
+            <div className="flex flex-wrap items-center gap-4 mb-6">
+              <a
+                href="https://github.com/D-MachadoDev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0"
+                aria-label="David Machado on GitHub"
+              >
+                <img
+                  src="/assets/david-machado.jpg"
+                  alt="David Machado"
+                  width={64}
+                  height={64}
+                  loading="lazy"
+                  className="w-16 h-16 rounded-full object-cover border border-[#27272A] hover:border-[#3B82F6] transition-colors"
+                />
+              </a>
+
+              <div>
+                <p className="text-sm text-[#EDEDED] font-medium">David Machado</p>
+                <p className="text-xs font-mono text-[#71717A]">
+                  Backend Software Engineer · {t(language, "contact.location")}
+                </p>
+              </div>
+
+              <motion.div
+                className="inline-block px-4 py-2 border border-[#27272A] backdrop-blur-sm sm:ml-auto"
+                style={{ borderRadius: "8px" }}
+              >
+                <span className="text-xs sm:text-sm font-mono text-[#71717A] uppercase tracking-wider">
+                  {t(language, "about.badge")}
+                </span>
+              </motion.div>
+            </div>
 
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#EDEDED] mb-6 sm:mb-8 tracking-tight max-w-4xl leading-tight text-balance">
               {t(language, "about.heading")}{" "}
