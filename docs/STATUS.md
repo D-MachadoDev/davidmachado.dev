@@ -22,6 +22,8 @@ Branch: `fix/credibility-and-deploy` (from `main`).
   profile link was removed from the UI and metadata.
 - Mobile navigation is reachable at every scroll position; the back-to-top button hides
   while the contact section is visible so it cannot cover the footer.
+- The About section uses David's GitHub headshot (`public/assets/david-machado.jpg`) and
+  links it to his GitHub profile.
 - Unused UI kit, Certifications, LoadingScreen, sonner, and ~30 dependencies removed.
 - SEO uses `https://davidmachado-dev.vercel.app/` because `davidmachado.dev` does not
   resolve (NXDOMAIN).
@@ -32,6 +34,11 @@ Branch: `fix/credibility-and-deploy` (from `main`).
 - `D-MachadoDev/Zentric`: .NET 10, Hexagonal + DDD + CQRS, PostgreSQL, Docker, README
   badge `Tests-592 Passing (100%)`. Returns HTTP 200.
 - `D-MachadoDev/leaseflow`: TypeScript + Express + SQLite, Vitest. Returns HTTP 200.
+- The CV source and PDF include the live portfolio URL.
+- GitHub profile README (`D-MachadoDev/D-MachadoDev`) now links to the live portfolio,
+  LinkedIn, and email (commit `82fce07`); the repo homepage points to the deployment.
+- The GitHub profile bio/blog still show the old `davidmachado.github.io` URL because the
+  current token lacks the `user` scope. Fix with `gh auth refresh -h github.com -s user`.
 - Production deployment is live at `https://davidmachado-dev.vercel.app/` (deployment
   `davidmachado-n4pb2hczk`, Vercel project `davidmachado-dev`).
 - `davidmachado.dev` has no DNS record. Do not restore it as canonical until it resolves.
@@ -57,9 +64,11 @@ Branch: `fix/credibility-and-deploy` (from `main`).
 
 ## Known issues / blockers
 
-1. `gh` CLI returns 401 Bad credentials. Pushing and PR creation need `gh auth login` or
-   an equivalent authenticated path.
-2. `og-image.png` and the CV PDF are generated assets; regenerate when copy changes.
+1. `gh` CLI returns 401 Bad credentials while `GITHUB_TOKEN` is set. Unset it to use the
+   valid keyring account; pushing and PR creation still need an explicit go-ahead.
+2. GitHub profile fields (bio, blog, email) need the `user` scope that the keyring token
+   does not have. Run `gh auth refresh -h github.com -s user` to fix the dead blog URL.
+3. `og-image.png` and the CV PDF are generated assets; regenerate when copy changes.
 
 ## Next steps
 
