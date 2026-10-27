@@ -1,24 +1,52 @@
- # Design Portfolio
+# David Machado — Portfolio
 
- Portfolio personal construido con React, TypeScript, Vite, Motion y Tailwind CSS.
+Personal portfolio of David Machado, a backend-focused software engineering student in
+Medellín, Colombia. The site presents three projects with inspectable evidence: public
+repositories, documented architecture decisions, and test suites.
 
- ## Ejecutar en local
+Live: https://davidmachado-dev.vercel.app/
 
- Instala dependencias:
+## Stack
 
- ```bash
- npm install
- ```
+- React 18 + TypeScript
+- Vite 6 + Tailwind CSS 4
+- Motion for interaction and reduced-motion-aware animation
+- Vitest for the content and mailto logic
+- Biome for linting
 
- Levanta el servidor de desarrollo:
+## Scripts
 
- ```bash
- npm run dev
- ```
+```bash
+npm install
+npm run dev        # local development server
+npm run build      # production bundle
+npm run preview    # preview the production bundle
+npm run typecheck  # tsc --noEmit
+npm run lint       # biome check .
+npm test           # vitest run
+```
 
- Compila para producción:
+## Structure
 
- ```bash
- npm run build
- ```
-  
+```text
+src/app/
+  components/   page sections and interaction primitives
+  data/         featured project data and its test
+  lib/          mailto builder and its test
+  i18n.ts       English, Spanish, and Portuguese copy
+public/         static assets, sitemap, robots, OG image
+scripts/        CV source used to generate public/assets/cv/david-machado-cv.pdf
+```
+
+## Content policy
+
+- Every project states where its evidence lives: a public repository or a private case
+  study available on request.
+- The contact form opens a prefilled email draft. It never claims a message was sent,
+  because the static site cannot observe delivery.
+- Stack and metric claims are limited to what the linked repository or the client can
+  back up.
+
+## Deploy
+
+The site is a static Vite build deployed on Vercel as the `davidmachado-dev` project.

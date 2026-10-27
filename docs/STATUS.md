@@ -1,35 +1,62 @@
-# STATUS — davidmachado.dev
+# STATUS — Portfolio
 
 Read this file first when opening a session. Do not re-ask what is already answered here.
-Last updated: 2026-09-29.
+Last updated: 2026-10-26.
 
 ## What this is
 
-Personal portfolio website. Frontend only — no backend.
-Stack: React + TypeScript + Vite + TailwindCSS + Motion (`motion/react`) + lucide-react.
-Scripts: `npm run dev` / `npm run build` / `npm run preview`. No test or lint script yet.
+Personal portfolio. Frontend only — no backend, no database.
+Stack: React 18 + TypeScript + Vite 6 + Tailwind CSS 4 + Motion.
+Scripts: `dev`, `build`, `preview`, `typecheck`, `lint`, `test`.
 
-## Git state (evidence: `git log`, `git status` — 2026-09-29)
+## Current work: credibility pass
 
-- Branch `main`, remote `origin` → `github.com/D-MachadoDev/davidmachado.dev.git`.
-- Last product commit: `a965d1f` (2026-06-02) `fix hero spacing on mobile`.
-- 2026-06-02: source added (`608627e`), MobileMenu + language switch (`659e9ae`), then 4 commits with the identical message `fix hero spacing on mobile` (`bf5af82`…`a965d1f`).
-- 2026-09-29: rules template added (`702eac5`, merge `71f8d72`).
+Branch: `fix/credibility-and-deploy` (from `main`).
 
-## Uncommitted work
+- Featured projects come from `src/app/data/projects.ts`: Zentric (open source, .NET 10,
+  592 tests), LeaseFlow (open source, TypeScript/SQLite/Vitest), and Retail Analytics
+  (private case study). Faro, Virtualized Explorer, Redis, and countdown claims were
+  removed.
+- Contact is a real `mailto:` composer (`src/app/lib/mailto.ts`); the page never claims a
+  message was sent. The same link is used by the navbar and mobile menu. The dead X/Twitter
+  profile link was removed from the UI and metadata.
+- Mobile navigation is reachable at every scroll position; the back-to-top button hides
+  while the contact section is visible so it cannot cover the footer.
+- Unused UI kit, Certifications, LoadingScreen, sonner, and ~30 dependencies removed.
+- SEO uses `https://davidmachado-dev.vercel.app/` because `davidmachado.dev` does not
+  resolve (NXDOMAIN).
+- Tests: mailto builder, project data, and i18n key parity (15 passing).
 
-- `README.md` (+16 lines): pasted quality checklist — real problem/audience, production demo, clear README, clean repo, error/loading/empty states, tests on critical logic, decisions & trade-offs section, later improvements. Candidate acceptance criteria; not approved nor committed yet. [PENDIENTE]
-- `.agents/`, `skills-lock.json`: agent skill config, untracked.
+## Verified facts (2026-10-26)
 
-## Known issues / debt
+- `D-MachadoDev/Zentric`: .NET 10, Hexagonal + DDD + CQRS, PostgreSQL, Docker, README
+  badge `Tests-592 Passing (100%)`. Returns HTTP 200.
+- `D-MachadoDev/leaseflow`: TypeScript + Express + SQLite, Vitest. Returns HTTP 200.
+- Vercel project `davidmachado-dev` exists and serves the site.
+- `davidmachado.dev` has no DNS record. Do not restore it as canonical until it resolves.
+- `npm audit --omit=dev` reports 0 production vulnerabilities. Dev-only advisories remain
+  in Vitest/Tinypool; the available fix requires Vitest 5, a breaking upgrade.
 
-1. **Possible lost work**: `src/app/components/{Hero,MagneticButton,Projects}.tsx` and `i18n.ts` have mtime 2026-09-29 15:19 but content identical to HEAD; no stash exists. The Hero redesign shown in chat on 2026-09-29 is not in the worktree. [CONFIRMADO: `git status` clean for these files, `git stash list` empty; INFERIDO: the changes were discarded or never written to disk] — verify before building on top of it.
-2. Four consecutive commits share one message (conventional-commit violation).
-3. No tests (`*.test.*` / `*.spec.*` not found under `src/`), no lint, no CI.
-4. `dist/` exists locally (build 2026-09-29 15:14); ignored by `.gitignore`.
+## Verification evidence (2026-10-26)
+
+- `npm run typecheck`: pass.
+- `npx biome check .`: pass.
+- `npm test -- --run`: 15/15 passing.
+- `npm run build`: pass. Bundle: 418.86 kB JS / 50.71 kB CSS.
+- Headless Edge smoke test on 1440x900 and 390x844: no console errors; About, Experience,
+  and Contact visible after scroll; mobile menu opens, switches to Spanish, closes on
+  Escape, and restores body scroll. Contact email renders without breaking the domain.
+- Local preview: `/`, CV PDF, OG image, sitemap, robots, and llms.txt return 200.
+
+## Known issues / blockers
+
+1. `gh` CLI returns 401 Bad credentials. PR creation needs `gh auth login` or an
+   equivalent authenticated path.
+2. `.vercel/project.json` is absent. Run `npx vercel link --project davidmachado-dev`
+   before `npx vercel --prod`.
+3. `og-image.png` and the CV PDF are generated assets; regenerate when copy changes.
 
 ## Next steps
 
-1. Fase 0 intake (`grilling`) — answers go to the project note in Obsidian: real answers only, `[PENDIENTE]` for the rest, created only after the interview (AGENTS.md, Fase 0).
-2. Decide: is the README checklist the definition of done? Commit it or remove it.
-3. Confirm whether the Hero redesign must be redone.
+1. Deploy with `npx vercel --prod --yes` and verify the live URL.
+2. Open the PR once `gh` is authenticated; merge after review.

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>David Machado — Backend Software Engineer</title>
+    <style>
+      @page { size: A4; margin: 0; }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        color: #111827;
+        font-family: "Segoe UI", Calibri, Arial, sans-serif;
+        font-size: 10pt;
+        line-height: 1.38;
+      }
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 13mm 15mm 12mm;
+      }
+      header { border-bottom: 2px solid #111827; padding-bottom: 8px; }
+      h1 {
+        margin: 0;
+        font-size: 21pt;
+        letter-spacing: -0.5px;
+        font-weight: 700;
+      }
+      .title {
+        margin-top: 3px;
+        font-size: 11.5pt;
+        font-weight: 600;
+        color: #1d4ed8;
+      }
+      .contact {
+        margin-top: 6px;
+        font-size: 8.8pt;
+        color: #374151;
+      }
+      .contact span + span::before { content: "  ·  "; color: #9ca3af; }
+      a { color: inherit; text-decoration: none; }
+      h2 {
+        margin: 13px 0 5px;
+        font-size: 9pt;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        color: #1d4ed8;
+        border-bottom: 1px solid #d1d5db;
+        padding-bottom: 3px;
+      }
+      p { margin: 0; }
+      .role-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+      }
+      .role-line strong { font-size: 10.6pt; }
+      .role-line em { font-style: normal; color: #4b5563; font-size: 9pt; }
+      .muted { color: #4b5563; }
+      ul { margin: 4px 0 0; padding-left: 16px; }
+      li { margin-bottom: 3px; }
+      .item { margin-bottom: 7px; }
+      .item:last-child { margin-bottom: 0; }
+      .skills p { margin-bottom: 3px; }
+      .skills strong { display: inline-block; min-width: 92px; }
+      .two-col { display: flex; gap: 18px; }
+      .two-col > div { flex: 1; }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <h1>David Alexander Machado Alzate</h1>
+        <div class="title">Backend Software Engineer · .NET &amp; TypeScript</div>
+        <div class="contact">
+          <span>Medellín, Colombia · Remote (UTC-5)</span>
+          <span><a href="mailto:davidmachado.dev07@gmail.com">davidmachado.dev07@gmail.com</a></span>
+          <span><a href="https://github.com/D-MachadoDev">github.com/D-MachadoDev</a></span>
+          <span><a href="https://www.linkedin.com/in/david-machado-94b3921a2/">linkedin.com/in/david-machado-94b3921a2</a></span>
+        </div>
+      </header>
+
+      <h2>Summary</h2>
+      <p>
+        Software engineering student (5th semester, Universidad Pascual Bravo) focused on
+        backend systems: transactional APIs, relational schemas, and domain logic covered by
+        automated tests. Built and documented a .NET 10 marketplace core with hexagonal
+        architecture, DDD, CQRS, and 592 xUnit tests, plus an open-source TypeScript lease
+        billing engine with a Vitest suite. Looking for a backend team where I can review
+        code, own small services, and learn from production systems.
+      </p>
+
+      <h2>Experience</h2>
+      <div class="item">
+        <div class="role-line">
+          <strong>Independent Software Developer</strong>
+          <em>2024 – Present</em>
+        </div>
+        <div class="muted">Client projects &amp; open source</div>
+        <ul>
+          <li>
+            <strong>Zentric — Marketplace Core API:</strong> designed the domain core of a
+            multi-vendor marketplace in .NET 10 with ports and adapters, DDD aggregates, and a
+            CQRS split of 22 command and 14 query handlers. Mapped 14 DbSets with EF Core and
+            PostgreSQL, containerized the service with Docker, documented decisions as ADRs,
+            and shipped 592 xUnit tests across domain, application, and API layers.
+          </li>
+          <li>
+            <strong>LeaseFlow — Lease Billing Engine:</strong> built an open-source TypeScript
+            engine with Express and SQLite that turns rent, partial payments, and receipts into
+            deterministic balances. Wrote the Vitest suite covering domain money rules and the
+            HTTP layer.
+          </li>
+        </ul>
+      </div>
+
+      <h2>Selected Projects</h2>
+      <div class="item">
+        <div class="role-line">
+          <strong><a href="https://github.com/D-MachadoDev/Zentric">Zentric — Marketplace Core API</a></strong>
+          <em>github.com/D-MachadoDev/Zentric</em>
+        </div>
+        <div class="muted">.NET 10 · Hexagonal Architecture · DDD · CQRS · PostgreSQL · Docker · 592 tests</div>
+      </div>
+      <div class="item">
+        <div class="role-line">
+          <strong><a href="https://github.com/D-MachadoDev/leaseflow">LeaseFlow — Lease Billing Engine</a></strong>
+          <em>github.com/D-MachadoDev/leaseflow</em>
+        </div>
+        <div class="muted">TypeScript · Express · SQLite · Vitest · partial payments and reconciliation</div>
+      </div>
+      <div class="item">
+        <div class="role-line">
+          <strong>Retail Analytics — Data Pipeline &amp; BI</strong>
+          <em>Private case study</em>
+        </div>
+        <div class="muted">Incremental ETL · star schema · Power BI dashboards · walkthrough on request</div>
+      </div>
+
+      <h2>Skills</h2>
+      <div class="skills">
+        <p><strong>Languages</strong> C#, TypeScript, SQL, Python</p>
+        <p><strong>Backend</strong> .NET 10, Express, REST APIs</p>
+        <p><strong>Data</strong> PostgreSQL, SQLite, EF Core</p>
+        <p><strong>Architecture</strong> Hexagonal Architecture, DDD, CQRS, SOLID</p>
+        <p><strong>Testing</strong> xUnit, Vitest</p>
+        <p><strong>Tooling</strong> Docker, Git, GitHub Actions</p>
+      </div>
+
+      <h2>Education</h2>
+      <div class="role-line">
+        <strong>Universidad Pascual Bravo — Ingeniería de Software</strong>
+        <em>2022 – Present · 5th semester</em>
+      </div>
+      <p class="muted">
+        Coursework: object-oriented programming, software architecture, relational databases,
+        data structures, operating systems.
+      </p>
+    </div>
+  </body>
+</html>

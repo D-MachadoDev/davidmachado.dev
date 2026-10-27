@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://davidmachado.dev/sitemap.xml
+Sitemap: https://davidmachado-dev.vercel.app/sitemap.xml
