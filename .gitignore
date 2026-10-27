@@ -49,3 +49,8 @@ Thumbs.db
 .codegraph/
 .impeccable/
 .playwright-cli/
+
+.vercel
+.env
+.env.local
+.env.*.local
