@@ -2,35 +2,16 @@ import { useEffect, useState } from "react";
 import { About } from "./components/About";
 import { BackToTop } from "./components/BackToTop";
 import { Contact } from "./components/Contact";
-import { CustomCursor } from "./components/CustomCursor";
 import { Experience } from "./components/Experience";
 import { Hero } from "./components/Hero";
+import { HowIWork } from "./components/HowIWork";
 import { Navbar } from "./components/Navbar";
 import { Projects } from "./components/Projects";
 import { ScrollProgress } from "./components/ScrollProgress";
 import { detectLanguage, type Language, t } from "./i18n";
 
-function SectionDivider() {
-	return (
-		<div className="relative py-4 sm:py-6">
-			<div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-				<div
-					className="h-[1px] w-full"
-					style={{
-						background:
-							"linear-gradient(90deg, transparent 0%, #27272A 20%, #3B82F6 50%, #27272A 80%, transparent 100%)",
-					}}
-				/>
-			</div>
-		</div>
-	);
-}
-
 export default function App() {
-	const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 	const [language, setLanguage] = useState<Language>(detectLanguage());
-
-	type MotionPreferenceChangeHandler = (e: MediaQueryListEvent) => void;
 
 	useEffect(() => {
 		// Smooth scroll behavior
@@ -38,18 +19,6 @@ export default function App() {
 
 		// Prevent flash of unstyled content
 		document.body.style.visibility = "visible";
-
-		// Check reduced motion preference
-		const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-		setPrefersReducedMotion(mq.matches);
-
-		const handler: MotionPreferenceChangeHandler = (e) => {
-			setPrefersReducedMotion(e.matches);
-		};
-
-		mq.addEventListener("change", handler);
-
-		return () => mq.removeEventListener("change", handler);
 	}, []);
 
 	useEffect(() => {
@@ -74,9 +43,6 @@ export default function App() {
 				{t(language, "a11y.skipToContent")}
 			</a>
 
-			{/* Custom Cursor — hidden on touch / reduced motion */}
-			{!prefersReducedMotion && <CustomCursor />}
-
 			{/* Scroll Progress Bar */}
 			<ScrollProgress />
 
@@ -100,26 +66,6 @@ export default function App() {
 				}}
 			/>
 
-			{/* Gradient Orbs */}
-			<div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-				<div
-					className="absolute top-1/4 -left-1/4 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-[#3B82F6] rounded-full opacity-[0.03] blur-[80px] sm:blur-[100px] lg:blur-[120px]"
-					style={{
-						animation: prefersReducedMotion
-							? "none"
-							: "float 20s ease-in-out infinite",
-					}}
-				/>
-				<div
-					className="absolute bottom-1/4 -right-1/4 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-[#3B82F6] rounded-full opacity-[0.03] blur-[80px] sm:blur-[100px] lg:blur-[120px]"
-					style={{
-						animation: prefersReducedMotion
-							? "none"
-							: "float 25s ease-in-out infinite reverse",
-					}}
-				/>
-			</div>
-
 			<Navbar language={language} onLanguageChange={setLanguage} />
 
 			{/* Semantic Main Content Landmark */}
@@ -128,13 +74,10 @@ export default function App() {
 				className="relative z-10 w-full overflow-x-hidden"
 			>
 				<Hero language={language} />
-				<SectionDivider />
 				<Projects language={language} />
-				<SectionDivider />
+				<HowIWork language={language} />
 				<About language={language} />
-				<SectionDivider />
 				<Experience language={language} />
-				<SectionDivider />
 				<Contact language={language} />
 			</main>
 

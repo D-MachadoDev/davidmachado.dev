@@ -1,280 +1,55 @@
-import { motion, useReducedMotion } from "motion/react";
-import {
-  Code2,
-  Boxes,
-  Cloud,
-  Database,
-  Terminal,
-  Bot,
-  GitBranch,
-  Download,
-} from "lucide-react";
-import { FadeIn } from "./TextReveal";
-import { useRef, useState, useEffect } from "react";
+import { Download } from "lucide-react";
+import { motion } from "motion/react";
 import { type Language, t, type TranslationKey } from "../i18n";
+import { FadeIn } from "./TextReveal";
 
-const skills = [
+const competencies = [
   {
-    icon: Code2,
-    categoryKey: "about.skillLang" as TranslationKey,
+    labelKey: "about.skillLang" as TranslationKey,
     items: ["C#", ".NET 10", "TypeScript", "JavaScript", "SQL"],
-    color: "#34D399",
   },
   {
-    icon: Database,
-    categoryKey: "about.skillData" as TranslationKey,
+    labelKey: "about.skillData" as TranslationKey,
     items: ["PostgreSQL", "SQL Server", "SQLite", "EF Core", "Migrations"],
-    color: "#FBBF24",
   },
   {
-    icon: Boxes,
-    categoryKey: "about.skillArch" as TranslationKey,
+    labelKey: "about.skillArch" as TranslationKey,
     items: ["Hexagonal Architecture", "DDD", "CQRS", "REST APIs", "SOLID"],
-    color: "#A78BFA",
   },
   {
-    icon: Cloud,
-    categoryKey: "about.skillCloud" as TranslationKey,
+    labelKey: "about.skillCloud" as TranslationKey,
     items: ["Docker", "Docker Compose", "Linux", "GitHub Actions"],
-    color: "#60A5FA",
   },
   {
-    icon: Terminal,
-    categoryKey: "about.skillDevops" as TranslationKey,
+    labelKey: "about.skillDevops" as TranslationKey,
     items: ["Git", "GitHub", "Postman", "Swagger / OpenAPI"],
-    color: "#F472B6",
   },
   {
-    icon: GitBranch,
-    categoryKey: "about.skillMethods" as TranslationKey,
+    labelKey: "about.skillMethods" as TranslationKey,
     items: ["xUnit", "Vitest", "Code Review", "Technical Docs"],
-    color: "#22D3EE",
   },
   {
-    icon: Bot,
-    categoryKey: "about.skillAI" as TranslationKey,
+    labelKey: "about.skillAI" as TranslationKey,
     items: ["LLM APIs", "Prompt Engineering", "Workflow Automation"],
-    color: "#818CF8",
   },
 ];
 
-function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
-  const [displayed, setDisplayed] = useState(0);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const prefersReducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    if (hasAnimated || !ref.current) return;
-
-    if (prefersReducedMotion) {
-      setDisplayed(value);
-      setHasAnimated(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (!entries[0]?.isIntersecting) return;
-
-        setHasAnimated(true);
-
-        const duration = 1800;
-        const steps = 50;
-        const increment = value / steps;
-        const stepTime = duration / steps;
-        let current = 0;
-
-        const timer = setInterval(() => {
-          current += increment;
-
-          if (current >= value) {
-            current = value;
-            clearInterval(timer);
-          }
-
-          setDisplayed(Math.round(current));
-        }, stepTime);
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [value, hasAnimated, prefersReducedMotion]);
-
-  return (
-    <div
-      ref={ref}
-      className="text-4xl md:text-5xl text-[#60A5FA] font-bold font-mono mb-3 tabular-nums"
-    >
-      {displayed.toLocaleString()}
-      {suffix}
-    </div>
-  );
-}
-
-function SkillCard({
-  skill,
-  index,
-  language,
-  featured = false,
-}: {
-  skill: (typeof skills)[number];
-  index: number;
-  language: Language;
-  featured?: boolean;
-}) {
-  const Icon = skill.icon;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ delay: index * 0.05, duration: 0.55 }}
-      whileHover={{
-        y: -4,
-        scale: 1.01,
-      }}
-      className={`group border border-[#27272A] p-6 transition-all duration-300 relative overflow-hidden h-full ${
-        featured ? "md:col-span-2 xl:col-span-3" : ""
-      }`}
-      style={{
-        borderRadius: "8px",
-        backgroundColor: "#0B0B0C",
-      }}
-    >
-      <motion.div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-        style={{
-          background: `radial-gradient(circle at 20% 15%, ${skill.color}08 0%, transparent 42%)`,
-        }}
-      />
-
-      <motion.div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-        style={{
-          border: `1px solid ${skill.color}55`,
-          borderRadius: "8px",
-        }}
-      />
-
-      <div
-        className={
-          featured
-            ? "relative z-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between"
-            : "relative z-10"
-        }
-      >
-        <div className={featured ? "flex items-center gap-4" : "flex items-start gap-4 mb-5"}>
-          <motion.div
-            whileHover={{ scale: 1.05, y: -1 }}
-            className="relative p-3 border border-[#27272A] transition-all"
-            style={{
-              borderRadius: "8px",
-              background: "rgba(255,255,255,0.01)",
-            }}
-          >
-            <motion.div
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              style={{
-                borderRadius: "8px",
-                background: `radial-gradient(circle at 50% 50%, ${skill.color}18 0%, transparent 70%)`,
-              }}
-            />
-            <Icon className="w-5 h-5 relative z-10" style={{ color: skill.color }} />
-          </motion.div>
-
-          <div className="flex-1">
-            <h4 className="text-[#EDEDED] mb-2 font-medium text-lg">
-              {t(language, skill.categoryKey)}
-            </h4>
-
-            <div
-              className="w-12 h-[2px] bg-[#27272A] overflow-hidden"
-              style={{ borderRadius: "999px" }}
-            >
-              <motion.div
-                className="h-full"
-                style={{ backgroundColor: skill.color }}
-                initial={{ width: "0%" }}
-                whileInView={{ width: "100%" }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.15 + index * 0.05, duration: 0.5 }}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div
-          className={`flex flex-wrap gap-2 ${featured ? "sm:justify-end" : ""}`}
-        >
-          {skill.items.map((item, i) => (
-            <motion.span
-              key={item}
-              initial={{ opacity: 0, y: 6, scale: 0.98 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.04 + i * 0.03, duration: 0.35 }}
-              whileHover={{
-                y: -1,
-                color: "#EDEDED",
-                borderColor: `${skill.color}55`,
-                backgroundColor: "rgba(255,255,255,0.02)",
-              }}
-              className="text-xs font-mono text-[#A1A1AA] px-3 py-1.5 border border-[#27272A] transition-all cursor-default"
-              style={{ borderRadius: "6px" }}
-            >
-              {item}
-            </motion.span>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
 export function About({ language }: { language: Language }) {
-  const sectionRef = useRef<HTMLElement | null>(null);
-
   const stats = [
-    { label: t(language, "about.statProjects"), value: 3, suffix: "" },
-    { label: t(language, "about.statTests"), value: 592, suffix: "" },
-    { label: t(language, "about.statRepos"), value: 9, suffix: "" },
-    { label: t(language, "about.statOpenSource"), value: 2, suffix: "" },
-  ];
-
-  const philosophy = [
-    {
-      num: "01",
-      title: t(language, "about.phil1Title"),
-      desc: t(language, "about.phil1Desc"),
-      color: "#3B82F6",
-    },
-    {
-      num: "02",
-      title: t(language, "about.phil2Title"),
-      desc: t(language, "about.phil2Desc"),
-      color: "#10B981",
-    },
-    {
-      num: "03",
-      title: t(language, "about.phil3Title"),
-      desc: t(language, "about.phil3Desc"),
-      color: "#8B5CF6",
-    },
+    { label: t(language, "about.statProjects"), value: 3 },
+    { label: t(language, "about.statTests"), value: 592 },
+    { label: t(language, "about.statRepos"), value: 9 },
+    { label: t(language, "about.statOpenSource"), value: 2 },
   ];
 
   return (
     <section
       id="about"
-      ref={sectionRef}
-      className="min-h-screen py-16 sm:py-24 lg:py-32 px-6 sm:px-8 lg:px-12 relative"
+      className="min-h-screen py-20 sm:py-28 lg:py-32 px-6 sm:px-8 lg:px-12 relative"
     >
       <div className="max-w-7xl mx-auto">
         <FadeIn>
-          <div className="mb-12 sm:mb-16 lg:mb-20">
+          <div className="mb-12 sm:mb-16">
             <div className="flex flex-wrap items-center gap-4 mb-6">
               <a
                 href="https://github.com/D-MachadoDev"
@@ -312,7 +87,9 @@ export function About({ language }: { language: Language }) {
 
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#EDEDED] mb-6 sm:mb-8 tracking-tight max-w-4xl leading-tight text-balance">
               {t(language, "about.heading")}{" "}
-              <span className="text-[#3B82F6]">{t(language, "about.headingAccent")}</span>
+              <span className="text-[#3B82F6]">
+                {t(language, "about.headingAccent")}
+              </span>
             </h2>
 
             <div className="max-w-3xl space-y-4 sm:space-y-6 text-base sm:text-lg md:text-xl text-[#71717A] leading-relaxed">
@@ -320,8 +97,13 @@ export function About({ language }: { language: Language }) {
 
               <p>
                 {t(language, "about.p2pre")}{" "}
-                <span className="text-[#EDEDED]">{t(language, "about.p2cloud")}</span>,{" "}
-                <span className="text-[#EDEDED]">{t(language, "about.p2distributed")}</span>
+                <span className="text-[#EDEDED]">
+                  {t(language, "about.p2cloud")}
+                </span>
+                ,{" "}
+                <span className="text-[#EDEDED]">
+                  {t(language, "about.p2distributed")}
+                </span>
                 {t(language, "about.p2and")}{" "}
                 <span className="text-[#EDEDED]">{t(language, "about.p2dx")}</span>
                 {t(language, "about.p2post")}
@@ -349,115 +131,54 @@ export function About({ language }: { language: Language }) {
           </div>
         </FadeIn>
 
-        <FadeIn delay={0.2}>
-          <div className="mb-12 sm:mb-16 lg:mb-20">
-            <h3 className="text-2xl sm:text-3xl md:text-4xl text-[#EDEDED] mb-8 sm:mb-10">
-              {t(language, "about.competencies")}
-            </h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
-              {skills.map((skill, index) => (
-                <SkillCard
-                  key={skill.categoryKey}
-                  skill={skill}
-                  index={index}
-                  language={language}
-                  featured={index === skills.length - 1}
-                />
-              ))}
-            </div>
-          </div>
-        </FadeIn>
-
-        <FadeIn delay={0.4}>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.96, y: 12 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 + index * 0.08, duration: 0.45 }}
-                whileHover={{ y: -4, scale: 1.02 }}
-                className="group border border-[#27272A] p-6 sm:p-8 text-center relative overflow-hidden"
-                style={{
-                  borderRadius: "8px",
-                  backgroundColor: "#0B0B0C",
-                }}
-              >
-              
-                <motion.div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  style={{
-                    background:
-                      "radial-gradient(circle at 50% 20%, rgba(96,165,250,0.12) 0%, transparent 55%)",
-                  }}
-                />
-
-                <motion.div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  style={{
-                    border: "1px solid rgba(96,165,250,0.45)",
-                    borderRadius: "8px",
-                  }}
-                />
-
-                <div className="relative z-10">
-                  <AnimatedNumber value={stat.value} suffix={stat.suffix} />
-                  <div className="text-sm text-[#71717A] uppercase tracking-wider font-medium">
-                    {stat.label}
-                  </div>
+        <FadeIn delay={0.1}>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 border-y border-[#27272A] py-8">
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <div className="text-3xl sm:text-4xl text-[#EDEDED] font-bold font-mono mb-2 tabular-nums">
+                  {stat.value.toLocaleString()}
                 </div>
-
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 h-[2px] origin-left"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, #3B82F6 0%, rgba(59,130,246,0.2) 100%)",
-                  }}
-                  initial={{ scaleX: 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.28 }}
-                />
-              </motion.div>
+                <div className="text-[11px] sm:text-xs text-[#71717A] uppercase tracking-wider">
+                  {stat.label}
+                </div>
+              </div>
             ))}
           </div>
         </FadeIn>
 
-        <FadeIn delay={0.6}>
-          <div
-            className="mt-20 border border-[#27272A] p-8 md:p-12 relative overflow-hidden bg-[#050505]"
-            style={{ borderRadius: "8px" }}
-          >
-            <h3 className="text-2xl md:text-3xl text-[#EDEDED] mb-8">
-              {t(language, "about.philosophy")}
+        <FadeIn delay={0.2}>
+          <div className="mt-16 sm:mt-20">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl text-[#EDEDED] mb-8">
+              {t(language, "about.competencies")}
             </h3>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {philosophy.map((item, i) => (
+            <div className="grid sm:grid-cols-2 gap-x-10">
+              {competencies.map((group, index) => (
                 <motion.div
-                  key={item.num}
-                  initial={{ opacity: 0, y: 20 }}
+                  key={group.labelKey}
+                  initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.15 + i * 0.08, duration: 0.5 }}
-                  className="relative"
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ delay: index * 0.04, duration: 0.4 }}
+                  className="border-t border-[#1F1F22] py-3 sm:py-4"
                 >
-                  <div className="font-mono text-sm mb-3" style={{ color: item.color }}>
-                    {item.num} — {item.title}
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-[#71717A] mb-1">
+                    {t(language, group.labelKey)}
                   </div>
-
-                  <p className="text-[#71717A] leading-relaxed">{item.desc}</p>
-
-                  {i < philosophy.length - 1 && (
-                    <div
-                      className="hidden md:block absolute top-4 -right-4 w-8 h-px"
-                      style={{ backgroundColor: `${item.color}30` }}
-                    />
-                  )}
+                  <div className="text-sm text-[#A1A1AA]">
+                    {group.items.join(" · ")}
+                  </div>
                 </motion.div>
               ))}
             </div>
+
+            <p className="mt-8 text-xs font-mono text-[#52525B]">
+              <span className="uppercase tracking-wider">
+                {t(language, "about.philosophy")}:
+              </span>{" "}
+              {t(language, "about.phil1Title")} · {t(language, "about.phil2Title")}{" "}
+              · {t(language, "about.phil3Title")}
+            </p>
           </div>
         </FadeIn>
       </div>

@@ -1,12 +1,6 @@
 import { ArrowRight } from "lucide-react";
-import {
-	AnimatePresence,
-	motion,
-	useReducedMotion,
-	useScroll,
-	useTransform,
-} from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { useEffect, useState } from "react";
 import { type Language, t } from "../i18n";
 import { CONTACT_EMAIL } from "../lib/mailto";
 import { MagneticButton } from "./MagneticButton";
@@ -20,20 +14,8 @@ export function Hero({ language }: { language: Language }) {
 		t(language, "hero.subtitle4"),
 	];
 
-	const ref = useRef(null);
 	const prefersReducedMotion = useReducedMotion();
 	const [subtitleIndex, setSubtitleIndex] = useState(0);
-	const { scrollYProgress } = useScroll({
-		target: ref,
-		offset: ["start start", "end start"],
-	});
-
-	const y = useTransform(
-		scrollYProgress,
-		[0, 1],
-		prefersReducedMotion ? ["0%", "0%"] : ["0%", "50%"],
-	);
-	const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.5, 0]);
 
 	// Rotate subtitle every 4.5s, unless the visitor asked for reduced motion
 	useEffect(() => {
@@ -56,77 +38,22 @@ export function Hero({ language }: { language: Language }) {
 	return (
 		<section
 			id="hero"
-			ref={ref}
 			className="min-h-screen relative flex items-start lg:items-center justify-center px-6 sm:px-8 lg:px-12 pt-18 sm:pt-20 lg:pt-0 overflow-hidden"
 		>
-			{/* Animated Gradient Background */}
-			<div className="absolute inset-0 overflow-hidden">
-				<motion.div
-					className="absolute inset-0"
-					style={{
-						background:
-							"radial-gradient(circle at 50% 40%, rgba(59, 130, 246, 0.06) 0%, transparent 52%)",
-					}}
-					animate={
-						prefersReducedMotion
-							? undefined
-							: {
-									scale: [1, 1.08, 1],
-									opacity: [0.24, 0.38, 0.24],
-								}
-					}
-					transition={{
-						duration: 10,
-						repeat: Infinity,
-						ease: "easeInOut",
-					}}
-				/>
-			</div>
-
-			{/* Grid Background with Parallax */}
-			<motion.div
-				className="absolute inset-0 pointer-events-none will-change-transform"
+			{/* Single static light source, no decorative motion */}
+			<div
+				className="absolute inset-0 pointer-events-none"
 				style={{
-					backgroundImage: `
-            linear-gradient(rgba(237, 237, 237, 0.025) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(237, 237, 237, 0.025) 1px, transparent 1px)
-          `,
-					backgroundSize: "32px 32px",
-					y,
-					willChange: "transform",
+					background:
+						"radial-gradient(circle at 50% 38%, rgba(59, 130, 246, 0.07) 0%, transparent 55%)",
 				}}
 			/>
 
-			{/* Floating geometric shapes */}
-			{!prefersReducedMotion && (
-				<div className="absolute inset-0 overflow-hidden pointer-events-none">
-				<motion.div
-					className="absolute top-[20%] right-[15%] w-20 h-20 border border-[#3B82F6]/10 rounded-full"
-					animate={{ y: [-20, 20, -20], rotate: [0, 180, 360] }}
-					transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-				/>
-				<motion.div
-					className="absolute bottom-[30%] left-[10%] w-3 h-3 bg-[#3B82F6]/20 rounded-full"
-					animate={{ y: [-30, 30, -30], x: [-10, 10, -10] }}
-					transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-				/>
-				<motion.div
-					className="absolute top-[60%] right-[25%] w-1 h-16 bg-gradient-to-b from-[#3B82F6]/20 to-transparent"
-					animate={{ y: [-10, 10, -10], opacity: [0.3, 0.6, 0.3] }}
-					transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-				/>
-				<motion.div
-					className="absolute top-[15%] left-[25%] w-8 h-8 border border-[#3B82F6]/10"
-					style={{ borderRadius: "2px" }}
-					animate={{ rotate: [0, 90, 180, 270, 360], scale: [1, 1.2, 1] }}
-					transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-				/>
-				</div>
-			)}
-
 			<motion.div
 				className="max-w-6xl mx-auto relative z-10 w-full"
-				style={{ opacity }}
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				transition={{ duration: 0.8 }}
 			>
 				<motion.div
 					initial={{ opacity: 0 }}
@@ -159,13 +86,6 @@ export function Hero({ language }: { language: Language }) {
 								{t(language, "hero.availableShort")} •{" "}
 							</span>
 							{t(language, "contact.location")}
-							<motion.span
-								className="inline-block w-[2px] h-3 bg-[#3B82F6] ml-1 align-middle"
-								animate={
-									prefersReducedMotion ? undefined : { opacity: [1, 0, 1] }
-								}
-								transition={{ duration: 1, repeat: Infinity }}
-							/>
 						</span>
 					</motion.div>
 
@@ -173,40 +93,32 @@ export function Hero({ language }: { language: Language }) {
 					<div className="mb-3 sm:mb-4">
 						<TextReveal delay={0.1}>
 							<h1
-							className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl leading-[0.88] tracking-tight text-balance text-white"
+								className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl leading-[0.88] tracking-tight text-balance text-white"
 							>
-							David
-							<span className="block">Machado</span>
+								David
+								<span className="block">Machado</span>
 							</h1>
 						</TextReveal>
 					</div>
 
-					{/* Animated Rotating Title */}
+					{/* Rotating Title */}
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.5, duration: 0.8 }}
-						className="mb-6 sm:mb-7 h-14 sm:h-14 md:h-14 overflow-hidden max-w-3xl relative"
+						className="mb-6 sm:mb-7 h-14 overflow-hidden max-w-3xl relative"
 					>
 						<AnimatePresence mode="wait">
 							<motion.h2
 								key={subtitleIndex}
-								initial={
-									prefersReducedMotion
-										? false
-										: { y: 60, opacity: 0, filter: "blur(4px)" }
-								}
-								animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-								exit={
-									prefersReducedMotion
-										? undefined
-										: { y: -60, opacity: 0, filter: "blur(4px)" }
-								}
+								initial={prefersReducedMotion ? false : { y: 30, opacity: 0 }}
+								animate={{ y: 0, opacity: 1 }}
+								exit={prefersReducedMotion ? undefined : { y: -30, opacity: 0 }}
 								transition={{
-									duration: prefersReducedMotion ? 0 : 0.5,
+									duration: prefersReducedMotion ? 0 : 0.35,
 									ease: [0.33, 1, 0.68, 1],
 								}}
-								className="text-xl sm:text-2xl md:text-2xl lg:text-[2rem] font-light tracking-tight leading-none absolute inset-0 flex items-center"
+								className="text-xl sm:text-2xl md:text-2xl lg:text-[2rem] font-light tracking-tight leading-tight absolute inset-0 flex items-center"
 								style={{
 									background:
 										"linear-gradient(to right, #EDEDED 30%, #71717A 100%)",
@@ -225,7 +137,7 @@ export function Hero({ language }: { language: Language }) {
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.6, duration: 0.8 }}
-						className="text-sm sm:text-base md:text-[1.05rem] text-zinc-300 mb-10 max-w-[40rem] leading-[1.8]"
+						className="text-base sm:text-lg text-zinc-300 mb-10 max-w-[42rem] leading-[1.75]"
 					>
 						{t(language, "hero.descPre")}
 						<span className="text-blue-400 font-medium">
@@ -239,7 +151,7 @@ export function Hero({ language }: { language: Language }) {
 						<span className="text-blue-400 font-medium">
 							{t(language, "hero.descDX")}
 						</span>
-						.
+						{t(language, "hero.descPost")}
 					</motion.p>
 
 					{/* CTA Buttons */}
@@ -273,75 +185,33 @@ export function Hero({ language }: { language: Language }) {
 						</MagneticButton>
 					</motion.div>
 
-
-					{/* Tech Stack Pills */}
+					{/* Four anchors, not a stack dump */}
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.8, duration: 0.8 }}
-						className="flex flex-wrap gap-2 sm:gap-3"
+						className="flex flex-wrap gap-1.5 sm:gap-3"
 					>
-						{[
-							".NET 10",
-							"C#",
-							"TypeScript",
-							"PostgreSQL",
-							"SQLite",
-							"Docker",
-							"Hexagonal Architecture",
-							"xUnit / Vitest",
-						].map((tech, index) => (
-							<motion.span
-								key={tech}
-								initial={{ opacity: 0, scale: 0.8 }}
-								animate={{ opacity: 1, scale: 1 }}
-								transition={{ delay: 0.9 + index * 0.05, duration: 0.4 }}
-								whileHover={{ scale: 1.05, borderColor: "#3B82F6" }}
-								className="px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-mono text-zinc-300 border border-white/10 hover:border-white/30 hover:text-white transition-all cursor-default backdrop-blur-sm"
-								style={{
-									borderRadius: "8px",
-									backgroundColor: "rgba(255, 255, 255, 0.02)",
-								}}
-							>
-								{tech}
-							</motion.span>
-						))}
+						{[".NET 10", "TypeScript", "PostgreSQL", "Docker"].map(
+							(tech, index) => (
+								<motion.span
+									key={tech}
+									initial={{ opacity: 0, scale: 0.8 }}
+									animate={{ opacity: 1, scale: 1 }}
+									transition={{ delay: 0.9 + index * 0.05, duration: 0.4 }}
+									whileHover={{ scale: 1.05, borderColor: "#3B82F6" }}
+									className="px-2.5 sm:px-4 py-2 sm:py-2.5 text-[11px] sm:text-sm font-mono text-zinc-300 border border-white/10 hover:border-white/30 hover:text-white transition-all cursor-default backdrop-blur-sm"
+									style={{
+										borderRadius: "8px",
+										backgroundColor: "rgba(255, 255, 255, 0.02)",
+									}}
+								>
+									{tech}
+								</motion.span>
+							),
+						)}
 					</motion.div>
 				</motion.div>
-			</motion.div>
-
-			{/* Enhanced Scroll Indicator */}
-			<motion.div
-				initial={{ opacity: 0 }}
-				animate={{ opacity: 1 }}
-				transition={{ delay: 1.5, duration: 1 }}
-				className="absolute bottom-8 sm:bottom-12 left-1/2 transform -translate-x-1/2 hidden sm:block"
-			>
-				<motion.button
-					type="button"
-					onClick={() => scrollToSection("work")}
-					animate={prefersReducedMotion ? undefined : { y: [0, 10, 0] }}
-					transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-					className="flex flex-col items-center gap-3 text-[#71717A] hover:text-[#3B82F6] transition-colors group"
-				>
-					<span className="text-xs font-mono uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
-						{t(language, "hero.scroll")}
-					</span>
-					<div
-						className="w-6 h-10 border-2 border-current flex items-start justify-center p-2"
-						style={{ borderRadius: "20px" }}
-					>
-						<motion.div
-							animate={
-								prefersReducedMotion
-									? undefined
-									: { y: [0, 12, 0], opacity: [1, 0, 1] }
-							}
-							transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-							className="w-1.5 h-1.5 bg-current rounded-full"
-						/>
-					</div>
-				</motion.button>
 			</motion.div>
 		</section>
 	);
