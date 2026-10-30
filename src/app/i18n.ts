@@ -47,18 +47,18 @@ export const translations = {
 		"hero.available": "Available for opportunities",
 		"hero.availableShort": "Available",
 		"hero.subtitle1": "Backend Software Engineer",
-		"hero.subtitle2": ".NET / C# & Hexagonal Architecture",
-		"hero.subtitle3": "TypeScript & Transactional APIs",
-		"hero.subtitle4": "PostgreSQL & Tested Domain Logic",
-		"hero.descPre": "I build transactional systems where ",
-		"hero.descCloud": "backend architecture",
-		"hero.descMiddle": ", ",
-		"hero.descDistributed": "relational data",
-		"hero.descAnd": ", and ",
-		"hero.descDX": "automated tests",
+		"hero.subtitle2": "I design systems, not just endpoints",
+		"hero.subtitle3": ".NET · TypeScript · PostgreSQL",
+		"hero.subtitle4": "Documented, tested, handed over",
+		"hero.descPre": "I turn ",
+		"hero.descCloud": "messy business rules",
+		"hero.descMiddle": " into ",
+		"hero.descDistributed": "software a team can trust",
+		"hero.descAnd": ", and leave ",
+		"hero.descDX": "tests, docs, and decisions",
+		"hero.descPost": " behind so it stays that way.",
 		"hero.ctaWork": "View my work",
 		"hero.ctaContact": "Get in touch",
-		"hero.scroll": "Scroll",
 
 		"projects.badge": "SELECTED WORK",
 		"projects.heading": "Selected work &",
@@ -85,10 +85,10 @@ export const translations = {
 		"projects.nextProject": "Next project",
 
 		"about.badge": "ABOUT ME",
-		"about.heading": "First principles meet",
-		"about.headingAccent": "pragmatic engineering",
+		"about.heading": "I write code",
+		"about.headingAccent": "so other people can keep it",
 		"about.p1":
-			"I am a software engineering student in my fifth semester at Universidad Pascual Bravo, focused on backend systems: transactional APIs, relational schemas, and domain logic that can be tested without a framework.",
+			"I am a software engineering student in my fifth semester at Universidad Pascual Bravo. What I enjoy most is the part of the job many people skip: turning an ambiguous business rule into something a team can build, test, and explain.",
 		"about.p2pre": "My foundation is ",
 		"about.p2cloud": "hexagonal architecture",
 		"about.p2distributed": "relational data modeling",
@@ -97,7 +97,7 @@ export const translations = {
 		"about.p2post":
 			". I care about explicit invariants, deterministic behavior, and tests that describe the domain.",
 		"about.p3":
-			"I have built and documented a .NET marketplace core with 592 automated tests and an open-source lease billing engine in TypeScript. I am looking for a backend team where I can review code, own small services, and learn from production systems.",
+			"I have built and documented a .NET marketplace core with 592 automated tests and an open-source lease billing engine in TypeScript. I am looking for a backend team where I can own small services, review code, and learn from production systems, and where clear communication matters as much as clean code.",
 		"about.competencies": "Core Competencies",
 		"about.skillCloud": "Containers & Environment",
 		"about.skillLang": "Languages & Frameworks",
@@ -106,6 +106,21 @@ export const translations = {
 		"about.skillDevops": "Tools & Version Control",
 		"about.skillMethods": "Testing & Quality",
 		"about.skillAI": "AI-assisted Engineering",
+		"about.workTitle": "How I work",
+		"about.workLede":
+			"The part of the job that does not show up in a repository.",
+		"about.work1Title": "Written communication",
+		"about.work1Desc":
+			"Decisions live in ADRs, READMEs, and docs, not in my head. A teammate should not need me to understand what I built.",
+		"about.work2Title": "Ownership",
+		"about.work2Desc":
+			"I take a problem from conversation to deployment: define the rule, build it, test it, and document it.",
+		"about.work3Title": "Self-directed learning",
+		"about.work3Desc":
+			"I learned .NET 10, DDD, CQRS, and hexagonal architecture while studying. Open source is where I test what I learn.",
+		"about.work4Title": "Collaboration",
+		"about.work4Desc":
+			"I share context early, ask for review before it is comfortable, and keep feedback about the code, not the person.",
 		"about.statProjects": "Featured Projects",
 		"about.statTests": "Automated Tests (Zentric)",
 		"about.statRepos": "Public Repositories",
@@ -113,14 +128,8 @@ export const translations = {
 		"about.downloadCv": "Download CV",
 		"about.philosophy": "Software Engineering Philosophy",
 		"about.phil1Title": "First Principles",
-		"about.phil1Desc":
-			"Break down complex problems to their fundamental truths and build up from there.",
 		"about.phil2Title": "Reliability First",
-		"about.phil2Desc":
-			"Prefer explicit rules and deterministic behavior over clever abstractions.",
 		"about.phil3Title": "Evidence Over Claims",
-		"about.phil3Desc":
-			"Ship what can be demonstrated: repositories, tests, and measured results.",
 
 		"exp.badge": "EXPERIENCE",
 		"exp.heading": "Journey of",
@@ -206,18 +215,18 @@ export const translations = {
 		"hero.available": "Disponible para oportunidades",
 		"hero.availableShort": "Disponible",
 		"hero.subtitle1": "Ingeniero de Software Backend",
-		"hero.subtitle2": ".NET / C# y Arquitectura Hexagonal",
-		"hero.subtitle3": "TypeScript y APIs Transaccionales",
-		"hero.subtitle4": "PostgreSQL y Lógica de Dominio Probada",
-		"hero.descPre": "Construyo sistemas transaccionales donde la ",
-		"hero.descCloud": "arquitectura backend",
-		"hero.descMiddle": ", el ",
-		"hero.descDistributed": "modelo relacional",
-		"hero.descAnd": " y las ",
-		"hero.descDX": "pruebas automatizadas guían el diseño",
+		"hero.subtitle2": "Diseño sistemas, no solo endpoints",
+		"hero.subtitle3": ".NET · TypeScript · PostgreSQL",
+		"hero.subtitle4": "Documentado, probado, transferible",
+		"hero.descPre": "Convierto ",
+		"hero.descCloud": "reglas de negocio enredadas",
+		"hero.descMiddle": " en ",
+		"hero.descDistributed": "software en el que un equipo puede confiar",
+		"hero.descAnd": ", y dejo ",
+		"hero.descDX": "pruebas, documentación y decisiones",
+		"hero.descPost": " para que siga siéndolo.",
 		"hero.ctaWork": "Ver proyectos",
 		"hero.ctaContact": "Hablemos",
-		"hero.scroll": "Deslizar",
 
 		"projects.badge": "PROYECTOS DESTACADOS",
 		"projects.heading": "Trabajo seleccionado y",
@@ -244,10 +253,10 @@ export const translations = {
 		"projects.nextProject": "Siguiente proyecto",
 
 		"about.badge": "SOBRE MÍ",
-		"about.heading": "Primeros principios y",
-		"about.headingAccent": "ingeniería pragmática",
+		"about.heading": "Escribo código",
+		"about.headingAccent": "para que otros puedan mantenerlo",
 		"about.p1":
-			"Soy estudiante de Ingeniería de Software en quinto semestre en la Universidad Pascual Bravo, enfocado en sistemas backend: APIs transaccionales, esquemas relacionales y lógica de dominio que se puede probar sin un framework.",
+			"Soy estudiante de Ingeniería de Software en quinto semestre en la Universidad Pascual Bravo. Lo que más disfruto es la parte del trabajo que muchos saltan: convertir una regla de negocio ambigua en algo que un equipo pueda construir, probar y explicar.",
 		"about.p2pre": "Mi base es la ",
 		"about.p2cloud": "arquitectura hexagonal",
 		"about.p2distributed": "modelado relacional",
@@ -256,7 +265,7 @@ export const translations = {
 		"about.p2post":
 			". Me importan las invariantes explícitas, el comportamiento determinista y las pruebas que describen el dominio.",
 		"about.p3":
-			"He construido y documentado un núcleo de marketplace en .NET con 592 pruebas automatizadas y un motor de facturación de arriendos open source en TypeScript. Busco un equipo backend donde pueda revisar código, hacerme cargo de servicios pequeños y aprender de sistemas en producción.",
+			"He construido y documentado un núcleo de marketplace en .NET con 592 pruebas automatizadas y un motor de facturación de arriendos open source en TypeScript. Busco un equipo backend donde pueda hacerme cargo de servicios pequeños, revisar código y aprender de sistemas en producción, y donde la comunicación clara importe tanto como el código limpio.",
 		"about.competencies": "Competencias Principales",
 		"about.skillCloud": "Contenedores y Entorno",
 		"about.skillLang": "Lenguajes y Frameworks",
@@ -265,6 +274,21 @@ export const translations = {
 		"about.skillDevops": "Herramientas y Control de Versiones",
 		"about.skillMethods": "Pruebas y Calidad",
 		"about.skillAI": "Ingeniería asistida por IA",
+		"about.workTitle": "Cómo trabajo",
+		"about.workLede":
+			"La parte del trabajo que no aparece en un repositorio.",
+		"about.work1Title": "Comunicación escrita",
+		"about.work1Desc":
+			"Las decisiones viven en ADRs, READMEs y documentación, no en mi cabeza. Un compañero no debería necesitarme para entender lo que construí.",
+		"about.work2Title": "Responsabilidad",
+		"about.work2Desc":
+			"Llevo un problema de la conversación al despliegue: definir la regla, construirla, probarla y documentarla.",
+		"about.work3Title": "Aprendizaje autónomo",
+		"about.work3Desc":
+			"Aprendí .NET 10, DDD, CQRS y arquitectura hexagonal mientras estudiaba. El código abierto es donde pruebo lo que aprendo.",
+		"about.work4Title": "Colaboración",
+		"about.work4Desc":
+			"Comparto contexto temprano, pido revisión antes de que sea cómodo y mantengo el feedback sobre el código, no sobre la persona.",
 		"about.statProjects": "Proyectos Destacados",
 		"about.statTests": "Pruebas Automatizadas (Zentric)",
 		"about.statRepos": "Repositorios Públicos",
@@ -272,14 +296,8 @@ export const translations = {
 		"about.downloadCv": "Descargar CV",
 		"about.philosophy": "Filosofía de Ingeniería de Software",
 		"about.phil1Title": "Primeros Principios",
-		"about.phil1Desc":
-			"Descomponer problemas complejos hasta sus verdades fundamentales y construir desde ahí.",
 		"about.phil2Title": "Confiabilidad Primero",
-		"about.phil2Desc":
-			"Prefiero reglas explícitas y comportamiento determinista antes que abstracciones ingeniosas.",
 		"about.phil3Title": "Evidencia Sobre Promesas",
-		"about.phil3Desc":
-			"Entregar lo que se puede demostrar: repositorios, pruebas y resultados medidos.",
 
 		"exp.badge": "EXPERIENCIA",
 		"exp.heading": "Trayectoria de",
@@ -365,18 +383,18 @@ export const translations = {
 		"hero.available": "Disponível para oportunidades",
 		"hero.availableShort": "Disponível",
 		"hero.subtitle1": "Engenheiro de Software Backend",
-		"hero.subtitle2": ".NET / C# e Arquitetura Hexagonal",
-		"hero.subtitle3": "TypeScript e APIs Transacionais",
-		"hero.subtitle4": "PostgreSQL e Lógica de Domínio Testada",
-		"hero.descPre": "Construo sistemas transacionais onde a ",
-		"hero.descCloud": "arquitetura backend",
-		"hero.descMiddle": ", o ",
-		"hero.descDistributed": "modelo relacional",
-		"hero.descAnd": " e os ",
-		"hero.descDX": "testes automatizados orientam o design",
+		"hero.subtitle2": "Projeto sistemas, não só endpoints",
+		"hero.subtitle3": ".NET · TypeScript · PostgreSQL",
+		"hero.subtitle4": "Documentado, testado, transferível",
+		"hero.descPre": "Transformo ",
+		"hero.descCloud": "regras de negócio confusas",
+		"hero.descMiddle": " em ",
+		"hero.descDistributed": "software em que o time pode confiar",
+		"hero.descAnd": ", e deixo ",
+		"hero.descDX": "testes, documentação e decisões",
+		"hero.descPost": " para que continue assim.",
 		"hero.ctaWork": "Ver meus projetos",
 		"hero.ctaContact": "Entre em contato",
-		"hero.scroll": "Rolar",
 
 		"projects.badge": "PROJETOS EM DESTAQUE",
 		"projects.heading": "Trabalho selecionado e",
@@ -403,10 +421,10 @@ export const translations = {
 		"projects.nextProject": "Próximo projeto",
 
 		"about.badge": "SOBRE MIM",
-		"about.heading": "Primeiros princípios e",
-		"about.headingAccent": "engenharia pragmática",
+		"about.heading": "Escrevo código",
+		"about.headingAccent": "para que outras pessoas possam mantê-lo",
 		"about.p1":
-			"Sou estudante de Engenharia de Software no quinto semestre na Universidad Pascual Bravo, focado em sistemas backend: APIs transacionais, esquemas relacionais e lógica de domínio que pode ser testada sem um framework.",
+			"Sou estudante de Engenharia de Software no quinto semestre na Universidad Pascual Bravo. O que mais gosto é da parte do trabalho que muitos pulam: transformar uma regra de negócio ambígua em algo que o time possa construir, testar e explicar.",
 		"about.p2pre": "Minha base é a ",
 		"about.p2cloud": "arquitetura hexagonal",
 		"about.p2distributed": "modelagem relacional",
@@ -415,7 +433,7 @@ export const translations = {
 		"about.p2post":
 			". Valorizo invariantes explícitas, comportamento determinístico e testes que descrevem o domínio.",
 		"about.p3":
-			"Construí e documentei um núcleo de marketplace em .NET com 592 testes automatizados e um motor de cobrança de aluguéis open source em TypeScript. Busco uma equipe backend onde possa revisar código, assumir serviços pequenos e aprender com sistemas em produção.",
+			"Construí e documentei um núcleo de marketplace em .NET com 592 testes automatizados e um motor de cobrança de aluguéis open source em TypeScript. Busco uma equipe backend onde possa assumir serviços pequenos, revisar código e aprender com sistemas em produção, e onde a comunicação clara importe tanto quanto o código limpo.",
 		"about.competencies": "Competências Principais",
 		"about.skillCloud": "Contêineres e Ambiente",
 		"about.skillLang": "Linguagens e Frameworks",
@@ -424,6 +442,21 @@ export const translations = {
 		"about.skillDevops": "Ferramentas e Controle de Versão",
 		"about.skillMethods": "Testes e Qualidade",
 		"about.skillAI": "Engenharia assistida por IA",
+		"about.workTitle": "Como eu trabalho",
+		"about.workLede":
+			"A parte do trabalho que não aparece em um repositório.",
+		"about.work1Title": "Comunicação escrita",
+		"about.work1Desc":
+			"As decisões vivem em ADRs, READMEs e documentação, não na minha cabeça. Um colega não deveria precisar de mim para entender o que construí.",
+		"about.work2Title": "Responsabilidade",
+		"about.work2Desc":
+			"Levo um problema da conversa ao deploy: definir a regra, construir, testar e documentar.",
+		"about.work3Title": "Aprendizado autônomo",
+		"about.work3Desc":
+			"Aprendi .NET 10, DDD, CQRS e arquitetura hexagonal enquanto estudava. O código aberto é onde testo o que aprendo.",
+		"about.work4Title": "Colaboração",
+		"about.work4Desc":
+			"Compartilho contexto cedo, peço revisão antes de ser confortável e mantenho o feedback sobre o código, não sobre a pessoa.",
 		"about.statProjects": "Projetos em Destaque",
 		"about.statTests": "Testes Automatizados (Zentric)",
 		"about.statRepos": "Repositórios Públicos",
@@ -431,14 +464,8 @@ export const translations = {
 		"about.downloadCv": "Baixar CV",
 		"about.philosophy": "Filosofia de Engenharia de Software",
 		"about.phil1Title": "Primeiros Princípios",
-		"about.phil1Desc":
-			"Decompor problemas complexos até suas verdades fundamentais e construir a partir daí.",
 		"about.phil2Title": "Confiabilidade Primeiro",
-		"about.phil2Desc":
-			"Prefiro regras explícitas e comportamento determinístico a abstrações engenhosas.",
 		"about.phil3Title": "Evidência Acima de Promessas",
-		"about.phil3Desc":
-			"Entregar o que pode ser demonstrado: repositórios, testes e resultados medidos.",
 
 		"exp.badge": "EXPERIÊNCIA",
 		"exp.heading": "Jornada de",
