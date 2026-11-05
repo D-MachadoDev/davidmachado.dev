@@ -1,30 +1,21 @@
- # Design Portfolio
+# David Machado — Portfolio
 
- Portfolio personal construido con React, TypeScript, Vite, Motion y Tailwind CSS.
+Personal portfolio of David Machado, a backend-focused software engineering student in
+Medellín, Colombia. The site presents three projects with inspectable evidence: public
+repositories, documented architecture decisions, and test suites.
 
- ## Ejecutar en local
+Live: https://davidmachado-dev.vercel.app/
 
- Instala dependencias:
+## Stack
 
-<<<<<<< Updated upstream
- ```bash
- npm install
- ```
-=======
 - React 18 + TypeScript
 - Vite 6 + Tailwind CSS 4
 - Static HTML generation for route-specific SEO metadata
 - Vitest for content, mailto, routing, language, SEO, and wheel-scroll logic
 - Biome for linting
->>>>>>> Stashed changes
 
- Levanta el servidor de desarrollo:
+## Scripts
 
-<<<<<<< Updated upstream
- ```bash
- npm run dev
- ```
-=======
 ```bash
 npm install
 npm run dev        # local development server
@@ -34,16 +25,9 @@ npm run typecheck  # tsc --noEmit
 npm run lint       # biome check .
 npm test           # vitest run
 ```
->>>>>>> Stashed changes
 
- Compila para producción:
+## Structure
 
-<<<<<<< Updated upstream
- ```bash
- npm run build
- ```
-  
-=======
 ```text
 src/app/
   components/   page sections and interaction primitives
@@ -72,4 +56,3 @@ The site is a static Vite build deployed on Vercel as the `davidmachado-dev` pro
 documents so crawlers receive page-specific titles, descriptions, and Open Graph tags.
 Set `VITE_SITE_URL` when the public origin differs from
 `https://davidmachado-dev.vercel.app`.
->>>>>>> Stashed changes

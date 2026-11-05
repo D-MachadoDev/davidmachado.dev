@@ -1,19 +1,9 @@
-<<<<<<< Updated upstream
-# David Machado — Portfolio & Engineering Systems
-> Software Engineer & Systems Architect building scalable web applications and distributed architectures.
-=======
 # David Machado - Backend Software Engineer
->>>>>>> Stashed changes
 
-## Flagship Systems
-- Faro: Property Management Platform (ASP.NET Core, React 18, PostgreSQL)
-- Zentric Marketplace: Transactional API with DDD and Hexagonal Architecture
-- Concurrent Booking Engine: In-memory atomic locking via Redis and optimistic concurrency
-- Virtualized Data Explorer: Dynamic DOM windowing and Web Worker multithreading at 60fps
+> Software engineering student in Medellín, Colombia. Focused on backend systems:
+> transactional APIs, relational schemas, and domain logic covered by automated tests.
+> Stack: .NET 10 / C#, TypeScript, PostgreSQL, SQLite, Docker.
 
-<<<<<<< Updated upstream
-## Contact & Code
-=======
 ## Portfolio
 
 - Home: https://davidmachado-dev.vercel.app/
@@ -46,6 +36,6 @@ These credentials are being studied for and have not been issued yet:
 ## Contact
 
 - Email: davidmachado.dev07@gmail.com
->>>>>>> Stashed changes
 - GitHub: https://github.com/D-MachadoDev
 - LinkedIn: https://www.linkedin.com/in/david-machado-94b3921a2/
+- Portfolio: https://davidmachado-dev.vercel.app/

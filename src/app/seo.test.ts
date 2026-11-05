@@ -47,7 +47,7 @@ describe("static SEO routes", () => {
 			"/",
 			"/projects",
 			"/projects/zentric",
-			"/projects/leaseflow",
+			"/projects/faroo",
 			"/projects/retail-analytics",
 			"/gallery",
 			"/about",

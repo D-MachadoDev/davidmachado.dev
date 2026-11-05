@@ -58,7 +58,6 @@ describe("featured projects", () => {
 	it("does not carry retired or unverifiable claims", () => {
 		const payload = JSON.stringify(projects).toLowerCase();
 		const retired = [
-			"faro",
 			"virtualized",
 			"redis",
 			"cloud architect",

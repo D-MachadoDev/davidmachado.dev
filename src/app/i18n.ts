@@ -61,9 +61,6 @@ export function detectLanguageFrom(browserLanguage: string | undefined): Languag
 	return "en";
 }
 
-<<<<<<< Updated upstream
-const translations = {
-=======
 export function detectLanguage(): Language {
 	const stored = readStoredLanguage();
 	if (stored) return stored;
@@ -73,8 +70,12 @@ export function detectLanguage(): Language {
 }
 
 export const translations = {
->>>>>>> Stashed changes
 	en: {
+		"meta.title":
+			"David Machado — Backend Software Engineer (.NET & TypeScript)",
+		"meta.description":
+			"Backend software engineer in Medellín, Colombia. .NET/C# and TypeScript, hexagonal architecture, PostgreSQL, Docker, and automated tests. Open-source work with public repositories.",
+
 		"nav.work": "Work",
 		"nav.about": "About",
 		"nav.experience": "Experience",
@@ -92,38 +93,30 @@ export const translations = {
 
 		"hero.available": "Available for opportunities",
 		"hero.availableShort": "Available",
-		"hero.subtitle1": "Backend & Software Engineer",
-		"hero.subtitle2": ".NET / C# & Clean Architecture",
-		"hero.subtitle3": "Full-Stack Web Developer",
-		"hero.subtitle4": "PostgreSQL & Transactional APIs",
-		"hero.descPre": "Building robust transactional systems at the intersection of ",
-		"hero.descCloud": "backend architecture",
-		"hero.descMiddle": ", ",
-		"hero.descDistributed": "relational databases",
-		"hero.descAnd": ", and ",
-		"hero.descDX": "modern web engineering",
+		"hero.subtitle1": "Backend Software Engineer",
+		"hero.subtitle2": "I design systems, not just endpoints",
+		"hero.subtitle3": ".NET · TypeScript · PostgreSQL",
+		"hero.subtitle4": "Documented, tested, handed over",
+		"hero.descPre": "I turn ",
+		"hero.descCloud": "messy business rules",
+		"hero.descMiddle": " into ",
+		"hero.descDistributed": "software a team can trust",
+		"hero.descAnd": ", and leave ",
+		"hero.descDX": "tests, docs, and decisions",
+		"hero.descPost": " behind so it stays that way.",
 		"hero.ctaWork": "View my work",
 		"hero.ctaContact": "Get in touch",
-		"hero.scroll": "Scroll",
 
-		"projects.badge": "FEATURED WORK",
-		"projects.heading": "Engineering initiatives &",
-		"projects.headingAccent": "active systems",
+		"projects.badge": "SELECTED WORK",
+		"projects.heading": "Selected work &",
+		"projects.headingAccent": "verifiable systems",
 		"projects.subtitle":
-			"Transactional backend architectures, Clean Architecture APIs, and responsive web applications built for reliability.",
+			"Backend and data systems with public repositories, documented decisions, and test suites you can inspect.",
 		"projects.viewAll": "View all repositories on GitHub",
-		"projects.demo": "Live Demo",
-		"projects.inDevelopment": "In Construction",
-		"projects.source": "GitHub Repository",
-		"projects.details": "Architecture & Details",
+		"projects.demo": "Live demo",
+		"projects.source": "GitHub repository",
+		"projects.details": "Architecture & details",
 		"projects.closeModal": "Close modal (Esc)",
-<<<<<<< Updated upstream
-		"projects.countdownDays": "Days",
-		"projects.countdownHours": "Hours",
-		"projects.countdownMins": "Mins",
-		"projects.countdownSecs": "Secs",
-		"projects.launchEstimated": "Estimated Delivery",
-=======
 		"projects.statusOpenSource": "Open source",
 		"projects.statusPrivate": "Private case study",
 		"projects.privateCase": "Private case study",
@@ -137,91 +130,85 @@ export const translations = {
 		"projects.resumeRotation": "Resume automatic rotation",
 		"projects.previousProject": "Previous project",
 		"projects.nextProject": "Next project",
->>>>>>> Stashed changes
 
 		"about.badge": "ABOUT ME",
-		"about.heading": "First principles meet",
-		"about.headingAccent": "pragmatic engineering",
+		"about.heading": "I write code",
+		"about.headingAccent": "so other people can keep it",
 		"about.p1":
-<<<<<<< Updated upstream
-			"I am a software engineer approaching development from first principles. Currently in my 5th semester of Software Engineering at Universidad Pascual Bravo, I focus on building robust backend systems, relational schemas, and modern web applications that solve real-world problems.",
-		"about.p2pre": "My technical foundation centers on",
-		"about.p2cloud": "clean backend architecture",
-		"about.p2distributed": "relational database design",
-		"about.p2and": ", and",
-		"about.p2dx": "responsive web interfaces",
-=======
 			"I am a software engineering student at Universidad Pascual Bravo. What I enjoy most is the part of the job many people skip: turning an ambiguous business rule into something a team can build, test, and explain.",
 		"about.p2pre": "My foundation is ",
 		"about.p2cloud": "hexagonal architecture",
 		"about.p2distributed": "relational data modeling",
 		"about.p2and": ", and ",
 		"about.p2dx": "TypeScript and .NET",
->>>>>>> Stashed changes
 		"about.p2post":
-			". I believe sustainable software is built through clear separation of concerns, testable code, and pragmatic design decisions.",
+			". I care about explicit invariants, deterministic behavior, and tests that describe the domain.",
 		"about.p3":
-			"From implementing layered domain models in ASP.NET Core and structuring transactional ledgers in PostgreSQL, to crafting fluid user interfaces in React 18 and containerizing services with Docker—I build systems with verifiable engineering discipline.",
+			"I have built and documented a .NET marketplace core with 592 automated tests and an open-source lease billing engine in TypeScript. I am looking for a backend team where I can own small services, review code, and learn from production systems, and where clear communication matters as much as clean code.",
 		"about.competencies": "Core Competencies",
 		"about.skillCloud": "Containers & Environment",
 		"about.skillLang": "Languages & Frameworks",
 		"about.skillData": "Databases & ORM",
 		"about.skillArch": "Architecture & Design",
 		"about.skillDevops": "Tools & Version Control",
-		"about.skillMethods": "Practices & Quality",
-		"cert.badge": "CERTIFICATIONS",
-		"cert.heading": "Credentials & learning path",
-		"cert.subtitle": "Planned certifications that reinforce my backend, cloud, and data analytics profile.",
-		"cert.statusPlanned": "Planned",
-		"about.skillAI": "AI Integration & Automation",
-		"about.statProjects": "Engineered Systems",
-		"about.statArch": "Clean Architecture",
+		"about.skillMethods": "Testing & Quality",
+		"about.skillAI": "AI-assisted Engineering",
+		"about.workTitle": "How I work",
+		"about.workLede":
+			"The part of the job that does not show up in a repository.",
+		"about.work1Title": "Written communication",
+		"about.work1Desc":
+			"Decisions live in ADRs, READMEs, and docs, not in my head. A teammate should not need me to understand what I built.",
+		"about.work2Title": "Ownership",
+		"about.work2Desc":
+			"I take a problem from conversation to deployment: define the rule, build it, test it, and document it.",
+		"about.work3Title": "Self-directed learning",
+		"about.work3Desc":
+			"I learned .NET 10, DDD, CQRS, and hexagonal architecture while studying. Open source is where I test what I learn.",
+		"about.work4Title": "Collaboration",
+		"about.work4Desc":
+			"I share context early, ask for review before it is comfortable, and keep feedback about the code, not the person.",
+		"about.statProjects": "Featured Projects",
+		"about.statTests": "Automated Tests (Zentric)",
 		"about.statRepos": "Public Repositories",
-		"about.statStack": "Core Stack",
+		"about.statOpenSource": "Open-Source Systems",
+		"about.downloadCv": "Download CV",
 		"about.philosophy": "Software Engineering Philosophy",
 		"about.phil1Title": "First Principles",
-		"about.phil1Desc":
-			"Break down complex problems to their fundamental truths and build up from there.",
-		"about.phil2Title": "Scalability First",
-		"about.phil2Desc":
-			"Design systems that can grow without architectural rewrites.",
-		"about.phil3Title": "Developer Joy",
-		"about.phil3Desc":
-			"Great tools should make developers more productive and happier.",
+		"about.phil2Title": "Reliability First",
+		"about.phil3Title": "Evidence Over Claims",
 
 		"exp.badge": "EXPERIENCE",
 		"exp.heading": "Journey of",
 		"exp.headingAccent": "growth & impact",
 		"exp.subtitle":
-			"A timeline of professional initiatives, foundational education, and engineering projects shaping my software mindset.",
+			"A timeline of client work, open-source systems, and the education behind them.",
 		"exp.typeWork": "Experience",
 		"exp.typeEducation": "Education",
 		"exp.typeAchievement": "Achievement",
 		"exp.more": "More to come...",
 		"exp.workTitle": "Independent Software Developer",
-		"exp.workOrg": "Client Projects & Engineering",
+		"exp.workOrg": "Client projects & open source",
 		"exp.workPeriod": "2024 - Present",
 		"exp.workDesc":
-			"Architecting and developing full-stack web applications and transactional RESTful APIs. Designed Faro, an auditable property management platform with ASP.NET Core, PostgreSQL, and React, structuring lease lifecycles, payment reconciliations, and deterministic balance ledgers.",
+			"Building transactional systems for clients and open source. Zentric: .NET 10 marketplace core with Hexagonal Architecture, DDD, CQRS, PostgreSQL, Docker, and 592 automated tests. LeaseFlow: TypeScript lease billing engine with Express, SQLite, and a Vitest suite covering partial payments and reconciliation.",
 		"exp.eduTitle": "Software Engineering",
 		"exp.eduOrg": "Universidad Pascual Bravo",
 		"exp.eduPeriod": "2022 - Present",
 		"exp.eduDesc":
-<<<<<<< Updated upstream
-			"5th semester. Academic focus on object-oriented programming, software architecture, relational database theory, data structures, and operating systems.",
-=======
 			"Coursework in object-oriented programming, software architecture, relational databases, data structures, and operating systems.",
 		"exp.eduTag1": "Software Engineering",
 		"exp.eduTag2": "OOP & Algorithms",
 		"exp.eduTag3": "Databases",
->>>>>>> Stashed changes
 
 		"contact.badge": "GET IN TOUCH",
 		"contact.heading": "Let's build something",
-		"contact.headingAccent": "remarkable",
+		"contact.headingAccent": "reliable",
 		"contact.subtitle":
-			"Open to opportunities in cloud architecture, DevOps, and systems engineering. Also available for consulting and collaboration.",
-		"contact.formTitle": "Send a message",
+			"Open to backend and full-stack roles, and to open-source collaboration. Based in Medellín (UTC-5), working remotely.",
+		"contact.formTitle": "Start an email",
+		"contact.formHint":
+			"This opens your email app with the message prefilled. Nothing is sent from this page.",
 		"contact.labelName": "Name",
 		"contact.labelEmail": "Email",
 		"contact.labelMessage": "Message",
@@ -229,26 +216,19 @@ export const translations = {
 		"contact.placeholderEmail": "your@email.com",
 		"contact.placeholderMessage":
 			"Tell me about your project or opportunity...",
-		"contact.sending": "Sending...",
-		"contact.send": "Send message",
-		"contact.sent": "Message sent!",
-		"contact.sentSub": "I'll get back to you within 24 hours.",
-		"contact.basedIn": "Based in",
+		"contact.openDraft": "Open email draft",
+		"contact.draftReady": "Email draft ready",
+		"contact.draftReadySub":
+			"Your email app should be open. If it did not open, write to the address below or copy it manually.",
+		"contact.editDraft": "Edit message",
+		"contact.email": "Email",
 		"contact.location": "Medellín, Colombia",
 		"contact.availability": "Availability",
-		"contact.availStatus": "Open for opportunities",
+		"contact.availStatus": "Open to backend roles",
 		"contact.timezone": "Time Zone",
-		"contact.sendEmail": "Send me an email",
-		"contact.emailResponse": "Typically responds within 24 hours",
 		"contact.copyright": "© 2026 David Alexander Machado Alzate",
-		"contact.tagline": "Designed for clarity. Engineered for performance.",
+		"contact.tagline": "Designed for clarity. Engineered for evidence.",
 		"contact.builtWith":
-<<<<<<< Updated upstream
-			"Built with React, TypeScript, Motion, and Tailwind CSS",
-		"contact.github": "GitHub",
-		"contact.linkedin": "LinkedIn",
-		"contact.twitter": "X / Twitter",
-=======
 			"Built with React, TypeScript, and Tailwind CSS. Tested with Vitest.",
 		"contact.github": "GitHub",
 		"contact.linkedin": "LinkedIn",
@@ -293,12 +273,18 @@ export const translations = {
 		"notFound.heading": "This page is not in the pond.",
 		"notFound.lede": "The link may be old, or the page moved.",
 		"notFound.cta": "Back to the pond",
->>>>>>> Stashed changes
 
 		"a11y.skipToContent": "Skip to content",
+		"a11y.mobileMenu": "Mobile navigation menu",
+		"a11y.backToTop": "Back to top",
 	},
 
 	es: {
+		"meta.title":
+			"David Machado — Ingeniero de Software Backend (.NET y TypeScript)",
+		"meta.description":
+			"Ingeniero de software backend en Medellín, Colombia. .NET/C# y TypeScript, arquitectura hexagonal, PostgreSQL, Docker y pruebas automatizadas. Trabajo open source con repositorios públicos.",
+
 		"nav.work": "Proyectos",
 		"nav.about": "Sobre mí",
 		"nav.experience": "Experiencia",
@@ -316,38 +302,30 @@ export const translations = {
 
 		"hero.available": "Disponible para oportunidades",
 		"hero.availableShort": "Disponible",
-		"hero.subtitle1": "Ingeniero de Software & Backend",
-		"hero.subtitle2": ".NET / C# & Clean Architecture",
-		"hero.subtitle3": "Desarrollador Web Full-Stack",
-		"hero.subtitle4": "PostgreSQL & APIs Transaccionales",
-		"hero.descPre": "Construyo software transaccional y robusto en la intersección de ",
-		"hero.descCloud": "arquitectura backend",
-		"hero.descMiddle": ", ",
-		"hero.descDistributed": "bases de datos relacionales",
-		"hero.descAnd": " y ",
-		"hero.descDX": "desarrollo web moderno",
+		"hero.subtitle1": "Ingeniero de Software Backend",
+		"hero.subtitle2": "Diseño sistemas, no solo endpoints",
+		"hero.subtitle3": ".NET · TypeScript · PostgreSQL",
+		"hero.subtitle4": "Documentado, probado, transferible",
+		"hero.descPre": "Convierto ",
+		"hero.descCloud": "reglas de negocio enredadas",
+		"hero.descMiddle": " en ",
+		"hero.descDistributed": "software en el que un equipo puede confiar",
+		"hero.descAnd": ", y dejo ",
+		"hero.descDX": "pruebas, documentación y decisiones",
+		"hero.descPost": " para que siga siéndolo.",
 		"hero.ctaWork": "Ver proyectos",
 		"hero.ctaContact": "Hablemos",
-		"hero.scroll": "Deslizar",
 
 		"projects.badge": "PROYECTOS DESTACADOS",
-		"projects.heading": "Iniciativas técnicas y",
-		"projects.headingAccent": "sistemas activos",
+		"projects.heading": "Trabajo seleccionado y",
+		"projects.headingAccent": "sistemas verificables",
 		"projects.subtitle":
-			"Arquitecturas backend transaccionales, APIs con Clean Architecture y aplicaciones web orientadas a la confiabilidad.",
+			"Sistemas backend y de datos con repositorios públicos, decisiones documentadas y suites de pruebas que puedes inspeccionar.",
 		"projects.viewAll": "Ver todos los repositorios en GitHub",
-		"projects.demo": "Demo en Vivo",
-		"projects.inDevelopment": "En Construcción",
+		"projects.demo": "Demo en vivo",
 		"projects.source": "Repositorio GitHub",
-		"projects.details": "Arquitectura y Detalles",
+		"projects.details": "Arquitectura y detalles",
 		"projects.closeModal": "Cerrar ventana (Esc)",
-<<<<<<< Updated upstream
-		"projects.countdownDays": "Días",
-		"projects.countdownHours": "Horas",
-		"projects.countdownMins": "Min",
-		"projects.countdownSecs": "Seg",
-		"projects.launchEstimated": "Entrega Estimada",
-=======
 		"projects.statusOpenSource": "Código abierto",
 		"projects.statusPrivate": "Caso privado",
 		"projects.privateCase": "Caso de estudio privado",
@@ -361,116 +339,103 @@ export const translations = {
 		"projects.resumeRotation": "Reanudar rotación automática",
 		"projects.previousProject": "Proyecto anterior",
 		"projects.nextProject": "Siguiente proyecto",
->>>>>>> Stashed changes
 
 		"about.badge": "SOBRE MÍ",
-		"about.heading": "Primeros principios y",
-		"about.headingAccent": "ingeniería pragmática",
+		"about.heading": "Escribo código",
+		"about.headingAccent": "para que otros puedan mantenerlo",
 		"about.p1":
-<<<<<<< Updated upstream
-			"Soy un desarrollador de software que aborda la ingeniería desde los primeros principios. Actualmente en 5to semestre de Ingeniería de Software en la Universidad Pascual Bravo, me enfoco en construir sistemas backend robustos, esquemas relacionales sólidos y aplicaciones web modernas orientadas a resolver problemas reales.",
-		"about.p2pre": "Mi núcleo técnico se enfoca en",
-		"about.p2cloud": "arquitectura limpia de backend",
-		"about.p2distributed": "diseño relacional en bases de datos",
-		"about.p2and": " y ",
-		"about.p2dx": "desarrollo web responsivo",
-=======
 			"Soy estudiante de Ingeniería de Software en la Universidad Pascual Bravo. Lo que más disfruto es la parte del trabajo que muchos saltan: convertir una regla de negocio ambigua en algo que un equipo pueda construir, probar y explicar.",
 		"about.p2pre": "Mi base es la ",
 		"about.p2cloud": "arquitectura hexagonal",
 		"about.p2distributed": "modelado relacional",
 		"about.p2and": ", además de ",
 		"about.p2dx": "TypeScript y .NET",
->>>>>>> Stashed changes
 		"about.p2post":
-			". Creo que el software sostenible se construye mediante una separación clara de responsabilidades, código testeable y decisiones de diseño pragmáticas.",
+			". Me importan las invariantes explícitas, el comportamiento determinista y las pruebas que describen el dominio.",
 		"about.p3":
-			"Desde modelar reglas de negocio con Clean Architecture en ASP.NET Core y estructurar balances contables transaccionales en PostgreSQL, hasta crear interfaces de usuario fluidas en React 18 y contenerizar servicios con Docker — construyo con disciplina de ingeniería verificable.",
+			"He construido y documentado un núcleo de marketplace en .NET con 592 pruebas automatizadas y un motor de facturación de arriendos open source en TypeScript. Busco un equipo backend donde pueda hacerme cargo de servicios pequeños, revisar código y aprender de sistemas en producción, y donde la comunicación clara importe tanto como el código limpio.",
 		"about.competencies": "Competencias Principales",
 		"about.skillCloud": "Contenedores y Entorno",
 		"about.skillLang": "Lenguajes y Frameworks",
 		"about.skillData": "Bases de Datos y ORM",
 		"about.skillArch": "Arquitectura y Diseño",
 		"about.skillDevops": "Herramientas y Control de Versiones",
-		"about.skillMethods": "Prácticas y Calidad",
-		"cert.badge": "CERTIFICACIONES",
-		"cert.heading": "Credenciales y ruta de aprendizaje",
-		"cert.subtitle": "Certificaciones planificadas que refuerzan mi perfil backend, cloud y análisis de datos.",
-		"cert.statusPlanned": "Planificada",
-		"about.skillAI": "Integración de IA y Automatización",
-		"about.statProjects": "Sistemas Desarrollados",
-		"about.statArch": "Clean Architecture",
+		"about.skillMethods": "Pruebas y Calidad",
+		"about.skillAI": "Ingeniería asistida por IA",
+		"about.workTitle": "Cómo trabajo",
+		"about.workLede":
+			"La parte del trabajo que no aparece en un repositorio.",
+		"about.work1Title": "Comunicación escrita",
+		"about.work1Desc":
+			"Las decisiones viven en ADRs, READMEs y documentación, no en mi cabeza. Un compañero no debería necesitarme para entender lo que construí.",
+		"about.work2Title": "Responsabilidad",
+		"about.work2Desc":
+			"Llevo un problema de la conversación al despliegue: definir la regla, construirla, probarla y documentarla.",
+		"about.work3Title": "Aprendizaje autónomo",
+		"about.work3Desc":
+			"Aprendí .NET 10, DDD, CQRS y arquitectura hexagonal mientras estudiaba. El código abierto es donde pruebo lo que aprendo.",
+		"about.work4Title": "Colaboración",
+		"about.work4Desc":
+			"Comparto contexto temprano, pido revisión antes de que sea cómodo y mantengo el feedback sobre el código, no sobre la persona.",
+		"about.statProjects": "Proyectos Destacados",
+		"about.statTests": "Pruebas Automatizadas (Zentric)",
 		"about.statRepos": "Repositorios Públicos",
-		"about.statStack": "Stack Principal",
+		"about.statOpenSource": "Sistemas Open Source",
+		"about.downloadCv": "Descargar CV",
 		"about.philosophy": "Filosofía de Ingeniería de Software",
 		"about.phil1Title": "Primeros Principios",
-		"about.phil1Desc":
-			"Descomponer problemas complejos hasta sus verdades fundamentales y construir desde ahí.",
-		"about.phil2Title": "Escalabilidad Primero",
-		"about.phil2Desc":
-			"Diseñar sistemas que puedan crecer sin reescrituras arquitectónicas.",
-		"about.phil3Title": "Felicidad del Desarrollador",
-		"about.phil3Desc":
-			"Las grandes herramientas deben hacer a los desarrolladores más productivos y felices.",
+		"about.phil2Title": "Confiabilidad Primero",
+		"about.phil3Title": "Evidencia Sobre Promesas",
 
 		"exp.badge": "EXPERIENCIA",
 		"exp.heading": "Trayectoria de",
 		"exp.headingAccent": "crecimiento e impacto",
 		"exp.subtitle":
-			"Línea de tiempo de iniciativas profesionales, formación académica y proyectos que forjan mi mentalidad en ingeniería.",
+			"Una línea de tiempo de trabajo con clientes, sistemas open source y la formación detrás.",
 		"exp.typeWork": "Experiencia",
 		"exp.typeEducation": "Educación",
 		"exp.typeAchievement": "Logro",
 		"exp.more": "Más por venir...",
 		"exp.workTitle": "Desarrollador de Software Independiente",
-		"exp.workOrg": "Proyectos de Ingeniería & Clientes",
+		"exp.workOrg": "Proyectos de clientes y código abierto",
 		"exp.workPeriod": "2024 - Presente",
 		"exp.workDesc":
-			"Diseño y desarrollo de sistemas web full-stack y APIs RESTful transaccionales. Creador de Faro, plataforma de gestión inmobiliaria con ASP.NET Core, PostgreSQL y React, automatizando contratos de arriendo, conciliación contable y liquidación determinista de mora.",
+			"Construyo sistemas transaccionales para clientes y para código abierto. Zentric: núcleo de marketplace en .NET 10 con Arquitectura Hexagonal, DDD, CQRS, PostgreSQL, Docker y 592 pruebas automatizadas. LeaseFlow: motor de facturación de arriendos en TypeScript con Express, SQLite y una suite de Vitest que cubre pagos parciales y conciliación.",
 		"exp.eduTitle": "Ingeniería de Software",
 		"exp.eduOrg": "Universidad Pascual Bravo",
 		"exp.eduPeriod": "2022 - Presente",
 		"exp.eduDesc":
-<<<<<<< Updated upstream
-			"5to semestre. Formación académica orientada a programación orientada a objetos, arquitectura de software, bases de datos relacionales, estructuras de datos y sistemas operativos.",
-=======
 			"Cursos de programación orientada a objetos, arquitectura de software, bases de datos relacionales, estructuras de datos y sistemas operativos.",
 		"exp.eduTag1": "Ingeniería de Software",
 		"exp.eduTag2": "POO y Algoritmos",
 		"exp.eduTag3": "Bases de Datos",
->>>>>>> Stashed changes
 
 		"contact.badge": "CONTACTO",
 		"contact.heading": "Construyamos algo",
-		"contact.headingAccent": "juntos",
+		"contact.headingAccent": "confiable",
 		"contact.subtitle":
-			"Abierto a oportunidades en arquitectura cloud, DevOps e ingeniería de sistemas. También disponible para consultoría y colaboración.",
-		"contact.formTitle": "Enviar un mensaje",
+			"Abierto a roles backend y full-stack, y a colaboración en código abierto. Ubicado en Medellín (UTC-5), trabajo en remoto.",
+		"contact.formTitle": "Empezar un correo",
+		"contact.formHint":
+			"Esto abre tu aplicación de correo con el mensaje precargado. Nada se envía desde esta página.",
 		"contact.labelName": "Nombre",
 		"contact.labelEmail": "Correo",
 		"contact.labelMessage": "Mensaje",
 		"contact.placeholderName": "Tu nombre",
 		"contact.placeholderEmail": "tu@correo.com",
-		"contact.placeholderMessage": "Cuéntame sobre tu proyecto u oportunidad...",
-		"contact.sending": "Enviando...",
-		"contact.send": "Enviar mensaje",
-		"contact.sent": "¡Mensaje enviado!",
-		"contact.sentSub": "Te responderé dentro de 24 horas.",
-		"contact.basedIn": "Ubicación",
+		"contact.placeholderMessage":
+			"Cuéntame sobre tu proyecto u oportunidad...",
+		"contact.openDraft": "Abrir borrador de correo",
+		"contact.draftReady": "Borrador de correo listo",
+		"contact.draftReadySub":
+			"Tu aplicación de correo debería estar abierta. Si no se abrió, escribe a la dirección de abajo o cópiala manualmente.",
+		"contact.editDraft": "Editar mensaje",
+		"contact.email": "Correo",
 		"contact.location": "Medellín, Colombia",
 		"contact.availability": "Disponibilidad",
-		"contact.availStatus": "Abierto a oportunidades",
+		"contact.availStatus": "Abierto a roles backend",
 		"contact.timezone": "Zona Horaria",
-		"contact.sendEmail": "Envíame un correo",
-		"contact.emailResponse": "Generalmente responde en 24 horas",
 		"contact.copyright": "© 2026 David Alexander Machado Alzate",
-<<<<<<< Updated upstream
-		"contact.tagline": "Diseñado con claridad. Construido para rendimiento.",
-		"contact.builtWith": "Hecho con React, TypeScript, Motion y Tailwind CSS",
-		"contact.github": "GitHub",
-		"contact.linkedin": "LinkedIn",
-		"contact.twitter": "X / Twitter",
-=======
 		"contact.tagline": "Diseñado con claridad. Construido con evidencia.",
 		"contact.builtWith":
 			"Hecho con React, TypeScript y Tailwind CSS. Probado con Vitest.",
@@ -517,12 +482,18 @@ export const translations = {
 		"notFound.heading": "Esta página no está en el estanque.",
 		"notFound.lede": "El enlace puede ser viejo, o la página se movió.",
 		"notFound.cta": "Volver al estanque",
->>>>>>> Stashed changes
 
 		"a11y.skipToContent": "Ir al contenido",
+		"a11y.mobileMenu": "Menú de navegación móvil",
+		"a11y.backToTop": "Volver arriba",
 	},
 
 	pt: {
+		"meta.title":
+			"David Machado — Engenheiro de Software Backend (.NET e TypeScript)",
+		"meta.description":
+			"Engenheiro de software backend em Medellín, Colômbia. .NET/C# e TypeScript, arquitetura hexagonal, PostgreSQL, Docker e testes automatizados. Trabalho open source com repositórios públicos.",
+
 		"nav.work": "Projetos",
 		"nav.about": "Sobre",
 		"nav.experience": "Experiência",
@@ -540,38 +511,30 @@ export const translations = {
 
 		"hero.available": "Disponível para oportunidades",
 		"hero.availableShort": "Disponível",
-		"hero.subtitle1": "Engenheiro de Software & Backend",
-		"hero.subtitle2": ".NET / C# & Clean Architecture",
-		"hero.subtitle3": "Desenvolvedor Web Full-Stack",
-		"hero.subtitle4": "PostgreSQL & APIs Transacionais",
-		"hero.descPre": "Construindo software transacional e robusto na intersecção de ",
-		"hero.descCloud": "arquitetura backend",
-		"hero.descMiddle": ", ",
-		"hero.descDistributed": "bancos de dados relacionais",
-		"hero.descAnd": " e ",
-		"hero.descDX": "desenvolvimento web moderno",
+		"hero.subtitle1": "Engenheiro de Software Backend",
+		"hero.subtitle2": "Projeto sistemas, não só endpoints",
+		"hero.subtitle3": ".NET · TypeScript · PostgreSQL",
+		"hero.subtitle4": "Documentado, testado, transferível",
+		"hero.descPre": "Transformo ",
+		"hero.descCloud": "regras de negócio confusas",
+		"hero.descMiddle": " em ",
+		"hero.descDistributed": "software em que o time pode confiar",
+		"hero.descAnd": ", e deixo ",
+		"hero.descDX": "testes, documentação e decisões",
+		"hero.descPost": " para que continue assim.",
 		"hero.ctaWork": "Ver meus projetos",
 		"hero.ctaContact": "Entre em contato",
-		"hero.scroll": "Rolar",
 
 		"projects.badge": "PROJETOS EM DESTAQUE",
-		"projects.heading": "Iniciativas técnicas e",
-		"projects.headingAccent": "sistemas ativos",
+		"projects.heading": "Trabalho selecionado e",
+		"projects.headingAccent": "sistemas verificáveis",
 		"projects.subtitle":
-			"Arquiteturas backend transacionais, APIs com Clean Architecture e aplicações web orientadas à confiabilidade.",
+			"Sistemas backend e de dados com repositórios públicos, decisões documentadas e suítes de testes que você pode inspecionar.",
 		"projects.viewAll": "Ver todos os repositórios no GitHub",
-		"projects.demo": "Demo ao Vivo",
-		"projects.inDevelopment": "Em Construção",
+		"projects.demo": "Demo ao vivo",
 		"projects.source": "Repositório GitHub",
-		"projects.details": "Arquitetura e Detalhes",
+		"projects.details": "Arquitetura e detalhes",
 		"projects.closeModal": "Fechar janela (Esc)",
-<<<<<<< Updated upstream
-		"projects.countdownDays": "Dias",
-		"projects.countdownHours": "Horas",
-		"projects.countdownMins": "Min",
-		"projects.countdownSecs": "Seg",
-		"projects.launchEstimated": "Entrega Estimada",
-=======
 		"projects.statusOpenSource": "Código aberto",
 		"projects.statusPrivate": "Estudo privado",
 		"projects.privateCase": "Estudo de caso privado",
@@ -585,91 +548,85 @@ export const translations = {
 		"projects.resumeRotation": "Retomar rotação automática",
 		"projects.previousProject": "Projeto anterior",
 		"projects.nextProject": "Próximo projeto",
->>>>>>> Stashed changes
 
 		"about.badge": "SOBRE MIM",
-		"about.heading": "Primeiros princípios e",
-		"about.headingAccent": "engenharia pragmática",
+		"about.heading": "Escrevo código",
+		"about.headingAccent": "para que outras pessoas possam mantê-lo",
 		"about.p1":
-<<<<<<< Updated upstream
-			"Sou um engenheiro de software que aborda o desenvolvimento a partir de primeiros princípios. Atualmente no 5º semestre de Engenharia de Software na Universidad Pascual Bravo, foco na construção de sistemas backend robustos, esquemas relacionais sólidos e aplicações web modernas que resolvem problemas reais.",
-		"about.p2pre": "Meu foco técnico está na intersecção de",
-		"about.p2cloud": "arquitetura limpa de backend",
-		"about.p2distributed": "design de bancos de dados relacionais",
-		"about.p2and": ", e",
-		"about.p2dx": "interfaces web modernas",
-=======
 			"Sou estudante de Engenharia de Software na Universidad Pascual Bravo. O que mais gosto é da parte do trabalho que muitos pulam: transformar uma regra de negócio ambígua em algo que o time possa construir, testar e explicar.",
 		"about.p2pre": "Minha base é a ",
 		"about.p2cloud": "arquitetura hexagonal",
 		"about.p2distributed": "modelagem relacional",
 		"about.p2and": ", além de ",
 		"about.p2dx": "TypeScript e .NET",
->>>>>>> Stashed changes
 		"about.p2post":
-			". Acredito que software sustentável é construído através de separação clara de responsabilidades, código testável e decisões pragmáticas.",
+			". Valorizo invariantes explícitas, comportamento determinístico e testes que descrevem o domínio.",
 		"about.p3":
-			"Desde a implementação de modelos de domínio em ASP.NET Core e estruturação de balanços transacionais no PostgreSQL, até a criação de interfaces fluidas em React 18 e orquestração de contêineres com Docker — construo com disciplina de engenharia verificável.",
+			"Construí e documentei um núcleo de marketplace em .NET com 592 testes automatizados e um motor de cobrança de aluguéis open source em TypeScript. Busco uma equipe backend onde possa assumir serviços pequenos, revisar código e aprender com sistemas em produção, e onde a comunicação clara importe tanto quanto o código limpo.",
 		"about.competencies": "Competências Principais",
 		"about.skillCloud": "Contêineres e Ambiente",
 		"about.skillLang": "Linguagens e Frameworks",
 		"about.skillData": "Bancos de Dados e ORM",
 		"about.skillArch": "Arquitetura e Design",
 		"about.skillDevops": "Ferramentas e Controle de Versão",
-		"about.skillMethods": "Práticas e Qualidade",
-		"cert.badge": "CERTIFICAÇÕES",
-		"cert.heading": "Credenciais e trilha de aprendizado",
-		"cert.subtitle": "Certificações planejadas que reforçam meu perfil backend, cloud e análise de dados.",
-		"cert.statusPlanned": "Planejada",
-		"about.skillAI": "Integração de IA e Automação",
-		"about.statProjects": "Sistemas Desenvolvidos",
-		"about.statArch": "Clean Architecture",
+		"about.skillMethods": "Testes e Qualidade",
+		"about.skillAI": "Engenharia assistida por IA",
+		"about.workTitle": "Como eu trabalho",
+		"about.workLede":
+			"A parte do trabalho que não aparece em um repositório.",
+		"about.work1Title": "Comunicação escrita",
+		"about.work1Desc":
+			"As decisões vivem em ADRs, READMEs e documentação, não na minha cabeça. Um colega não deveria precisar de mim para entender o que construí.",
+		"about.work2Title": "Responsabilidade",
+		"about.work2Desc":
+			"Levo um problema da conversa ao deploy: definir a regra, construir, testar e documentar.",
+		"about.work3Title": "Aprendizado autônomo",
+		"about.work3Desc":
+			"Aprendi .NET 10, DDD, CQRS e arquitetura hexagonal enquanto estudava. O código aberto é onde testo o que aprendo.",
+		"about.work4Title": "Colaboração",
+		"about.work4Desc":
+			"Compartilho contexto cedo, peço revisão antes de ser confortável e mantenho o feedback sobre o código, não sobre a pessoa.",
+		"about.statProjects": "Projetos em Destaque",
+		"about.statTests": "Testes Automatizados (Zentric)",
 		"about.statRepos": "Repositórios Públicos",
-		"about.statStack": "Stack Principal",
+		"about.statOpenSource": "Sistemas Open Source",
+		"about.downloadCv": "Baixar CV",
 		"about.philosophy": "Filosofia de Engenharia de Software",
 		"about.phil1Title": "Primeiros Princípios",
-		"about.phil1Desc":
-			"Decompor problemas complexos até suas verdades fundamentais e construir a partir daí.",
-		"about.phil2Title": "Escalabilidade Primeiro",
-		"about.phil2Desc":
-			"Projetar sistemas que podem crescer sem reescritas arquiteturais.",
-		"about.phil3Title": "Alegria do Desenvolvedor",
-		"about.phil3Desc":
-			"Grandes ferramentas devem tornar os desenvolvedores mais produtivos e felizes.",
+		"about.phil2Title": "Confiabilidade Primeiro",
+		"about.phil3Title": "Evidência Acima de Promessas",
 
 		"exp.badge": "EXPERIÊNCIA",
 		"exp.heading": "Jornada de",
 		"exp.headingAccent": "crescimento e impacto",
 		"exp.subtitle":
-			"Linha do tempo de iniciativas profissionais, formação acadêmica e projetos que moldaram minha mentalidade em engenharia.",
+			"Uma linha do tempo de trabalho com clientes, sistemas open source e a formação por trás.",
 		"exp.typeWork": "Experiência",
 		"exp.typeEducation": "Educação",
 		"exp.typeAchievement": "Conquista",
 		"exp.more": "Mais por vir...",
 		"exp.workTitle": "Desenvolvedor de Software Independente",
-		"exp.workOrg": "Projetos de Engenharia & Clientes",
+		"exp.workOrg": "Projetos de clientes e código aberto",
 		"exp.workPeriod": "2024 - Presente",
 		"exp.workDesc":
-			"Projeto e desenvolvimento de sistemas web full-stack e APIs RESTful transacionais. Criador do Faro, plataforma de gestão imobiliária com ASP.NET Core, PostgreSQL e React, automatizando contratos de locação, conciliação contábil e cálculos determinísticos.",
+			"Construo sistemas transacionais para clientes e para código aberto. Zentric: núcleo de marketplace em .NET 10 com Arquitetura Hexagonal, DDD, CQRS, PostgreSQL, Docker e 592 testes automatizados. LeaseFlow: motor de cobrança de aluguéis em TypeScript com Express, SQLite e uma suíte Vitest que cobre pagamentos parciais e conciliação.",
 		"exp.eduTitle": "Engenharia de Software",
 		"exp.eduOrg": "Universidad Pascual Bravo",
 		"exp.eduPeriod": "2022 - Presente",
 		"exp.eduDesc":
-<<<<<<< Updated upstream
-			"5º semestre. Foco acadêmico em programação orientada a objetos, arquitetura de software, bancos de dados relacionais, estruturas de dados e sistemas operacionais.",
-=======
 			"Disciplinas de programação orientada a objetos, arquitetura de software, bancos de dados relacionais, estruturas de dados e sistemas operacionais.",
 		"exp.eduTag1": "Engenharia de Software",
 		"exp.eduTag2": "POO e Algoritmos",
 		"exp.eduTag3": "Bancos de Dados",
->>>>>>> Stashed changes
 
 		"contact.badge": "ENTRE EM CONTATO",
 		"contact.heading": "Vamos construir algo",
-		"contact.headingAccent": "extraordinário",
+		"contact.headingAccent": "confiável",
 		"contact.subtitle":
-			"Aberto a oportunidades em arquitetura cloud, DevOps e engenharia de sistemas. Também disponível para consultoria e colaboração.",
-		"contact.formTitle": "Enviar uma mensagem",
+			"Aberto a vagas backend e full-stack, e a colaboração em código aberto. Baseado em Medellín (UTC-5), trabalho remotamente.",
+		"contact.formTitle": "Iniciar um email",
+		"contact.formHint":
+			"Isso abre seu aplicativo de email com a mensagem preenchida. Nada é enviado a partir desta página.",
 		"contact.labelName": "Nome",
 		"contact.labelEmail": "Email",
 		"contact.labelMessage": "Mensagem",
@@ -677,25 +634,17 @@ export const translations = {
 		"contact.placeholderEmail": "seu@email.com",
 		"contact.placeholderMessage":
 			"Conte-me sobre seu projeto ou oportunidade...",
-		"contact.sending": "Enviando...",
-		"contact.send": "Enviar mensagem",
-		"contact.sent": "Mensagem enviada!",
-		"contact.sentSub": "Responderei dentro de 24 horas.",
-		"contact.basedIn": "Localização",
+		"contact.openDraft": "Abrir rascunho de email",
+		"contact.draftReady": "Rascunho de email pronto",
+		"contact.draftReadySub":
+			"Seu aplicativo de email deve estar aberto. Se não abriu, escreva para o endereço abaixo ou copie manualmente.",
+		"contact.editDraft": "Editar mensagem",
+		"contact.email": "Email",
 		"contact.location": "Medellín, Colômbia",
 		"contact.availability": "Disponibilidade",
-		"contact.availStatus": "Aberto a oportunidades",
+		"contact.availStatus": "Aberto a vagas backend",
 		"contact.timezone": "Fuso Horário",
-		"contact.sendEmail": "Envie-me um email",
-		"contact.emailResponse": "Geralmente responde em 24 horas",
 		"contact.copyright": "© 2026 David Alexander Machado Alzate",
-<<<<<<< Updated upstream
-		"contact.tagline": "Projetado com clareza. Construído para performance.",
-		"contact.builtWith": "Feito com React, TypeScript, Motion e Tailwind CSS",
-		"contact.github": "GitHub",
-		"contact.linkedin": "LinkedIn",
-		"contact.twitter": "X / Twitter",
-=======
 		"contact.tagline": "Projetado com clareza. Construído com evidência.",
 		"contact.builtWith":
 			"Feito com React, TypeScript e Tailwind CSS. Testado com Vitest.",
@@ -742,9 +691,10 @@ export const translations = {
 		"notFound.heading": "Esta página não está no lago.",
 		"notFound.lede": "O link pode ser antigo, ou a página mudou.",
 		"notFound.cta": "Voltar ao lago",
->>>>>>> Stashed changes
 
 		"a11y.skipToContent": "Ir para o conteúdo",
+		"a11y.mobileMenu": "Menu de navegação móvel",
+		"a11y.backToTop": "Voltar ao topo",
 	},
 } as const;
 
