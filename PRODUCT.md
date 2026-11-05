@@ -21,9 +21,19 @@ Honest semi-senior positioning backed by verified experience, multilingual conte
 - Keep content and stack claims aligned with verified experience.
 
 ## Stack
+<<<<<<< Updated upstream
 React 18, TypeScript, Vite 6, Tailwind CSS 4, Motion, React Router 7. Deployed as a static site at https://davidmachado.dev/.
 
 ## Assets
 - CV PDF at `/assets/cv/david-machado-cv.pdf`
 - Open Graph image at `/og-image.png`
+=======
+React 18, TypeScript, Vite 6, Tailwind CSS 4. Built as a static site with
+route-specific HTML metadata and deployed on Vercel at
+https://davidmachado-dev.vercel.app/.
+
+## Assets
+- CV PDF at `/assets/cv/david-machado-cv.pdf` (source: `scripts/cv-template.html`)
+- Open Graph image at `/og-image-v2.png`
+>>>>>>> Stashed changes
 - Favicon and apple-touch icon (inline SVG)

@@ -16,14 +16,64 @@ export function getNextLanguage(current: Language): Language {
 	return languageOrder[(index + 1) % languageOrder.length];
 }
 
-export function detectLanguage(): Language {
-	const browserLang = navigator.language?.toLowerCase() ?? "";
-	if (browserLang.startsWith("es")) return "es";
-	if (browserLang.startsWith("pt")) return "pt";
+export const LANGUAGE_STORAGE_KEY = "davidmachado.language";
+
+export function isLanguage(value: string | null): value is Language {
+	return value === "en" || value === "es" || value === "pt";
+}
+
+function getBrowserStorage(): Storage | null {
+	if (typeof window === "undefined") return null;
+	try {
+		return window.localStorage;
+	} catch {
+		// Storage can be unavailable in private browsing or locked-down embeds.
+		return null;
+	}
+}
+
+export function readStoredLanguage(
+	storage: Pick<Storage, "getItem"> | null = getBrowserStorage(),
+): Language | null {
+	try {
+		const value = storage?.getItem(LANGUAGE_STORAGE_KEY) ?? null;
+		return isLanguage(value) ? value : null;
+	} catch {
+		return null;
+	}
+}
+
+export function persistLanguage(
+	language: Language,
+	storage: Pick<Storage, "setItem"> | null = getBrowserStorage(),
+): void {
+	try {
+		storage?.setItem(LANGUAGE_STORAGE_KEY, language);
+	} catch {
+		// A blocked storage write must not break language switching.
+	}
+}
+
+export function detectLanguageFrom(browserLanguage: string | undefined): Language {
+	const normalized = browserLanguage?.toLowerCase() ?? "";
+	if (normalized.startsWith("es")) return "es";
+	if (normalized.startsWith("pt")) return "pt";
 	return "en";
 }
 
+<<<<<<< Updated upstream
 const translations = {
+=======
+export function detectLanguage(): Language {
+	const stored = readStoredLanguage();
+	if (stored) return stored;
+	return detectLanguageFrom(
+		typeof navigator === "undefined" ? undefined : navigator.language,
+	);
+}
+
+export const translations = {
+>>>>>>> Stashed changes
 	en: {
 		"nav.work": "Work",
 		"nav.about": "About",
@@ -33,6 +83,7 @@ const translations = {
 		"nav.openMenu": "Open menu",
 		"nav.closeMenu": "Close menu",
 		"nav.language": "Language",
+		"nav.theme": "Theme",
 		"nav.translateSite": "Translate site",
 
 		"mobile.location": "Location",
@@ -66,22 +117,47 @@ const translations = {
 		"projects.source": "GitHub Repository",
 		"projects.details": "Architecture & Details",
 		"projects.closeModal": "Close modal (Esc)",
+<<<<<<< Updated upstream
 		"projects.countdownDays": "Days",
 		"projects.countdownHours": "Hours",
 		"projects.countdownMins": "Mins",
 		"projects.countdownSecs": "Secs",
 		"projects.launchEstimated": "Estimated Delivery",
+=======
+		"projects.statusOpenSource": "Open source",
+		"projects.statusPrivate": "Private case study",
+		"projects.privateCase": "Private case study",
+		"projects.openRepo": "Open repository",
+		"projects.requestWalkthrough": "Request walkthrough",
+		"projects.overview": "Project overview",
+		"projects.decisions": "Key technical decisions",
+		"projects.evidence": "Engineering evidence",
+		"projects.stack": "Stack",
+		"projects.pauseRotation": "Pause automatic rotation",
+		"projects.resumeRotation": "Resume automatic rotation",
+		"projects.previousProject": "Previous project",
+		"projects.nextProject": "Next project",
+>>>>>>> Stashed changes
 
 		"about.badge": "ABOUT ME",
 		"about.heading": "First principles meet",
 		"about.headingAccent": "pragmatic engineering",
 		"about.p1":
+<<<<<<< Updated upstream
 			"I am a software engineer approaching development from first principles. Currently in my 5th semester of Software Engineering at Universidad Pascual Bravo, I focus on building robust backend systems, relational schemas, and modern web applications that solve real-world problems.",
 		"about.p2pre": "My technical foundation centers on",
 		"about.p2cloud": "clean backend architecture",
 		"about.p2distributed": "relational database design",
 		"about.p2and": ", and",
 		"about.p2dx": "responsive web interfaces",
+=======
+			"I am a software engineering student at Universidad Pascual Bravo. What I enjoy most is the part of the job many people skip: turning an ambiguous business rule into something a team can build, test, and explain.",
+		"about.p2pre": "My foundation is ",
+		"about.p2cloud": "hexagonal architecture",
+		"about.p2distributed": "relational data modeling",
+		"about.p2and": ", and ",
+		"about.p2dx": "TypeScript and .NET",
+>>>>>>> Stashed changes
 		"about.p2post":
 			". I believe sustainable software is built through clear separation of concerns, testable code, and pragmatic design decisions.",
 		"about.p3":
@@ -131,7 +207,14 @@ const translations = {
 		"exp.eduOrg": "Universidad Pascual Bravo",
 		"exp.eduPeriod": "2022 - Present",
 		"exp.eduDesc":
+<<<<<<< Updated upstream
 			"5th semester. Academic focus on object-oriented programming, software architecture, relational database theory, data structures, and operating systems.",
+=======
+			"Coursework in object-oriented programming, software architecture, relational databases, data structures, and operating systems.",
+		"exp.eduTag1": "Software Engineering",
+		"exp.eduTag2": "OOP & Algorithms",
+		"exp.eduTag3": "Databases",
+>>>>>>> Stashed changes
 
 		"contact.badge": "GET IN TOUCH",
 		"contact.heading": "Let's build something",
@@ -160,10 +243,57 @@ const translations = {
 		"contact.copyright": "© 2026 David Alexander Machado Alzate",
 		"contact.tagline": "Designed for clarity. Engineered for performance.",
 		"contact.builtWith":
+<<<<<<< Updated upstream
 			"Built with React, TypeScript, Motion, and Tailwind CSS",
 		"contact.github": "GitHub",
 		"contact.linkedin": "LinkedIn",
 		"contact.twitter": "X / Twitter",
+=======
+			"Built with React, TypeScript, and Tailwind CSS. Tested with Vitest.",
+		"contact.github": "GitHub",
+		"contact.linkedin": "LinkedIn",
+
+		"meta.projects": "Projects — David Machado",
+		"meta.gallery": "Gallery — David Machado",
+		"meta.about": "About — David Machado",
+		"nav.pond": "pond",
+		"nav.projects": "projects",
+		"nav.gallery": "gallery",
+		"nav.sayHi": "say hi",
+		"projects.viewCase": "view project",
+		"projects.scroll": "scroll",
+		"projects.allRepos": "all repositories",
+		"projects.allReposLede": "The rest of the public work lives on GitHub.",
+		"projects.back": "all projects",
+		"projects.next": "next project",
+		"projects.caseStudy": "case study",
+		"projects.year": "Year",
+		"projects.role": "Role",
+		"projects.status": "Status",
+		"projects.links": "Links",
+		"projects.roleValue": "Backend engineering, architecture, tests",
+		"projects.notFound": "This project does not exist.",
+		"gallery.badge": "GALLERY",
+		"gallery.heading": "Certifications & credentials",
+		"gallery.lede":
+			"Credentials I am studying for or have earned, with the honest status of each one. No badges I have not earned.",
+		"gallery.credentials": "credentials",
+		"gallery.status": "in progress",
+		"gallery.statusInProgress": "in progress",
+		"gallery.statusIssued": "issued",
+		"gallery.credential": "verify credential",
+		"gallery.note":
+			"Issued credentials will link to their verification page when available.",
+		"about.education": "Education",
+		"about.educationValue":
+			"Software Engineering, Universidad Pascual Bravo",
+		"about.educationMeta": "2022 — present",
+		"about.contactTitle": "Let's build something reliable",
+		"notFound.badge": "404",
+		"notFound.heading": "This page is not in the pond.",
+		"notFound.lede": "The link may be old, or the page moved.",
+		"notFound.cta": "Back to the pond",
+>>>>>>> Stashed changes
 
 		"a11y.skipToContent": "Skip to content",
 	},
@@ -177,6 +307,7 @@ const translations = {
 		"nav.openMenu": "Abrir menú",
 		"nav.closeMenu": "Cerrar menú",
 		"nav.language": "Idioma",
+		"nav.theme": "Tema",
 		"nav.translateSite": "Traducir sitio",
 
 		"mobile.location": "Ubicación",
@@ -210,22 +341,47 @@ const translations = {
 		"projects.source": "Repositorio GitHub",
 		"projects.details": "Arquitectura y Detalles",
 		"projects.closeModal": "Cerrar ventana (Esc)",
+<<<<<<< Updated upstream
 		"projects.countdownDays": "Días",
 		"projects.countdownHours": "Horas",
 		"projects.countdownMins": "Min",
 		"projects.countdownSecs": "Seg",
 		"projects.launchEstimated": "Entrega Estimada",
+=======
+		"projects.statusOpenSource": "Código abierto",
+		"projects.statusPrivate": "Caso privado",
+		"projects.privateCase": "Caso de estudio privado",
+		"projects.openRepo": "Abrir repositorio",
+		"projects.requestWalkthrough": "Solicitar recorrido",
+		"projects.overview": "Resumen del proyecto",
+		"projects.decisions": "Decisiones técnicas clave",
+		"projects.evidence": "Evidencia de ingeniería",
+		"projects.stack": "Stack",
+		"projects.pauseRotation": "Pausar rotación automática",
+		"projects.resumeRotation": "Reanudar rotación automática",
+		"projects.previousProject": "Proyecto anterior",
+		"projects.nextProject": "Siguiente proyecto",
+>>>>>>> Stashed changes
 
 		"about.badge": "SOBRE MÍ",
 		"about.heading": "Primeros principios y",
 		"about.headingAccent": "ingeniería pragmática",
 		"about.p1":
+<<<<<<< Updated upstream
 			"Soy un desarrollador de software que aborda la ingeniería desde los primeros principios. Actualmente en 5to semestre de Ingeniería de Software en la Universidad Pascual Bravo, me enfoco en construir sistemas backend robustos, esquemas relacionales sólidos y aplicaciones web modernas orientadas a resolver problemas reales.",
 		"about.p2pre": "Mi núcleo técnico se enfoca en",
 		"about.p2cloud": "arquitectura limpia de backend",
 		"about.p2distributed": "diseño relacional en bases de datos",
 		"about.p2and": " y ",
 		"about.p2dx": "desarrollo web responsivo",
+=======
+			"Soy estudiante de Ingeniería de Software en la Universidad Pascual Bravo. Lo que más disfruto es la parte del trabajo que muchos saltan: convertir una regla de negocio ambigua en algo que un equipo pueda construir, probar y explicar.",
+		"about.p2pre": "Mi base es la ",
+		"about.p2cloud": "arquitectura hexagonal",
+		"about.p2distributed": "modelado relacional",
+		"about.p2and": ", además de ",
+		"about.p2dx": "TypeScript y .NET",
+>>>>>>> Stashed changes
 		"about.p2post":
 			". Creo que el software sostenible se construye mediante una separación clara de responsabilidades, código testeable y decisiones de diseño pragmáticas.",
 		"about.p3":
@@ -275,7 +431,14 @@ const translations = {
 		"exp.eduOrg": "Universidad Pascual Bravo",
 		"exp.eduPeriod": "2022 - Presente",
 		"exp.eduDesc":
+<<<<<<< Updated upstream
 			"5to semestre. Formación académica orientada a programación orientada a objetos, arquitectura de software, bases de datos relacionales, estructuras de datos y sistemas operativos.",
+=======
+			"Cursos de programación orientada a objetos, arquitectura de software, bases de datos relacionales, estructuras de datos y sistemas operativos.",
+		"exp.eduTag1": "Ingeniería de Software",
+		"exp.eduTag2": "POO y Algoritmos",
+		"exp.eduTag3": "Bases de Datos",
+>>>>>>> Stashed changes
 
 		"contact.badge": "CONTACTO",
 		"contact.heading": "Construyamos algo",
@@ -301,11 +464,60 @@ const translations = {
 		"contact.sendEmail": "Envíame un correo",
 		"contact.emailResponse": "Generalmente responde en 24 horas",
 		"contact.copyright": "© 2026 David Alexander Machado Alzate",
+<<<<<<< Updated upstream
 		"contact.tagline": "Diseñado con claridad. Construido para rendimiento.",
 		"contact.builtWith": "Hecho con React, TypeScript, Motion y Tailwind CSS",
 		"contact.github": "GitHub",
 		"contact.linkedin": "LinkedIn",
 		"contact.twitter": "X / Twitter",
+=======
+		"contact.tagline": "Diseñado con claridad. Construido con evidencia.",
+		"contact.builtWith":
+			"Hecho con React, TypeScript y Tailwind CSS. Probado con Vitest.",
+		"contact.github": "GitHub",
+		"contact.linkedin": "LinkedIn",
+
+		"meta.projects": "Proyectos — David Machado",
+		"meta.gallery": "Galería — David Machado",
+		"meta.about": "Sobre mí — David Machado",
+		"nav.pond": "pond",
+		"nav.projects": "proyectos",
+		"nav.gallery": "galería",
+		"nav.sayHi": "saluda",
+		"projects.viewCase": "ver proyecto",
+		"projects.scroll": "desliza",
+		"projects.allRepos": "todos los repositorios",
+		"projects.allReposLede": "El resto del trabajo público vive en GitHub.",
+		"projects.back": "todos los proyectos",
+		"projects.next": "siguiente proyecto",
+		"projects.caseStudy": "caso de estudio",
+		"projects.year": "Año",
+		"projects.role": "Rol",
+		"projects.status": "Estado",
+		"projects.links": "Enlaces",
+		"projects.roleValue": "Ingeniería backend, arquitectura, pruebas",
+		"projects.notFound": "Este proyecto no existe.",
+		"gallery.badge": "GALERÍA",
+		"gallery.heading": "Certificaciones y credenciales",
+		"gallery.lede":
+			"Credenciales que estoy preparando u obteniendo, con el estado honesto de cada una. Sin insignias que no haya obtenido.",
+		"gallery.credentials": "credenciales",
+		"gallery.status": "en curso",
+		"gallery.statusInProgress": "en curso",
+		"gallery.statusIssued": "emitida",
+		"gallery.credential": "verificar credencial",
+		"gallery.note":
+			"Las credenciales emitidas enlazarán a su página de verificación cuando estén disponibles.",
+		"about.education": "Formación",
+		"about.educationValue":
+			"Ingeniería de Software, Universidad Pascual Bravo",
+		"about.educationMeta": "2022 — presente",
+		"about.contactTitle": "Construyamos algo confiable",
+		"notFound.badge": "404",
+		"notFound.heading": "Esta página no está en el estanque.",
+		"notFound.lede": "El enlace puede ser viejo, o la página se movió.",
+		"notFound.cta": "Volver al estanque",
+>>>>>>> Stashed changes
 
 		"a11y.skipToContent": "Ir al contenido",
 	},
@@ -319,6 +531,7 @@ const translations = {
 		"nav.openMenu": "Abrir menu",
 		"nav.closeMenu": "Fechar menu",
 		"nav.language": "Idioma",
+		"nav.theme": "Tema",
 		"nav.translateSite": "Traduzir site",
 
 		"mobile.location": "Localização",
@@ -352,22 +565,47 @@ const translations = {
 		"projects.source": "Repositório GitHub",
 		"projects.details": "Arquitetura e Detalhes",
 		"projects.closeModal": "Fechar janela (Esc)",
+<<<<<<< Updated upstream
 		"projects.countdownDays": "Dias",
 		"projects.countdownHours": "Horas",
 		"projects.countdownMins": "Min",
 		"projects.countdownSecs": "Seg",
 		"projects.launchEstimated": "Entrega Estimada",
+=======
+		"projects.statusOpenSource": "Código aberto",
+		"projects.statusPrivate": "Estudo privado",
+		"projects.privateCase": "Estudo de caso privado",
+		"projects.openRepo": "Abrir repositório",
+		"projects.requestWalkthrough": "Solicitar apresentação",
+		"projects.overview": "Visão geral do projeto",
+		"projects.decisions": "Decisões técnicas principais",
+		"projects.evidence": "Evidência de engenharia",
+		"projects.stack": "Stack",
+		"projects.pauseRotation": "Pausar rotação automática",
+		"projects.resumeRotation": "Retomar rotação automática",
+		"projects.previousProject": "Projeto anterior",
+		"projects.nextProject": "Próximo projeto",
+>>>>>>> Stashed changes
 
 		"about.badge": "SOBRE MIM",
 		"about.heading": "Primeiros princípios e",
 		"about.headingAccent": "engenharia pragmática",
 		"about.p1":
+<<<<<<< Updated upstream
 			"Sou um engenheiro de software que aborda o desenvolvimento a partir de primeiros princípios. Atualmente no 5º semestre de Engenharia de Software na Universidad Pascual Bravo, foco na construção de sistemas backend robustos, esquemas relacionais sólidos e aplicações web modernas que resolvem problemas reais.",
 		"about.p2pre": "Meu foco técnico está na intersecção de",
 		"about.p2cloud": "arquitetura limpa de backend",
 		"about.p2distributed": "design de bancos de dados relacionais",
 		"about.p2and": ", e",
 		"about.p2dx": "interfaces web modernas",
+=======
+			"Sou estudante de Engenharia de Software na Universidad Pascual Bravo. O que mais gosto é da parte do trabalho que muitos pulam: transformar uma regra de negócio ambígua em algo que o time possa construir, testar e explicar.",
+		"about.p2pre": "Minha base é a ",
+		"about.p2cloud": "arquitetura hexagonal",
+		"about.p2distributed": "modelagem relacional",
+		"about.p2and": ", além de ",
+		"about.p2dx": "TypeScript e .NET",
+>>>>>>> Stashed changes
 		"about.p2post":
 			". Acredito que software sustentável é construído através de separação clara de responsabilidades, código testável e decisões pragmáticas.",
 		"about.p3":
@@ -417,7 +655,14 @@ const translations = {
 		"exp.eduOrg": "Universidad Pascual Bravo",
 		"exp.eduPeriod": "2022 - Presente",
 		"exp.eduDesc":
+<<<<<<< Updated upstream
 			"5º semestre. Foco acadêmico em programação orientada a objetos, arquitetura de software, bancos de dados relacionais, estruturas de dados e sistemas operacionais.",
+=======
+			"Disciplinas de programação orientada a objetos, arquitetura de software, bancos de dados relacionais, estruturas de dados e sistemas operacionais.",
+		"exp.eduTag1": "Engenharia de Software",
+		"exp.eduTag2": "POO e Algoritmos",
+		"exp.eduTag3": "Bancos de Dados",
+>>>>>>> Stashed changes
 
 		"contact.badge": "ENTRE EM CONTATO",
 		"contact.heading": "Vamos construir algo",
@@ -444,11 +689,60 @@ const translations = {
 		"contact.sendEmail": "Envie-me um email",
 		"contact.emailResponse": "Geralmente responde em 24 horas",
 		"contact.copyright": "© 2026 David Alexander Machado Alzate",
+<<<<<<< Updated upstream
 		"contact.tagline": "Projetado com clareza. Construído para performance.",
 		"contact.builtWith": "Feito com React, TypeScript, Motion e Tailwind CSS",
 		"contact.github": "GitHub",
 		"contact.linkedin": "LinkedIn",
 		"contact.twitter": "X / Twitter",
+=======
+		"contact.tagline": "Projetado com clareza. Construído com evidência.",
+		"contact.builtWith":
+			"Feito com React, TypeScript e Tailwind CSS. Testado com Vitest.",
+		"contact.github": "GitHub",
+		"contact.linkedin": "LinkedIn",
+
+		"meta.projects": "Projetos — David Machado",
+		"meta.gallery": "Galeria — David Machado",
+		"meta.about": "Sobre — David Machado",
+		"nav.pond": "pond",
+		"nav.projects": "projetos",
+		"nav.gallery": "galeria",
+		"nav.sayHi": "diga oi",
+		"projects.viewCase": "ver projeto",
+		"projects.scroll": "role",
+		"projects.allRepos": "todos os repositórios",
+		"projects.allReposLede": "O resto do trabalho público está no GitHub.",
+		"projects.back": "todos os projetos",
+		"projects.next": "próximo projeto",
+		"projects.caseStudy": "estudo de caso",
+		"projects.year": "Ano",
+		"projects.role": "Papel",
+		"projects.status": "Status",
+		"projects.links": "Links",
+		"projects.roleValue": "Engenharia backend, arquitetura, testes",
+		"projects.notFound": "Este projeto não existe.",
+		"gallery.badge": "GALERIA",
+		"gallery.heading": "Certificações e credenciais",
+		"gallery.lede":
+			"Credenciais que estou estudando ou conquistando, com o status honesto de cada uma. Sem selos que não conquistei.",
+		"gallery.credentials": "credenciais",
+		"gallery.status": "em andamento",
+		"gallery.statusInProgress": "em andamento",
+		"gallery.statusIssued": "emitida",
+		"gallery.credential": "verificar credencial",
+		"gallery.note":
+			"As credenciais emitidas terão link para a página de verificação quando disponíveis.",
+		"about.education": "Formação",
+		"about.educationValue":
+			"Engenharia de Software, Universidad Pascual Bravo",
+		"about.educationMeta": "2022 — presente",
+		"about.contactTitle": "Vamos construir algo confiável",
+		"notFound.badge": "404",
+		"notFound.heading": "Esta página não está no lago.",
+		"notFound.lede": "O link pode ser antigo, ou a página mudou.",
+		"notFound.cta": "Voltar ao lago",
+>>>>>>> Stashed changes
 
 		"a11y.skipToContent": "Ir para o conteúdo",
 	},

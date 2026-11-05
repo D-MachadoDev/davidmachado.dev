@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+<<<<<<< Updated upstream
     <loc>https://davidmachado.dev/</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://davidmachado.dev/?lang=es" />
     <xhtml:link rel="alternate" hreflang="en" href="https://davidmachado.dev/?lang=en" />
@@ -9,6 +10,47 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://davidmachado.dev/" />
     <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
+=======
+    <loc>https://davidmachado-dev.vercel.app/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+>>>>>>> Stashed changes
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://davidmachado-dev.vercel.app/projects</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://davidmachado-dev.vercel.app/projects/zentric</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidmachado-dev.vercel.app/projects/leaseflow</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidmachado-dev.vercel.app/projects/retail-analytics</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://davidmachado-dev.vercel.app/gallery</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://davidmachado-dev.vercel.app/about</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

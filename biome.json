@@ -3,8 +3,16 @@
 	"files": {
 		"includes": [
 			"**",
+<<<<<<< Updated upstream
 			"!src/app/components/ui/**",
 			"!**/components/ui/**"
+=======
+			"!dist",
+			"!node_modules",
+			"!.vercel",
+			"!src/app/components/ui",
+			"!src/app/vendor"
+>>>>>>> Stashed changes
 		]
 	},
 	"formatter": {
