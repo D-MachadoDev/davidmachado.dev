@@ -5,10 +5,11 @@ const languages = ["en", "es", "pt"] as const;
 
 describe("featured projects", () => {
 	it("lists the three inspectable projects", () => {
-		expect(projects).toHaveLength(3);
+		expect(projects).toHaveLength(4);
 		expect(projects.map((project) => project.id)).toEqual([
 			"zentric",
 			"faroo",
+			"chefnutri",
 			"retail-analytics",
 		]);
 	});

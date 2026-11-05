@@ -43,24 +43,6 @@ const runtimeLabel: Record<Language, string> = {
 	pt: "runtime + EF Core",
 };
 
-const vitestLabel: Record<Language, string> = {
-	en: "test suite",
-	es: "suite de pruebas",
-	pt: "suíte de testes",
-};
-
-const sqliteLabel: Record<Language, string> = {
-	en: "transactional storage",
-	es: "almacenamiento transaccional",
-	pt: "armazenamento transacional",
-};
-
-const restLabel: Record<Language, string> = {
-	en: "REST API",
-	es: "API REST",
-	pt: "API REST",
-};
-
 const etlLabel: Record<Language, string> = {
 	en: "incremental pipeline",
 	es: "pipeline incremental",
@@ -79,11 +61,41 @@ const biLabel: Record<Language, string> = {
 	pt: "dashboards no Power BI",
 };
 
+const sqlLabel: Record<Language, string> = {
+	en: "SQL Server persistence",
+	es: "persistencia en SQL Server",
+	pt: "persistência no SQL Server",
+};
+
+const architectureLabel: Record<Language, string> = {
+	en: "Clean Architecture",
+	es: "Arquitectura Limpia",
+	pt: "Clean Architecture",
+};
+
+const productDesignLabel: Record<Language, string> = {
+	en: "product design case study",
+	es: "caso de diseño de producto",
+	pt: "estudo de design de produto",
+};
+
+const nutritionLabel: Record<Language, string> = {
+	en: "nutrition and culinary planning",
+	es: "planificación nutricional y culinaria",
+	pt: "planejamento nutricional e culinário",
+};
+
+const deterministicLabel: Record<Language, string> = {
+	en: "deterministic calculations",
+	es: "cálculos deterministas",
+	pt: "cálculos determinísticos",
+};
+
 /**
- * Featured work is limited to artifacts that can be inspected today.
- * Every entry states where the evidence lives: a public repository or a
- * private case study available on request. Avoid delivery dates, adoption
- * metrics, or stack claims that the repository cannot back up.
+ * Featured work is limited to artifacts that can be inspected or explained
+ * today. Every entry states where the evidence lives: a public repository or
+ * a private case study. Avoid delivery dates, adoption metrics, or stack
+ * claims that the available evidence cannot back up.
  */
 export const projects: Project[] = [
 	{
@@ -138,50 +150,102 @@ export const projects: Project[] = [
 	},
 	{
 		id: "faroo",
-		title: "Faroo — Descripción del proyecto",
-		category: "Nuevo Proyecto",
-		role: "Desarrollo",
+		title: "Faroo — Rental Control & Reconciliation",
+		category: "Full-Stack & Domain",
+		role: "Full-Stack Developer",
 		summary: {
-			en: "Faroo project description",
-			es: "Motor de facturación open source",
-			pt: "Motor de cobrança open source para administradores de imóveis. Modela contratos, pagamentos parciais e conciliação de recibos como regras de domínio explícitas em vez de fórmulas em planilhas.",
+			en: "An academic rental operations platform for independent landlords. Faroo brings contracts, scheduled charges, payment reconciliation, and arrears follow-up into one traceable workflow.",
+			es: "Plataforma académica de operación de alquileres para propietarios independientes. Faroo reúne contratos, cobros programados, conciliación de pagos y seguimiento de mora en un flujo trazable.",
+			pt: "Plataforma acadêmica de operação de aluguéis para proprietários independentes. Faroo reúne contratos, cobranças programadas, conciliação de pagamentos e acompanhamento de atrasos em um fluxo rastreável.",
 		},
 		description: {
-			en: "A lease billing engine that turns rent, partial payments, and receipts into deterministic balances. The domain model makes arrears and reconciliation rules explicit and testable; Express exposes the REST API and SQLite provides transactional local persistence. The Vitest suite covers the money rules before they reach the interface.",
-			es: "Un motor de facturación de arriendos que convierte el canon, los pagos parciales y los recibos en saldos deterministas. El modelo de dominio hace explícitas y testeables las reglas de mora y conciliación; Express expone la API REST y SQLite aporta persistencia transaccional local. La suite de Vitest cubre las reglas de dinero antes de llegar a la interfaz.",
-			pt: "Um motor de cobrança de aluguéis que transforma o valor mensal, os pagamentos parciais e os recibos em saldos determinísticos. O modelo de domínio torna as regras de atraso e conciliação explícitas e testáveis; o Express expõe a API REST e o SQLite fornece persistência transacional local. A suíte Vitest cobre as regras de dinheiro antes de chegarem à interface.",
+			en: "Faroo is a monorepo with a .NET 10 backend and a React 18, Vite, and TypeScript frontend. It models rental contracts, scheduled charges, photo-based payment reconciliation, and an operational arrears traffic light. Clean Architecture keeps domain rules independent from infrastructure; versioned SQL migrations and automated unit and integration tests make the system easier to evolve and verify.",
+			es: "Faroo es un monorepo con backend en .NET 10 y frontend en React 18, Vite y TypeScript. Modela contratos de alquiler, cobros programados, conciliación de pagos mediante fotos y un semáforo operativo de mora. La Arquitectura Limpia mantiene las reglas de negocio independientes de la infraestructura; las migraciones SQL versionadas y las pruebas unitarias y de integración facilitan su evolución y verificación.",
+			pt: "Faroo é um monorepo com backend em .NET 10 e frontend em React 18, Vite e TypeScript. Modela contratos de aluguel, cobranças programadas, conciliação de pagamentos por foto e um semáforo operacional de atrasos. A Clean Architecture mantém as regras de negócio independentes da infraestrutura; migrações SQL versionadas e testes unitários e de integração facilitam sua evolução e verificação.",
 		},
 		architectureHighlights: {
 			en: [
-				"Domain model for leases, partial payments, and receipt reconciliation",
-				"Deterministic balance and arrears rules, independent from the UI",
-				"Vitest suite covering domain logic and the HTTP layer",
-				"Express REST API with SQLite transactional persistence",
+				"Clean Architecture split across Domain, Application, Infrastructure, and API",
+				"Rental contracts, scheduled charges, and photo-based payment reconciliation",
+				"React 18 + Vite + TypeScript web application",
+				".NET 10 backend with SQL Server and versioned migrations",
+				"Unit and integration tests for the core workflows",
 			],
 			es: [
-				"Modelo de dominio para contratos, pagos parciales y conciliación de recibos",
-				"Reglas deterministas de saldo y mora, independientes de la interfaz",
-				"Suite de Vitest sobre la lógica de dominio y la capa HTTP",
-				"API REST con Express y persistencia transaccional en SQLite",
+				"Arquitectura Limpia separada en Domain, Application, Infrastructure y API",
+				"Contratos de alquiler, cobros programados y conciliación de pagos mediante fotos",
+				"Aplicación web con React 18, Vite y TypeScript",
+				"Backend en .NET 10 con SQL Server y migraciones versionadas",
+				"Pruebas unitarias y de integración para los flujos principales",
 			],
 			pt: [
-				"Modelo de domínio para contratos, pagamentos parciais e conciliação de recibos",
-				"Regras determinísticas de saldo e atraso, independentes da interface",
-				"Suíte Vitest sobre a lógica de domínio e a camada HTTP",
-				"API REST com Express e persistência transacional em SQLite",
+				"Clean Architecture separada em Domain, Application, Infrastructure e API",
+				"Contratos de aluguel, cobranças programadas e conciliação de pagamentos por foto",
+				"Aplicação web com React 18, Vite e TypeScript",
+				"Backend em .NET 10 com SQL Server e migrações versionadas",
+				"Testes unitários e de integração para os fluxos principais",
 			],
 		},
 		evidence: [
-			{ value: "Vitest", label: vitestLabel },
-			{ value: "SQLite", label: sqliteLabel },
-			{ value: "Express", label: restLabel },
+			{ value: ".NET 10", label: runtimeLabel },
+			{ value: "Clean Architecture", label: architectureLabel },
+			{ value: "SQL Server", label: sqlLabel },
 		],
-		tags: ["chefnutri", "TypeScript", "Express", "SQLite", "Vitest"],
+		tags: [".NET 10", "React", "TypeScript", "SQL Server", "Docker"],
 		github: "https://github.com/D-MachadoDev/faroo",
 		year: "2026",
 		accent: "#8B5CF6",
 		status: "open_source",
-		architectureBadge: "Chefnutri integration",
+		architectureBadge: "Clean Architecture + rental domain",
+	},
+	{
+		id: "chefnutri",
+		title: "ChefNutri — Gourmet Nutrition Planner",
+		category: "Product Design & AI",
+		role: "Product Designer / Software Engineer",
+		summary: {
+			en: "A product concept that combines nutrition guidance and practical cooking. ChefNutri helps people plan healthy, flavorful meals without wasting ingredients or losing track of budget.",
+			es: "Concepto de producto que combina orientación nutricional y cocina práctica. ChefNutri ayuda a planificar comidas saludables y sabrosas sin desperdiciar ingredientes ni perder de vista el presupuesto.",
+			pt: "Conceito de produto que combina orientação nutricional e cozinha prática. ChefNutri ajuda a planejar refeições saudáveis e saborosas sem desperdiçar ingredientes nem perder o controle do orçamento.",
+		},
+		description: {
+			en: "ChefNutri is a documented product and architecture case study for people who want to eat better but need practical guidance. The proposal combines a curated recipe library with calories and macros, step-by-step cooking guidance, an ingredient list that groups repeated items, and a local supermarket price comparison layer. The design keeps deterministic nutrition and shopping calculations in structured data, reserving AI for focused tasks such as interpreting a recipe link or suggesting meals from available ingredients.",
+			es: "ChefNutri es un caso documentado de producto y arquitectura para personas que quieren comer mejor, pero necesitan orientación práctica. La propuesta combina un recetario curado con calorías y macronutrientes, instrucciones de cocina paso a paso, una lista de ingredientes que agrupa productos repetidos y una capa de comparación de precios en supermercados locales. El diseño mantiene los cálculos nutricionales y de compras en datos estructurados y deterministas, y reserva la IA para tareas puntuales como interpretar un enlace de receta o sugerir comidas a partir de los ingredientes disponibles.",
+			pt: "ChefNutri é um estudo documentado de produto e arquitetura para pessoas que querem comer melhor, mas precisam de orientação prática. A proposta combina um acervo de receitas com calorias e macronutrientes, instruções de cozinha passo a passo, uma lista de ingredientes que agrupa itens repetidos e uma camada de comparação de preços em supermercados locais. O design mantém os cálculos nutricionais e de compras em dados estruturados e determinísticos, reservando a IA para tarefas específicas como interpretar um link de receita ou sugerir refeições a partir dos ingredientes disponíveis.",
+		},
+		architectureHighlights: {
+			en: [
+				"Recipe catalog with skill levels, calories, macros, and clear techniques",
+				"Shopping-list generation that groups shared ingredients to reduce waste",
+				"Deterministic nutrition and budget calculations before any AI call",
+				"Progressive supermarket pricing strategy that can start with reference prices or official APIs",
+				"Hybrid AI boundary for recipe-link interpretation and ingredient-based suggestions",
+			],
+			es: [
+				"Catálogo de recetas con niveles, calorías, macros y técnicas explicadas con claridad",
+				"Generación de listas que agrupa ingredientes compartidos para reducir desperdicio",
+				"Cálculos nutricionales y de presupuesto deterministas antes de llamar a la IA",
+				"Estrategia progresiva de precios que puede iniciar con referencias o APIs oficiales",
+				"Límite claro para IA: interpretar recetas y sugerir comidas según ingredientes",
+			],
+			pt: [
+				"Catálogo de receitas com níveis, calorias, macros e técnicas explicadas com clareza",
+				"Geração de listas que agrupa ingredientes compartilhados para reduzir desperdício",
+				"Cálculos nutricionais e de orçamento determinísticos antes de chamar a IA",
+				"Estratégia progressiva de preços que pode começar com referências ou APIs oficiais",
+				"Limite claro para IA: interpretar receitas e sugerir refeições pelos ingredientes",
+			],
+		},
+		evidence: [
+			{ value: "Product brief", label: productDesignLabel },
+			{ value: "Hybrid AI", label: deterministicLabel },
+			{ value: "Recipe + market flow", label: nutritionLabel },
+		],
+		tags: ["Product Design", "Nutrition", "AI", "Data Modeling", "UX"],
+		year: "2026",
+		accent: "#F97316",
+		status: "private",
+		architectureBadge: "Product design + hybrid AI",
 	},
 	{
 		id: "retail-analytics",
