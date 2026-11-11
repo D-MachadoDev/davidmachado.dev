@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>David Machado — Ingeniero de Software Backend</title>
+    <style>
+      @page { size: A4; margin: 0; }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        color: #111827;
+        font-family: "Segoe UI", Calibri, Arial, sans-serif;
+        font-size: 9.6pt;
+        line-height: 1.34;
+      }
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 11mm 14mm 10mm;
+      }
+      header { border-bottom: 2px solid #0f172a; padding-bottom: 6px; }
+      h1 {
+        margin: 0;
+        font-size: 19pt;
+        letter-spacing: -0.4px;
+        font-weight: 700;
+      }
+      .title {
+        margin-top: 2px;
+        font-size: 10.8pt;
+        font-weight: 600;
+        color: #1e3a8a;
+      }
+      .contact {
+        margin-top: 4px;
+        font-size: 8.3pt;
+        color: #374151;
+        line-height: 1.45;
+      }
+      .contact span + span::before { content: " | "; color: #9ca3af; }
+      a { color: inherit; text-decoration: none; }
+      h2 {
+        margin: 9px 0 3px;
+        font-size: 8.6pt;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: #1e3a8a;
+        border-bottom: 1px solid #d1d5db;
+        padding-bottom: 2px;
+      }
+      p { margin: 0; }
+      .role-line strong { font-size: 10pt; }
+      .role-line em { font-style: normal; color: #374151; font-size: 9pt; }
+      .muted { color: #4b5563; }
+      ul { margin: 2px 0 0; padding-left: 15px; }
+      li { margin-bottom: 1.5px; }
+      .item { margin-bottom: 5px; }
+      .item:last-child { margin-bottom: 0; }
+      .skills p { margin-bottom: 1.5px; }
+      .skills strong { display: inline-block; min-width: 118px; }
+      .proj { margin-bottom: 4px; }
+      .proj .name { font-size: 9.8pt; font-weight: 700; }
+      .proj .stack { font-size: 8.6pt; color: #1e3a8a; }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <h1>David Alexander Machado Alzate</h1>
+        <div class="title">Ingeniero de Software Backend | APIs REST | .NET 10 | Java &amp; Spring Boot</div>
+        <div class="contact">
+          <span>Medellín, Colombia</span>
+          <span>davidmachado.dev07@gmail.com</span>
+          <span>Portafolio: davidmachado-dev.vercel.app</span>
+          <span>GitHub: github.com/D-MachadoDev</span>
+          <span>LinkedIn: linkedin.com/in/david-machado-94b3921a2</span>
+        </div>
+      </header>
+
+      <h2>Perfil profesional</h2>
+      <p>
+        Ingeniero de Software (Universidad Pascual Bravo, último semestre) especializado en
+        backend: APIs REST, modelado relacional y reglas de negocio con invariantes explícitas
+        y pruebas automatizadas. Construí y documenté un núcleo transaccional de marketplace en
+        .NET 10 con arquitectura hexagonal, DDD y CQRS (592 pruebas), y una plataforma de
+        contratos, cobros programados y conciliación de pagos. Trabajo con autogestión,
+        documentación escrita y revisión de código; aprendo un stack nuevo en semanas y lo
+        demuestro con repositorios públicos.
+      </p>
+
+      <h2>Conocimientos técnicos</h2>
+      <div class="skills">
+        <p><strong>Lenguajes</strong> C#, TypeScript, SQL, Python, Java</p>
+        <p><strong>Backend</strong> .NET 10, ASP.NET Core, Spring Boot, APIs REST, microservicios, CQRS</p>
+        <p><strong>Bases de datos</strong> PostgreSQL, SQL Server, SQLite, EF Core, modelo entidad-relación, migraciones versionadas</p>
+        <p><strong>Arquitectura</strong> Hexagonal, Clean Architecture, DDD, SOLID, patrones de diseño</p>
+        <p><strong>Pruebas</strong> xUnit, Vitest, JUnit, pruebas unitarias y de integración</p>
+        <p><strong>Cloud &amp; DevOps</strong> Docker, Docker Compose, GitHub Actions, AWS (Lambda, SQS, S3)</p>
+        <p><strong>Herramientas</strong> Git, GitHub, Maven, Swagger / OpenAPI, Postman, diagramas UML y C4</p>
+        <p><strong>Metodologías</strong> Scrum, Kanban, code review, documentación técnica (ADRs)</p>
+      </div>
+
+      <h2>Experiencia profesional</h2>
+      <div class="item">
+        <div class="role-line">
+          <strong>Desarrollador de Software Independiente</strong> —
+          <em>Proyectos de clientes y código abierto | 2024 – Actualidad</em>
+        </div>
+        <ul>
+          <li>
+            Diseñé y desarrollé el núcleo transaccional de un marketplace multi-vendedor:
+            catálogo, inventario y creación de pedidos, con arquitectura hexagonal, agregados
+            DDD y separación CQRS (22 command handlers, 14 query handlers).
+          </li>
+          <li>
+            Implementé la persistencia con EF Core sobre PostgreSQL (14 DbSet), contenericé el
+            servicio con Docker y dejé 592 pruebas automatizadas con xUnit en las capas de
+            dominio, aplicación y API.
+          </li>
+          <li>
+            Documenté las decisiones de arquitectura en ADRs y mantuve el dominio independiente
+            de frameworks y base de datos, para que las reglas se pudieran probar sin
+            infraestructura.
+          </li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="role-line">
+          <strong>Desarrollador Full-Stack</strong> —
+          <em>Faroo, plataforma de operación de alquileres | 2026</em>
+        </div>
+        <ul>
+          <li>
+            Construí contratos, cobros programados, conciliación de pagos y seguimiento de mora
+            en un monorepo con backend .NET 10 y frontend React 18 + TypeScript.
+          </li>
+          <li>
+            Apliqué Clean Architecture (Domain, Application, Infrastructure, API), migraciones
+            SQL versionadas y pruebas unitarias e integración sobre los flujos críticos.
+          </li>
+        </ul>
+      </div>
+
+      <h2>Proyectos</h2>
+      <div class="proj">
+        <div class="name">Zentric — Marketplace Core API</div>
+        <div class="stack">.NET 10 | Hexagonal + DDD + CQRS | PostgreSQL | Docker | 592 pruebas xUnit</div>
+        <div class="muted">
+          github.com/D-MachadoDev/Zentric — Dominio sin dependencias de framework, invariantes de
+          stock y pedido, y suite de pruebas inspeccionable.
+        </div>
+      </div>
+      <div class="proj">
+        <div class="name">Faroo — Contratos, cobros y conciliación</div>
+        <div class="stack">.NET 10 | React 18 | TypeScript | SQL Server | Docker</div>
+        <div class="muted">
+          github.com/D-MachadoDev/faroo — Cobros programados, conciliación de pagos y semáforo de
+          mora en un flujo trazable con migraciones versionadas.
+        </div>
+      </div>
+      <div class="proj">
+        <div class="name">Portafolio técnico — davidmachado-dev.vercel.app</div>
+        <div class="stack">React 18 | TypeScript | Vite 6 | Tailwind CSS 4 | 55 pruebas Vitest</div>
+        <div class="muted">
+          Sitio trilingüe (es/en/pt) con metadatos SEO por ruta, accesibilidad por teclado y
+          despliegue continuo. Los tres casos de estudio anteriores están documentados ahí.
+        </div>
+      </div>
+
+      <h2>Educación</h2>
+      <div class="role-line">
+        <strong>Ingeniería de Software — Universidad Pascual Bravo</strong> —
+        <em>2022 – 2026</em>
+      </div>
+      <p class="muted">
+        Cursos relevantes: programación orientada a objetos, arquitectura de software, bases de
+        datos relacionales, estructuras de datos y sistemas operativos.
+      </p>
+
+      <h2>Certificaciones en curso</h2>
+      <p class="muted">
+        Microsoft Azure Fundamentals (AZ-900) | Google Data Analytics | Oracle Cloud
+        Infrastructure Foundations — 2026.
+      </p>
+    </div>
+  </body>
+</html>
