@@ -29,7 +29,14 @@ const COMPETENCIES: { labelKey: TranslationKey; items: string[] }[] = [
   },
   {
     labelKey: "about.skillAI",
-    items: ["LLM APIs", "Prompt Engineering", "Workflow Automation"],
+    items: [
+      "LLM APIs",
+      "Prompt Engineering",
+      "Multi-agent Workflows",
+      "Claude Code",
+      "Codex",
+      "OpenCode",
+    ],
   },
 ];
 
