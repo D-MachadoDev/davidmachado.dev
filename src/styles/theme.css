@@ -281,6 +281,20 @@ html[data-theme="light"] {
   );
 }
 
+/*
+ * Radial scrim behind the featured project. The ocean animation is busiest on
+ * the right of the hero, so the text there needs its own falloff instead of
+ * competing with glyphs. A radius has no hard edges to give it away.
+ */
+.featured-shade {
+  background: radial-gradient(
+    120% 140% at 100% 50%,
+    var(--background) 0%,
+    color-mix(in srgb, var(--background) 92%, transparent) 58%,
+    transparent 88%
+  );
+}
+
 .no-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;

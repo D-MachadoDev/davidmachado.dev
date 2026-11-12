@@ -13,7 +13,6 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { href: "/", key: "nav.pond", glyph: "~", match: ["home"] },
   { href: "/projects", key: "nav.projects", glyph: "#", match: ["projects", "project"] },
   { href: "/gallery", key: "nav.gallery", glyph: "*", match: ["gallery"] },
   { href: "/about", key: "nav.about", glyph: "?", match: ["about"] },

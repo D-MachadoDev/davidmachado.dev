@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { projects } from "./projects";
+import { FEATURED_PROJECT_ID, projects } from "./projects";
 
 const languages = ["en", "es", "pt"] as const;
 
@@ -68,6 +68,15 @@ describe("featured projects", () => {
 		for (const claim of retired) {
 			expect(payload).not.toContain(claim);
 		}
+	});
+
+	it("keeps the home featured project resolvable with evidence to show", () => {
+		const featured = projects.find(
+			(project) => project.id === FEATURED_PROJECT_ID,
+		);
+
+		expect(featured).toBeDefined();
+		expect(featured?.evidence.length ?? 0).toBeGreaterThanOrEqual(2);
 	});
 
 	it("backs the Zentric evidence with the documented test count", () => {

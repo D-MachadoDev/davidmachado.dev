@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { OceanBackground } from "../components/OceanBackground";
 import { CV_URL, GITHUB_URL, LINKEDIN_URL } from "../data/links";
+import { FEATURED_PROJECT_ID, projects } from "../data/projects";
 import { t, type Language } from "../i18n";
 import { CONTACT_MAILTO } from "../lib/mailto";
 import { Link } from "../router";
@@ -9,6 +10,7 @@ import type { Theme } from "../theme";
 const STACK = [".NET 10", "TypeScript", "PostgreSQL", "Docker"];
 
 export function HomePage({ language, theme }: { language: Language; theme: Theme }) {
+  const featured = projects.find((project) => project.id === FEATURED_PROJECT_ID);
   const subtitles = [
     t(language, "hero.subtitle1"),
     t(language, "hero.subtitle2"),
@@ -39,7 +41,7 @@ export function HomePage({ language, theme }: { language: Language; theme: Theme
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-48 bg-gradient-to-t from-background to-transparent" />
 
       <div className="relative z-20 mx-auto flex min-h-[100dvh] max-w-[1600px] flex-col px-5 pb-7 pt-24 sm:px-8">
-        <div className="flex flex-1 flex-col justify-center">
+        <div className="flex flex-1 flex-col justify-center gap-10 xl:flex-row xl:items-center xl:justify-between xl:gap-16">
           <div className="max-w-3xl">
             <p className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
               <span className="inline-block size-1.5 rounded-full bg-emerald-400" />
@@ -106,6 +108,49 @@ export function HomePage({ language, theme }: { language: Language; theme: Theme
               </a>
             </div>
           </div>
+
+          {featured && (
+            <aside className="relative w-full border-t border-foreground/10 pt-5 xl:w-[330px] xl:shrink-0 xl:border-l xl:border-t-0 xl:pl-8 xl:pt-0">
+              <div
+                aria-hidden="true"
+                className="featured-shade pointer-events-none absolute -inset-y-12 -left-32 -right-8"
+              />
+              <div className="relative">
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+                  {t(language, "hero.featured")}
+                </p>
+                <Link href={`/projects/${featured.id}`} className="group mt-4 block">
+                  <p className="text-[15px] font-medium leading-snug text-foreground transition-colors group-hover:text-accent">
+                    {featured.title}
+                  </p>
+                  <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
+                    {featured.architectureBadge}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-x-7 gap-y-3">
+                    {featured.evidence.slice(0, 2).map((item) => (
+                      <div key={item.value}>
+                        <p className="font-mono text-[15px] leading-none text-foreground">
+                          {item.value}
+                        </p>
+                        <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.1em] text-muted">
+                          {item.label[language]}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="mt-4 inline-flex items-center gap-1.5 border-b border-foreground/20 pb-0.5 font-mono text-[11px] text-muted transition-colors group-hover:border-foreground group-hover:text-foreground">
+                    {t(language, "hero.featuredCta")}
+                    <span
+                      aria-hidden="true"
+                      className="transition-transform group-hover:translate-x-0.5"
+                    >
+                      →
+                    </span>
+                  </p>
+                </Link>
+              </div>
+            </aside>
+          )}
         </div>
 
         <div className="mt-12 flex flex-wrap items-end justify-between gap-4 border-t border-foreground/10 pt-5 font-mono text-[11px] text-muted">

@@ -97,6 +97,13 @@ const deterministicLabel: Record<Language, string> = {
  * a private case study. Avoid delivery dates, adoption metrics, or stack
  * claims that the available evidence cannot back up.
  */
+
+/**
+ * The single project the home page surfaces. It lives here, next to the data,
+ * so renaming an id breaks a test instead of silently emptying the hero slot.
+ */
+export const FEATURED_PROJECT_ID = "zentric";
+
 export const projects: Project[] = [
 	{
 		id: "zentric",
