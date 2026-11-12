@@ -481,7 +481,7 @@ export class AsciiRenderer {
     this.markFish(world);
     this.drawDots(t);
 
-    ctx.font = `600 ${Math.round(ch * 0.74)}px ${this.fontFamily}`;
+    ctx.font = `600 ${Math.round(ch * 0.88)}px ${this.fontFamily}`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
@@ -817,6 +817,38 @@ export class AsciiRenderer {
   private drawSharks(t: number) {
     const { ctx, cols, rows, cw, ch, sharkFlag, sharkShade, sharkKey, sharkDepth, sharkKind } = this;
     const n = cols * rows;
+
+    // Body tone. Cells are bucketed by tone and filled once per bucket, so
+    // neighbouring cells fuse into one silhouette. Filling cell by cell put a
+    // visible seam around every tile, which read as a wall of bricks.
+    const bedLevels = 3;
+    const kindCount = KINDS.length;
+    const beds = new Array<Path2D>(kindCount * bedLevels);
+    for (let b = 0; b < beds.length; b++) beds[b] = new Path2D();
+    for (let i = 0; i < n; i++) {
+      const flag = sharkFlag[i];
+      if (!flag || flag === FLAG_EDGE) continue;
+      const dim = 0.7 + 0.3 * sharkDepth[i];
+      const tone = sharkShade[i] * (0.5 + 0.5 * dim);
+      const lvl = clamp(Math.floor(tone * bedLevels), 0, bedLevels - 1);
+      beds[sharkKind[i] * bedLevels + lvl].rect(
+        (i % cols) * cw,
+        ((i / cols) | 0) * ch,
+        cw + 1,
+        ch + 1,
+      );
+    }
+    ctx.save();
+    for (let k = 0; k < kindCount; k++) {
+      const [tr, tg, tb] = SHAPES[KINDS[k]].tint;
+      ctx.fillStyle = `rgb(${Math.round(52 * tr)},${Math.round(52 * tg)},${Math.min(255, Math.round(52 * tb + 6))})`;
+      for (let lvl = 0; lvl < bedLevels; lvl++) {
+        ctx.globalAlpha = 0.045 + lvl * 0.035;
+        ctx.fill(beds[k * bedLevels + lvl]);
+      }
+    }
+    ctx.restore();
+
     for (let i = 0; i < n; i++) {
       const flag = sharkFlag[i];
       if (!flag) continue;
@@ -845,36 +877,37 @@ export class AsciiRenderer {
         continue;
       }
 
-      let level: number;
+      // No cell bed: the glyph is the only ink, so the hide reads as ASCII
+      // texture instead of a wall of grey tiles. The ramp carries the
+      // shading: dense glyphs on the shadow side, sparse where light hits,
+      // and each cell class keeps its own base level.
       let glyph: string;
+      let inkBase: number;
       if (flag === FLAG_RIDGE) {
-        level = 226;
+        inkBase = 200 + shade * 55;
         glyph = RIDGE_GLYPHS[(key >>> 8) % RIDGE_GLYPHS.length];
       } else if (flag === FLAG_EYE) {
-        level = 12;
+        inkBase = 0;
         glyph = "o";
       } else if (flag === FLAG_MARK) {
-        level = 24 + shade * 22;
+        inkBase = 0;
         glyph = MARK_GLYPHS[(key >>> 8) % MARK_GLYPHS.length];
       } else if (flag === FLAG_FIN) {
-        level = 40 + shade * 120;
+        inkBase = 130 + shade * 70;
         glyph = FIN_GLYPHS[(key >>> 8) % FIN_GLYPHS.length];
       } else {
-        level = 46 + shade * 160;
+        inkBase = 168 + shade * 84;
         const jitter = ((key >>> 4) % 3) - 1;
         glyph = SKIN_RAMP[clamp(Math.floor((1 - shade) * 8.99) + jitter, 0, SKIN_RAMP.length - 1)];
       }
-      level *= dim;
-      // Tinted per species; the classic tint is a cool blue-grey, like a back seen through deep water.
-      ctx.fillStyle = `rgb(${Math.min(255, Math.round(level * tr))},${Math.min(255, Math.round(level * tg))},${Math.min(255, Math.round(level * tb + 4))})`;
-      ctx.fillRect(x + 1, y + 1, cw - 1, ch - 1);
-
+      const ink = Math.min(255, Math.round(inkBase * dim));
       let color: string;
-      if (flag === FLAG_EYE) color = "#9aa0ad";
-      else if (flag === FLAG_MARK) color = `rgb(${Math.round(70 * tr)},${Math.round(70 * tg)},${Math.round(70 * tb)})`;
+      if (flag === FLAG_EYE) color = "#d9dee8";
+      else if (flag === FLAG_MARK) color = `rgb(${Math.round(26 * tr)},${Math.round(26 * tg)},${Math.round(26 * tb)})`;
       else if (roll < 0.09) color = ACCENTS[key % ACCENTS.length];
       else if (roll < 0.13) color = "#ffffff";
-      else color = shade > 0.55 ? "#0e0f13" : "#1b1d24";
+      else
+        color = `rgb(${Math.min(255, Math.round(ink * tr))},${Math.min(255, Math.round(ink * tg))},${Math.min(255, Math.round(ink * tb + 6))})`;
       ctx.fillStyle = color;
       ctx.fillText(glyph, x + cw / 2, y + ch / 2 + 1);
     }
