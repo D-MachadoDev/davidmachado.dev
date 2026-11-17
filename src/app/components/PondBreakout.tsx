@@ -113,6 +113,7 @@ export function PondBreakout({ language }: { language: Language }) {
     ball: { x: W / 2, y: PADDLE_Y - BALL_R - 1, vx: 0, vy: 0 },
     bricks: buildBricks(0),
     speed: 66,
+    trail: [] as { x: number; y: number }[],
     pressed: { left: false, right: false },
   });
 
@@ -126,6 +127,7 @@ export function PondBreakout({ language }: { language: Language }) {
       const g = game.current;
       g.ball = { x: g.paddleX + PADDLE_W / 2, y: PADDLE_Y - BALL_R - 1, vx: 0, vy: 0 };
       g.bricks = buildBricks(stage);
+      g.trail = [];
       g.speed = 66 + stage * 8;
       g.mode = "ready";
       publish();
@@ -202,6 +204,14 @@ export function PondBreakout({ language }: { language: Language }) {
         ctx.globalAlpha = brick.hp > 1 ? 0.95 : 0.65;
         ctx.fillStyle = accent;
         ctx.fillRect(brick.x + 1, brick.y + 1, CELL - 2, CELL - 3);
+      }
+      ctx.globalAlpha = 1;
+
+      ctx.fillStyle = accent;
+      for (let index = 0; index < g.trail.length; index += 1) {
+        const point = g.trail[index];
+        ctx.globalAlpha = 0.04 + (index / g.trail.length) * 0.18;
+        ctx.fillRect(Math.round(point.x), Math.round(point.y), 2, 2);
       }
       ctx.globalAlpha = 1;
 
@@ -303,6 +313,9 @@ export function PondBreakout({ language }: { language: Language }) {
         if (g.ball.y - BALL_R > H) break;
       }
 
+      g.trail.push({ x: g.ball.x, y: g.ball.y });
+      if (g.trail.length > 8) g.trail.shift();
+
       if (g.bricks.length === 0) {
         g.mode = "won";
         g.stage += 1;
@@ -342,12 +355,49 @@ export function PondBreakout({ language }: { language: Language }) {
     return () => cancelAnimationFrame(raf);
   }, [visible, ready, publish]);
 
-  const act = () => {
+  const act = useCallback(() => {
     const g = game.current;
     if (g.mode === "ready") launch();
-    else if (g.mode === "won") ready(g.stage);
-    else if (g.mode === "lost") reset();
-  };
+    else if (g.mode === "won") {
+      ready(g.stage);
+      launch();
+    } else if (g.mode === "lost") {
+      reset();
+      launch();
+    }
+  }, [launch, ready, reset]);
+
+  // Anywhere on the page, an arrow or the space bar starts the game and hands
+  // the keys to the board, so the first thing a visitor presses already plays.
+  useEffect(() => {
+    if (!visible) return;
+
+    const onWindowKeyDown = (event: globalThis.KeyboardEvent) => {
+      const g = game.current;
+      if (g.mode === "playing") return;
+
+      const target = event.target as HTMLElement | null;
+      if (
+        target &&
+        (target.isContentEditable || /^(input|textarea|select)$/i.test(target.tagName))
+      ) {
+        return;
+      }
+
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        g.pressed[event.key === "ArrowLeft" ? "left" : "right"] = true;
+      } else if (event.key !== " " && event.key !== "Enter") {
+        return;
+      }
+
+      canvasRef.current?.focus({ preventScroll: true });
+      event.preventDefault();
+      act();
+    };
+
+    window.addEventListener("keydown", onWindowKeyDown);
+    return () => window.removeEventListener("keydown", onWindowKeyDown);
+  }, [visible, act]);
 
   const movePaddle = (event: PointerEvent<HTMLCanvasElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -385,11 +435,11 @@ export function PondBreakout({ language }: { language: Language }) {
   })();
 
   return (
-    <div className="pond-breakout w-[240px] rounded-md border border-border bg-card/85 p-3 backdrop-blur-sm">
-      <div className="mb-2 flex items-center justify-between font-mono text-[10px] lowercase text-muted">
+    <div className="pond-breakout w-[248px] font-mono text-[10px] lowercase">
+      <div className="flex items-baseline justify-between gap-3 border-b border-border/50 pb-1.5 text-muted">
         <span className="text-foreground">{t(language, "game.title")}</span>
         <span className="sr-only">{`${t(language, "game.score")}: ${hud.score}`}</span>
-        <span aria-hidden="true" className="tabular-nums">
+        <span aria-hidden="true" className="tabular-nums tracking-[0.2em]">
           {String(hud.score).padStart(3, "0")}
         </span>
       </div>
@@ -402,13 +452,12 @@ export function PondBreakout({ language }: { language: Language }) {
         onPointerMove={movePaddle}
         onKeyDown={onKeyDown}
         onKeyUp={onKeyUp}
-        className="w-full cursor-crosshair rounded-sm bg-background"
+        className="mt-2 w-full cursor-crosshair outline-none focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-accent"
       />
-      <div className="mt-2 flex items-center justify-between font-mono text-[10px] lowercase text-muted">
-        <span>{status}</span>
-        <span aria-hidden="true">
+      <div className="mt-1.5 flex items-baseline justify-between gap-3 text-muted">
+        <span className={hud.mode === "won" ? "text-accent" : undefined}>{status}</span>
+        <span aria-hidden="true" className="text-foreground/70">
           {Array.from({ length: hud.lives }, () => "·").join("")}
-          {Array.from({ length: 3 - hud.lives }, () => " ").join("")}
         </span>
       </div>
     </div>
