@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { flushSync } from "react-dom";
 import { Footer } from "./components/Footer";
 import { Navbar } from "./components/Navbar";
 import { projects } from "./data/projects";
@@ -77,6 +78,7 @@ function Site({
       <Navbar
         language={language}
         onLanguageChange={onLanguageChange}
+        theme={theme}
         themePreference={themePreference}
         onThemeChange={onThemeChange}
       />
@@ -113,6 +115,34 @@ export default function App() {
     return () => media.removeEventListener("change", onChange);
   }, []);
 
+  /**
+   * Swapping the palette repaints every surface at once, which reads as a
+   * flash. Let the browser cross-fade it, opening from the corner where the
+   * theme control (and its lamp) live.
+   */
+  const changeTheme = useCallback((preference: ThemePreference) => {
+    const reduceMotion =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const start = (
+      document as Document & {
+        startViewTransition?: (update: () => void) => unknown;
+      }
+    ).startViewTransition;
+
+    if (typeof start !== "function" || reduceMotion) {
+      setThemePreference(preference);
+      return;
+    }
+
+    const root = document.documentElement;
+    root.style.setProperty("--theme-x", "calc(100% - 5.5rem)");
+    root.style.setProperty("--theme-y", "2.25rem");
+    start.call(document, () => {
+      flushSync(() => setThemePreference(preference));
+    });
+  }, []);
+
   return (
     <RouterProvider>
       <Site
@@ -120,7 +150,7 @@ export default function App() {
         onLanguageChange={setLanguage}
         theme={theme}
         themePreference={themePreference}
-        onThemeChange={setThemePreference}
+        onThemeChange={changeTheme}
       />
     </RouterProvider>
   );

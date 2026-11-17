@@ -2,8 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { languageOrder, t, type Language, type TranslationKey } from "../i18n";
 import { CONTACT_MAILTO } from "../lib/mailto";
 import { Link, useRouter, type Route } from "../router";
-import type { ThemePreference } from "../theme";
-import { ThemeToggle } from "./ThemeToggle";
+import type { Theme, ThemePreference } from "../theme";
+import { ThemeLamp, ThemeToggle } from "./ThemeToggle";
 
 interface NavItem {
   href: string;
@@ -59,11 +59,13 @@ function LanguagePicker({
 export function Navbar({
   language,
   onLanguageChange,
+  theme,
   themePreference,
   onThemeChange,
 }: {
   language: Language;
   onLanguageChange: (language: Language) => void;
+  theme: Theme;
   themePreference: ThemePreference;
   onThemeChange: (preference: ThemePreference) => void;
 }) {
@@ -156,7 +158,10 @@ export function Navbar({
           })}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="relative flex items-center gap-4">
+          <span className="relative hidden w-[92px] shrink-0 xl:block" aria-hidden="true">
+            <ThemeLamp lit={theme === "dark"} className="-mt-8" />
+          </span>
           <LanguagePicker
             language={language}
             onChange={onLanguageChange}

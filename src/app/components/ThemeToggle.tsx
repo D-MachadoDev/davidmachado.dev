@@ -1,6 +1,30 @@
 import { t, type Language } from "../i18n";
 import { THEME_LABELS, THEME_ORDER, type ThemePreference } from "../theme";
 
+/**
+ * The light itself. A decorative fixture that hangs over the theme control and
+ * switches on with the dark palette, so the whole site reads as one room.
+ */
+export function ThemeLamp({
+	lit,
+	className,
+}: {
+	lit: boolean;
+	className?: string;
+}) {
+	return (
+		<div
+			aria-hidden="true"
+			className={`nav-lamp ${lit ? "is-lit" : ""} ${className ?? ""}`}
+		>
+			<span className="nav-lamp__wire" />
+			<span className="nav-lamp__shade" />
+			<span className="nav-lamp__bulb" />
+			<span className="nav-lamp__cone" />
+		</div>
+	);
+}
+
 export function ThemeToggle({
 	language,
 	preference,
