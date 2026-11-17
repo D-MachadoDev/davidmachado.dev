@@ -24,7 +24,39 @@ interface RendererPalette {
   dots: Rgb[];
   heatHot: Rgb;
   heatCool: Rgb;
+  /**
+   * Remaps a dark-theme ink luminance onto this theme's page. The hide is lit
+   * as light-on-black; on a light page the same ramp has to run the other way
+   * or every glyph dissolves into the background.
+   */
+  ink: (luminance: number) => number;
+  /** Specular highlight: the brightest ink on black, the darkest on paper. */
+  glint: string;
+  eye: string;
+  /** Tiger bars and zebra spots sit opposite the hide they mark. */
+  markScale: number;
+  /** Scattered hide colours, tuned to survive this theme's background. */
+  accents: string[];
 }
+
+const ACCENTS = [
+  "#e0892c",
+  "#e03a32",
+  "#b44ae0",
+  "#33c8cc",
+  "#3cb54a",
+  "#3150e8",
+  "#d9c14a",
+];
+const LIGHT_ACCENTS = [
+  "#b8620f",
+  "#b0221c",
+  "#7f2fa8",
+  "#0e7c80",
+  "#1f7a2e",
+  "#2436a8",
+  "#8a7412",
+];
 
 const PALETTES: Record<AsciiTheme, RendererPalette> = {
   dark: {
@@ -46,16 +78,23 @@ const PALETTES: Record<AsciiTheme, RendererPalette> = {
     ],
     heatHot: [255, 120, 60],
     heatCool: [220, 40, 40],
+    ink: (luminance) => luminance,
+    glint: "#ffffff",
+    eye: "#d9dee8",
+    markScale: 26,
+    accents: ACCENTS,
   },
   light: {
     background: "#F4F2EC",
     grid: "rgba(23,23,23,0.07)",
+    // The faintest bucket used to land at 1.3:1, which is not a fish on paper.
+    // The floor is raised until even the dimmest school clears 3:1.
     fish: [
-      "rgba(23,23,23,0.24)",
-      "rgba(23,23,23,0.38)",
-      "rgba(23,23,23,0.54)",
-      "rgba(23,23,23,0.7)",
-      "rgba(23,23,23,0.88)",
+      "rgba(23,23,23,0.48)",
+      "rgba(23,23,23,0.6)",
+      "rgba(23,23,23,0.72)",
+      "rgba(23,23,23,0.84)",
+      "rgba(23,23,23,0.96)",
     ],
     dots: [
       [48, 52, 235],
@@ -66,14 +105,19 @@ const PALETTES: Record<AsciiTheme, RendererPalette> = {
     ],
     heatHot: [180, 70, 30],
     heatCool: [180, 30, 30],
+    // Mirrors the ramp and keeps it between 30 and 99, so the hide stays
+    // darker than the page but lighter than the headline it sits behind.
+    ink: (luminance) => 30 + (255 - luminance) * 0.55,
+    glint: "#0b0b0c",
+    eye: "#111113",
+    markScale: 205,
+    accents: LIGHT_ACCENTS,
   },
 };
 
 // Dot colour classes: blue, green, red, pale; the last entry is the wake.
 const DOT_CLASSES = 5;
 const WAKE = DOT_CLASSES - 1;
-
-const ACCENTS = ["#e0892c", "#e03a32", "#b44ae0", "#33c8cc", "#3cb54a", "#3150e8", "#d9c14a"];
 
 // Sparse glyphs on bright skin, dense glyphs in shadow, so the texture
 // reinforces the shading instead of fighting it.
@@ -868,10 +912,10 @@ export class AsciiRenderer {
       if (flag === FLAG_EDGE) {
         // Soft, anti-aliased silhouette: no block, just a light glyph.
         const set = shade >= 0.5 ? EDGE_HEAVY : EDGE_LIGHT;
-        const g = (70 + shade * 80) * dim;
+        const g = this.palette.ink((70 + shade * 80) * dim);
         ctx.fillStyle =
           roll < 0.07
-            ? ACCENTS[key % ACCENTS.length]
+            ? this.palette.accents[key % this.palette.accents.length]
             : `rgb(${Math.round(g * tr)},${Math.round(g * tg)},${Math.min(255, Math.round(g * tb + 6))})`;
         ctx.fillText(set[(key >>> 8) % set.length], x + cw / 2, y + ch / 2 + 1);
         continue;
@@ -900,12 +944,13 @@ export class AsciiRenderer {
         const jitter = ((key >>> 4) % 3) - 1;
         glyph = SKIN_RAMP[clamp(Math.floor((1 - shade) * 8.99) + jitter, 0, SKIN_RAMP.length - 1)];
       }
-      const ink = Math.min(255, Math.round(inkBase * dim));
+      const ink = this.palette.ink(Math.min(255, Math.round(inkBase * dim)));
+      const mark = this.palette.markScale;
       let color: string;
-      if (flag === FLAG_EYE) color = "#d9dee8";
-      else if (flag === FLAG_MARK) color = `rgb(${Math.round(26 * tr)},${Math.round(26 * tg)},${Math.round(26 * tb)})`;
-      else if (roll < 0.09) color = ACCENTS[key % ACCENTS.length];
-      else if (roll < 0.13) color = "#ffffff";
+      if (flag === FLAG_EYE) color = this.palette.eye;
+      else if (flag === FLAG_MARK) color = `rgb(${Math.round(mark * tr)},${Math.round(mark * tg)},${Math.round(mark * tb)})`;
+      else if (roll < 0.09) color = this.palette.accents[key % this.palette.accents.length];
+      else if (roll < 0.13) color = this.palette.glint;
       else
         color = `rgb(${Math.min(255, Math.round(ink * tr))},${Math.min(255, Math.round(ink * tg))},${Math.min(255, Math.round(ink * tb + 6))})`;
       ctx.fillStyle = color;
