@@ -87,14 +87,14 @@ const PALETTES: Record<AsciiTheme, RendererPalette> = {
   light: {
     background: "#F4F2EC",
     grid: "rgba(23,23,23,0.07)",
-    // The faintest bucket used to land at 1.3:1, which is not a fish on paper.
-    // The floor is raised until even the dimmest school clears 3:1.
+    // Ink on paper is thin, not solid. This keeps every school above the old
+    // ghost fade without letting the near ones turn into black blocks.
     fish: [
-      "rgba(23,23,23,0.48)",
-      "rgba(23,23,23,0.6)",
-      "rgba(23,23,23,0.72)",
-      "rgba(23,23,23,0.84)",
-      "rgba(23,23,23,0.96)",
+      "rgba(23,23,23,0.34)",
+      "rgba(23,23,23,0.42)",
+      "rgba(23,23,23,0.52)",
+      "rgba(23,23,23,0.62)",
+      "rgba(23,23,23,0.74)",
     ],
     dots: [
       [48, 52, 235],
@@ -105,9 +105,9 @@ const PALETTES: Record<AsciiTheme, RendererPalette> = {
     ],
     heatHot: [180, 70, 30],
     heatCool: [180, 30, 30],
-    // Mirrors the ramp and keeps it between 30 and 99, so the hide stays
-    // darker than the page but lighter than the headline it sits behind.
-    ink: (luminance) => 30 + (255 - luminance) * 0.55,
+    // Mirrors the ramp and keeps it between 58 and 150, so the hide stays
+    // authored in pencil: readable on paper, never a black silhouette.
+    ink: (luminance) => 58 + (255 - luminance) * 0.36,
     glint: "#0b0b0c",
     eye: "#111113",
     markScale: 205,
