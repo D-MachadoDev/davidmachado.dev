@@ -308,16 +308,35 @@ html[data-theme="light"] {
   width: 92px;
   height: 86px;
   margin-left: -46px;
-  pointer-events: none;
-  opacity: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  opacity: 0.46;
   transform-origin: 50% 0;
   animation: lamp-sway 9s ease-in-out infinite;
   transition: opacity 320ms ease;
 }
 
-/* Daylight has its own light source; the lamp only exists after dark. */
+.nav-lamp:hover {
+  opacity: 0.72;
+}
+
+.nav-lamp:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 6px;
+  border-radius: 999px;
+}
+
+/* Daylight keeps the fixture hanging, switched off; dark turns it on. */
 .nav-lamp.is-lit {
   opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-lamp {
+    animation: none;
+  }
 }
 
 .nav-lamp__wire {

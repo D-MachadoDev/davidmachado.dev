@@ -2,26 +2,35 @@ import { t, type Language } from "../i18n";
 import { THEME_LABELS, THEME_ORDER, type ThemePreference } from "../theme";
 
 /**
- * The light itself. A decorative fixture that hangs over the theme control and
- * switches on with the dark palette, so the whole site reads as one room.
+ * The light itself. A real switch: pressing the fixture turns the room dark,
+ * pressing it again brings the daylight back, so the lamp is the theme control
+ * it already looks like.
  */
 export function ThemeLamp({
 	lit,
+	label,
+	onToggle,
 	className,
 }: {
 	lit: boolean;
+	label: string;
+	onToggle: () => void;
 	className?: string;
 }) {
 	return (
-		<div
-			aria-hidden="true"
+		<button
+			type="button"
+			onClick={onToggle}
+			aria-pressed={lit}
+			aria-label={label}
+			title={label}
 			className={`nav-lamp ${lit ? "is-lit" : ""} ${className ?? ""}`}
 		>
-			<span className="nav-lamp__wire" />
-			<span className="nav-lamp__shade" />
-			<span className="nav-lamp__bulb" />
-			<span className="nav-lamp__cone" />
-		</div>
+			<span aria-hidden="true" className="nav-lamp__wire" />
+			<span aria-hidden="true" className="nav-lamp__shade" />
+			<span aria-hidden="true" className="nav-lamp__bulb" />
+			<span aria-hidden="true" className="nav-lamp__cone" />
+		</button>
 	);
 }
 

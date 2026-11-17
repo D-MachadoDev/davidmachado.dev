@@ -159,8 +159,13 @@ export function Navbar({
         </nav>
 
         <div className="relative flex items-center gap-4">
-          <span className="relative hidden w-[92px] shrink-0 xl:block" aria-hidden="true">
-            <ThemeLamp lit={theme === "dark"} className="-mt-8" />
+          <span className="relative hidden w-[92px] shrink-0 xl:block">
+            <ThemeLamp
+              lit={theme === "dark"}
+              label={t(language, "nav.lamp")}
+              onToggle={() => onThemeChange(theme === "dark" ? "light" : "dark")}
+              className="-mt-8"
+            />
           </span>
           <LanguagePicker
             language={language}
