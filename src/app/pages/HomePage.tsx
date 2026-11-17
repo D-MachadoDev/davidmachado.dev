@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { OceanBackground } from "../components/OceanBackground";
+import { PondBreakout } from "../components/PondBreakout";
 import { CV_URL, GITHUB_URL, LINKEDIN_URL } from "../data/links";
 import { t, type Language } from "../i18n";
 import { CONTACT_MAILTO } from "../lib/mailto";
@@ -106,6 +107,10 @@ export function HomePage({ language, theme }: { language: Language; theme: Theme
               </a>
             </div>
           </div>
+        </div>
+
+        <div className="pointer-events-auto absolute bottom-24 right-8 hidden xl:block">
+          <PondBreakout language={language} />
         </div>
 
         <div className="mt-12 flex flex-wrap items-end justify-between gap-4 border-t border-foreground/10 pt-5 font-mono text-[11px] text-muted">
