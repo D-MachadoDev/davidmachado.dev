@@ -23,13 +23,16 @@ export type SharkKind = "classic" | "hammerhead" | "zebra" | "tiger" | "greatham
 /** Which sharks to put in the water; size is relative to the biggest. */
 export type SharkSpec = { kind: SharkKind; size: number };
 
-// The landing hero: four sharks at different depths, with one hammerhead so
-// the roster has a visible second silhouette without crowding the pond.
+// The landing hero: five sharks, one of each species, ordered by size so the
+// biggest reads as the closest. The renderer already draws eight silhouettes;
+// repeating the same one wasted them and made the water look like one animal
+// passing by over and over.
 export const HERO_SHARKS: SharkSpec[] = [
   { kind: "classic", size: 1 },
-  { kind: "classic", size: 0.7 },
   { kind: "hammerhead", size: 0.84 },
-  { kind: "classic", size: 0.77 },
+  { kind: "tiger", size: 0.74 },
+  { kind: "thresher", size: 0.68 },
+  { kind: "zebra", size: 0.58 },
 ];
 
 const DEFAULT_SHARKS = HERO_SHARKS;

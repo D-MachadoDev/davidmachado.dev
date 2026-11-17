@@ -2,10 +2,10 @@ import { describe, expect, it } from "vitest";
 import { HERO_SHARKS } from "./world";
 
 describe("hero shark roster", () => {
-	it("keeps three classic sharks and one hammerhead", () => {
-		expect(HERO_SHARKS).toHaveLength(4);
-		expect(HERO_SHARKS.filter((shark) => shark.kind === "classic")).toHaveLength(3);
-		expect(HERO_SHARKS.filter((shark) => shark.kind === "hammerhead")).toHaveLength(1);
+	it("gives every shark in the hero its own silhouette", () => {
+		const kinds = HERO_SHARKS.map((shark) => shark.kind);
+		expect(new Set(kinds).size).toBe(kinds.length);
+		expect(kinds).toContain("classic");
 	});
 
 	it("keeps every shark at a usable relative size", () => {
