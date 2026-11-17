@@ -271,6 +271,17 @@ html[data-theme="light"] {
   opacity: 0.8;
 }
 
+/*
+ * On a phone the hero copy spans the whole viewport, so the ocean has nowhere
+ * to stay out of its way and starts eating the words. Keep it as texture at a
+ * strength where the text always wins.
+ */
+@media (max-width: 640px) {
+  .ascii-ocean {
+    opacity: 0.34;
+  }
+}
+
 .hero-shade {
   background: linear-gradient(
     90deg,
@@ -278,20 +289,6 @@ html[data-theme="light"] {
     color-mix(in srgb, var(--background) 94%, transparent) 34%,
     color-mix(in srgb, var(--background) 55%, transparent) 64%,
     color-mix(in srgb, var(--background) 10%, transparent) 100%
-  );
-}
-
-/*
- * Radial scrim behind the featured project. The ocean animation is busiest on
- * the right of the hero, so the text there needs its own falloff instead of
- * competing with glyphs. A radius has no hard edges to give it away.
- */
-.featured-shade {
-  background: radial-gradient(
-    120% 140% at 100% 50%,
-    var(--background) 0%,
-    color-mix(in srgb, var(--background) 92%, transparent) 58%,
-    transparent 88%
   );
 }
 
