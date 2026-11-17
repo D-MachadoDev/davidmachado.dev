@@ -1,7 +1,10 @@
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { projects, type Project } from "../data/projects";
 
 const COLUMNS = 34;
 const ROWS = 22;
+const SCRAMBLE_MS = 140;
+const SCRAMBLE_STEP = 37;
 
 const GLYPHS = ["·", "+", "×", "=", "#", "~"] as const;
 
@@ -44,22 +47,65 @@ export function ProjectCover({
   className?: string;
 }) {
   const seed = hashString(project.id);
-  const rows = buildCoverRows(seed);
+  const [phase, setPhase] = useState(0);
+  const timer = useRef<number | null>(null);
+  const rows = buildCoverRows(seed + phase * SCRAMBLE_STEP);
   const index = projects.findIndex((entry) => entry.id === project.id) + 1;
   const gradientId = `cover-${project.id}`;
+  const scanId = `cover-scan-${project.id}`;
+
+  useEffect(
+    () => () => {
+      if (timer.current !== null) window.clearInterval(timer.current);
+    },
+    [],
+  );
+
+  const stop = () => {
+    if (timer.current !== null) {
+      window.clearInterval(timer.current);
+      timer.current = null;
+    }
+  };
+
+  /**
+   * Idle it breathes on its own; under the pointer the field re-encodes, which
+   * is the whole point of a glyph cover. Motion is opt-out.
+   */
+  const scramble = () => {
+    if (timer.current !== null) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    timer.current = window.setInterval(
+      () => setPhase((value) => value + 1),
+      SCRAMBLE_MS,
+    );
+  };
+
+  const settle = () => {
+    stop();
+    setPhase(0);
+  };
 
   return (
     <svg
       viewBox="0 0 1200 800"
       preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
+      onPointerEnter={scramble}
+      onPointerLeave={settle}
       className={className ?? "h-full w-full"}
+      style={{ "--cover-delay": index } as CSSProperties}
     >
       <defs>
         <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor={project.accent} stopOpacity="0.22" />
-          <stop offset="55%" stopColor={project.accent} stopOpacity="0.04" />
+          <stop offset="0%" stopColor={project.accent} stopOpacity="0.24" />
+          <stop offset="55%" stopColor={project.accent} stopOpacity="0.05" />
           <stop offset="100%" stopColor="#050505" stopOpacity="1" />
+        </linearGradient>
+        <linearGradient id={scanId} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={project.accent} stopOpacity="0" />
+          <stop offset="50%" stopColor={project.accent} stopOpacity="0.16" />
+          <stop offset="100%" stopColor={project.accent} stopOpacity="0" />
         </linearGradient>
       </defs>
 
@@ -101,6 +147,15 @@ export function ProjectCover({
         {project.category.toUpperCase()}
       </text>
 
+      <rect
+        className="cover-scan"
+        x="40"
+        y="0"
+        width="1120"
+        height="120"
+        fill={`url(#${scanId})`}
+      />
+
       <g
         fill={project.accent}
         fillOpacity="0.7"
@@ -108,8 +163,15 @@ export function ProjectCover({
         fontSize="18"
         letterSpacing="8"
       >
-        {rows.map((row, index) => (
-          <text key={index} x="72" y={156 + index * 27} xmlSpace="preserve">
+        {rows.map((row, line) => (
+          <text
+            key={line}
+            x="72"
+            y={156 + line * 27}
+            xmlSpace="preserve"
+            className="cover-row"
+            style={{ "--row": line } as CSSProperties}
+          >
             {row}
           </text>
         ))}
