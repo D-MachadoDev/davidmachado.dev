@@ -7,6 +7,7 @@ import {
   type PointerEvent,
 } from "react";
 import { t, type Language } from "../i18n";
+import type { Theme } from "../theme";
 
 /**
  * Reef breaker — a small cabinet in the corner. The board is drawn at 192x120
@@ -77,6 +78,17 @@ const LEVELS: string[][] = [
   ],
 ];
 
+const FIGURE_KEYS = ["game.figure.fish", "game.figure.shark", "game.figure.tide"] as const;
+
+// One figure per visit, picked from the visitor's own clock: the school feeds
+// in the morning, the shark hunts in the afternoon, the tide comes in at night.
+function visitorStage(): number {
+  const hour = new Date().getHours();
+  if (hour >= 6 && hour < 14) return 0;
+  if (hour >= 14 && hour < 22) return 1;
+  return 2;
+}
+
 function buildBricks(stage: number): Brick[] {
   const pattern = LEVELS[stage % LEVELS.length];
   const bricks: Brick[] = [];
@@ -99,19 +111,25 @@ function clamp(value: number, min: number, max: number): number {
   return Math.min(Math.max(value, min), max);
 }
 
-export function PondBreakout({ language }: { language: Language }) {
+export function PondBreakout({ language, theme }: { language: Language; theme: Theme }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [hud, setHud] = useState({ score: 0, lives: 3, stage: 0, mode: "ready" as Mode });
+  const [startStage] = useState(visitorStage);
+  const [hud, setHud] = useState({
+    score: 0,
+    lives: 3,
+    stage: startStage,
+    mode: "ready" as Mode,
+  });
   const [visible, setVisible] = useState(false);
 
   const game = useRef({
     mode: "ready" as Mode,
-    stage: 0,
+    stage: startStage,
     score: 0,
     lives: 3,
     paddleX: W / 2 - PADDLE_W / 2,
     ball: { x: W / 2, y: PADDLE_Y - BALL_R - 1, vx: 0, vy: 0 },
-    bricks: buildBricks(0),
+    bricks: buildBricks(startStage),
     speed: 66,
     trail: [] as { x: number; y: number }[],
     pressed: { left: false, right: false },
@@ -147,12 +165,12 @@ export function PondBreakout({ language }: { language: Language }) {
 
   const reset = useCallback(() => {
     const g = game.current;
-    g.stage = 0;
+    g.stage = startStage;
     g.score = 0;
     g.lives = 3;
     g.paddleX = W / 2 - PADDLE_W / 2;
-    ready(0);
-  }, [ready]);
+    ready(startStage);
+  }, [ready, startStage]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -179,14 +197,23 @@ export function PondBreakout({ language }: { language: Language }) {
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx || !visible) return;
 
-    const style = getComputedStyle(document.documentElement);
-    const ink = style.getPropertyValue("--foreground").trim() || "#EDEDED";
-    const accent = style.getPropertyValue("--accent").trim() || "#3B82F6";
+    // The parent applies the theme attribute in its own effect and child
+    // effects run first, so the tokens are read on the first frame instead of
+    // here; otherwise the board paints one theme behind the page.
+    let ink = "";
+    let accent = "";
 
     let raf = 0;
     let last = 0;
 
     const draw = () => {
+      if (!ink) {
+        const style = getComputedStyle(document.documentElement);
+        const inkFallback = theme === "dark" ? "#EDEDED" : "#171717";
+        const accentFallback = theme === "dark" ? "#3B82F6" : "#1D4ED8";
+        ink = style.getPropertyValue("--foreground").trim() || inkFallback;
+        accent = style.getPropertyValue("--accent").trim() || accentFallback;
+      }
       const g = game.current;
       ctx.clearRect(0, 0, W, H);
       ctx.globalAlpha = 0.06;
@@ -353,7 +380,7 @@ export function PondBreakout({ language }: { language: Language }) {
 
     raf = requestAnimationFrame(frame);
     return () => cancelAnimationFrame(raf);
-  }, [visible, ready, publish]);
+  }, [visible, ready, publish, theme]);
 
   const act = useCallback(() => {
     const g = game.current;
@@ -437,7 +464,9 @@ export function PondBreakout({ language }: { language: Language }) {
   return (
     <div className="pond-breakout w-[248px] font-mono text-[10px] lowercase">
       <div className="flex items-baseline justify-between gap-3 border-b border-border/50 pb-1.5 text-muted">
-        <span className="text-foreground">{t(language, "game.title")}</span>
+        <span className="text-foreground">
+          {t(language, FIGURE_KEYS[hud.stage % FIGURE_KEYS.length])}
+        </span>
         <span className="sr-only">{`${t(language, "game.score")}: ${hud.score}`}</span>
         <span aria-hidden="true" className="tabular-nums tracking-[0.2em]">
           {String(hud.score).padStart(3, "0")}

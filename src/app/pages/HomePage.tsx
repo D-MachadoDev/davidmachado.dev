@@ -110,7 +110,7 @@ export function HomePage({ language, theme }: { language: Language; theme: Theme
         </div>
 
         <div className="pointer-events-auto absolute bottom-24 right-8 hidden xl:block">
-          <PondBreakout language={language} />
+          <PondBreakout language={language} theme={theme} />
         </div>
 
         <div className="mt-12 flex flex-wrap items-end justify-between gap-4 border-t border-foreground/10 pt-5 font-mono text-[11px] text-muted">
